@@ -1,9 +1,9 @@
-#Ä¬ÈÏµÄ»·¾³ÅäÖÃ
+#é»˜è®¤çš„ç¯å¢ƒé…ç½®
 spring:
-  #¶¨ÒåÊ¹ÓÃµÄ»·¾³ÅäÖÃÎÄ¼ş
+  #å®šä¹‰ä½¿ç”¨çš„ç¯å¢ƒé…ç½®æ–‡ä»¶
   profiles:
     active: dev
-  #¶¨ÒåÊı¾İÔ´
+  #å®šä¹‰æ•°æ®æº
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://39.100.16.254:3306/test?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
@@ -12,33 +12,33 @@ spring:
   thymeleaf:
     cache: false
     check-template-location: true
-    #¸ÃÄ£°åÄ¬ÈÏHTMLÎÄ¼ş¿ÉÉ¾³ı
+    #è¯¥æ¨¡æ¿é»˜è®¤HTMLæ–‡ä»¶å¯åˆ é™¤
     suffix: .html
   mvc:
     view:
       suffix: .html
 
-#¶¨ÒåÓ¦ÓÃÂ·¾¶
+#å®šä¹‰åº”ç”¨è·¯å¾„
 server:
   servlet:
     path:
-#×Ô¶¨ÒåÊôĞÔ
-#Ò³Ãæ´óĞ¡
+#è‡ªå®šä¹‰å±æ€§
+#é¡µé¢å¤§å°
 page:
   size: 6
-#×Ô¶¨ÒåÀ¹½ØÂ·¾¶
+#è‡ªå®šä¹‰æ‹¦æˆªè·¯å¾„
 interceptor:
   path:
     exclude: res/**,index,login
-#Í¼Æ¬ÉÏ´«Â·¾¶
+#å›¾ç‰‡ä¸Šä¼ è·¯å¾„
 image:
   path: G:\EMSystem\src\main\resources\static\img\
-#×¼¿¼Ö¤Ä£°åÂ·¾¶
+#å‡†è€ƒè¯æ¨¡æ¿è·¯å¾„
 admission:
   path: G:\EMSystem\src\main\resources\static\doc\admission.doc
   per: G:\EMSystem\src\main\resources\static\doc\per\
 ---
-#¿ª·¢»·¾³ÅäÖÃ
+#å¼€å‘ç¯å¢ƒé…ç½®
 spring:
   profiles: dev
 server:
@@ -47,14 +47,14 @@ logging:
   level:
     com.demo.dao: debug
 ---
-#²âÊÔ»·¾³ÅäÖÃ
+#æµ‹è¯•ç¯å¢ƒé…ç½®
 spring:
   profiles: test
 server:
   port: 8088
 
 ---
-#Éú²ú»·¾³ÅäÖÃ
+#ç”Ÿäº§ç¯å¢ƒé…ç½®
 spring:
   profiles: prod
 server:
