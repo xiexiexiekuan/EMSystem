@@ -4,7 +4,7 @@ import com.demo.dao.ExamDao;
 import com.demo.dao.examinee.ExamineeDao;
 import com.demo.entity.MyExam;
 import com.demo.entity.User;
-import com.demo.entity.examinee.Examinee;
+import com.demo.entity.examinee.Examine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +20,7 @@ public class ExamineeService {
     @Autowired
     private ExamDao examDao;
 
-    public List<Examinee> findAll(){
+    public List<Examine> findAll(){
         return examineeDao.findAll();
     }
 

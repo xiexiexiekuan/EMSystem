@@ -1,6 +1,7 @@
 package com.demo.controller;
 
 import com.demo.entity.User;
+import com.demo.entity.exam.UserInformation;
 import com.demo.service.LoginService;
 import com.demo.util.FileUtil;
 import com.demo.entity.MyExam;
@@ -23,7 +24,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- *
  * 用于页面路径跳转
  */
 @SessionAttributes({"user"})
@@ -61,30 +61,35 @@ public class UrlController extends BaseController {
     @RequestMapping("/regist")
     public String regist(){return "regist";}
 
+    /**
+     * 退出登录
+     * @param request
+     * @return
+     */
     @RequestMapping("/logout")
     public String logout(HttpServletRequest request){
         request.getSession().removeAttribute("user");
         return "redirect:"+path+"/index";
     }
 
+    /**
+     * 所有用户都进入的主界面
+     * @return
+     */
     @RequestMapping("/home")
     public String home(){return "home";}
 
     /**
-     * 登录验证
+     * 登录验证        这是旧的方法，用下面的新方法
      * @param user
      * @param role
      * @return
      */
-    @RequestMapping("validate")
+    @RequestMapping("validate1")
     public String validate(User user, @RequestParam(required = false) String role, Map<String,Object> map){
         User existUser=loginService.findUser(user);
         if(existUser!=null) {
             existUser.setPassword("");
-//            if(existUser.getPerimage()!=null) {
-//                String tempPath = filePath+existUser.getPerimage();
-//                existUser.setPerimage(tempPath);
-//            }
             map.put("user",existUser);
             return "redirect:"+path+"/home";
         }
@@ -93,7 +98,19 @@ public class UrlController extends BaseController {
     }
 
     /**
-     * 考生注册
+     * 用户登录时的验证
+     * @param user
+     * @param role
+     * @param map
+     * @return
+     */
+    @RequestMapping("validate")
+    public String uservalidate(UserInformation user, @RequestParam(required = false) String role, Map<String,Object> map){
+        return null;
+    }
+
+    /**
+     * 考生注册           这是旧的方法，用下面的新方法
      * @param user
      * @param map
      * @return
@@ -105,6 +122,17 @@ public class UrlController extends BaseController {
             map.put("msg","用户名信息输入错误！");
         }
         return "login";
+    }
+
+    /**
+     * 考生注册
+     * @param user
+     * @param map
+     * @return
+     */
+    @RequestMapping("regist")
+    public String regist(UserInformation user, Map<String,Object> map){
+        return null;
     }
 
     /**
@@ -213,7 +241,7 @@ public class UrlController extends BaseController {
      */
     @RequestMapping("/test")
     public String test(Map<String,Object> map){
-        map.put("hello","嘻嘻嘻");
+        map.put("hello","你好");
         return "test";
     }
 

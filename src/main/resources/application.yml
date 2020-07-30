@@ -6,7 +6,8 @@ spring:
   #定义数据源
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://39.100.16.254:3306/test?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+    #url: jdbc:mysql://39.100.16.254:3306/examSystem?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+    url: jdbc:mysql://127.0.0.1:3306/erems?allowMultiQueries=true&useSSL=false
     username: root
     password: 123456
   thymeleaf:
@@ -32,11 +33,11 @@ interceptor:
     exclude: res/**,index,login
 #图片上传路径
 image:
-  path: G:\EMSystem\src\main\resources\static\img\
+  path: S:\EMSystem\src\main\resources\static\img\
 #准考证模板路径
 admission:
-  path: G:\EMSystem\src\main\resources\static\doc\admission.doc
-  per: G:\EMSystem\src\main\resources\static\doc\per\
+  path: S:\EMSystem\src\main\resources\static\doc\admission.doc
+  per: S:\EMSystem\src\main\resources\static\doc\per\
 ---
 #开发环境配置
 spring:

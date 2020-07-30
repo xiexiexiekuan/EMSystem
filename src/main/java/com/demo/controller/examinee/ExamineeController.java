@@ -4,7 +4,7 @@ import com.demo.controller.BaseController;
 import com.demo.entity.Exam;
 import com.demo.entity.MyExam;
 import com.demo.entity.User;
-import com.demo.entity.examinee.Examinee;
+import com.demo.entity.examinee.Examine;
 import com.demo.service.ExamService;
 import com.demo.service.examinee.ExamineeService;
 import com.demo.util.StringUtil;
@@ -38,9 +38,9 @@ public class ExamineeController extends BaseController {
      */
     @RequestMapping("/list")
     public String findAll(Map<String,Object> map){
-        List<Examinee> list=examineeService.findAll();
+        List<Examine> list=examineeService.findAll();
         String examString="";
-        for (Examinee e:list) {
+        for (Examine e:list) {
             examString+=e.getId()+e.getUsername()+"\n";
         }
         map.put("hello",examString);

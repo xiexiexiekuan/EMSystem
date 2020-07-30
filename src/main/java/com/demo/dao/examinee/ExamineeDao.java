@@ -2,7 +2,7 @@ package com.demo.dao.examinee;
 
 import com.demo.entity.MyExam;
 import com.demo.entity.User;
-import com.demo.entity.examinee.Examinee;
+import com.demo.entity.examinee.Examine;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
@@ -16,7 +16,7 @@ public interface ExamineeDao{
      * @return
      */
     @Select("select * from user")
-    public List<Examinee> findAll();
+    public List<Examine> findAll();
 
     @Select("select * from user where username=#{username} and password=#{password}")
     @Results(id="addressOnly",value = {
