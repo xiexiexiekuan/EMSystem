@@ -2,6 +2,7 @@ package com.demo.controller;
 
 import com.demo.entity.Exam;
 import com.demo.entity.Statistics;
+import com.demo.entity.exam.ExamType;
 import com.demo.service.ExamService;
 import com.demo.util.PageBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,9 @@ public class ExamController extends BaseController{
     @Autowired
     private ExamService examService;
 
+    /**
+     * 考生调用的考试列表
+     */
     @RequestMapping("list")
     public String list(@RequestParam(name="currentPage",defaultValue ="1")String currentPage,
                        Map<String,Object> map){
@@ -34,7 +38,6 @@ public class ExamController extends BaseController{
         map.put("examPage",examPage);
         return "exam-list";
     }
-
 
     @RequestMapping("examList")
     @ResponseBody
@@ -67,4 +70,5 @@ public class ExamController extends BaseController{
         map.put("currentExam",currentExam);
         return "signup";
     }
+
 }
