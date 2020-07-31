@@ -87,36 +87,35 @@
                     <a href="#"><i class="fa fa-desktop "></i>考试信息<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="/exam/list"><i class="fa fa-toggle-on"></i>考试列表</a>
+                            <a href="/student/Examinee/exam-list"><i class="fa fa-toggle-on"></i>考试列表</a>
                         </li>
                     </ul>
                 </li>
-
                 <li>
                     <a href="#"><i class="fa fa-yelp "></i>考试管理<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="/examinee/examList?pay=0"><i class="fa fa-coffee"></i>待审核</a>
+                            <a href="/student/Examinee/exam-list?wait=0"><i class="fa fa-coffee"></i>待审核</a>
                         </li>
                         <li>
-                            <a href="/examinee/examList?pay=1"><i class="fa fa-coffee"></i>已审核</a>
+                            <a href="/student/Examinee/exam-list?wait=1"><i class="fa fa-coffee"></i>已审核</a>
                         </li>
                         <li>
-                            <a href="/examinee/examList?pay=0"><i class="fa fa-coffee"></i>待缴费</a>
+                            <a href="/student/Examinee/exam-list?pay=0"><i class="fa fa-coffee"></i>待缴费</a>
                         </li>
                         <li>
-                            <a href="/examinee/examList?pay=1"><i class="fa fa-coffee"></i>已缴费</a>
+                            <a href="/student/Examinee/exam-list?pay=1"><i class="fa fa-coffee"></i>已缴费</a>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="/examinee/score"><i class="fa fa-flash "></i>成绩查询</a>
+                    <a href="/student/Examinee/inquire-grades"><i class="fa fa-flash "></i>成绩查询</a>
                 </li>
                     <li>
-                    <a href="/examinee/score"><i class="fa fa-flash "></i>违纪查询</a>
+                    <a href="/student/Examinee/inquire-violation"><i class="fa fa-flash "></i>违纪查询</a>
                 </li>
                 <li>
-                    <a href="/examinee/myInfo"><i class="fa fa-bicycle "></i>个人信息 </a>
+                    <a href="/student/Examinee/personal-info"><i class="fa fa-bicycle "></i>个人信息 </a>
                 </li>
                 </th:block>
 
@@ -128,7 +127,6 @@
                 <li>
                     <a href="/manager/statistical"><i class="fa fa-bicycle "></i>集体报名 </a>
                 </li>
-
                 <li>
                     <a href="#"><i class="fa fa-yelp "></i>报考管理<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
@@ -140,7 +138,6 @@
                         </li>
                     </ul>
                 </li>
-
                     <li>
                         <a href="/manager/myInfo"><i class="fa fa-bicycle "></i>报考信息查询 </a>
                     </li>
@@ -151,9 +148,9 @@
                             <li>
                                 <a href="/examinee/examList?pay=0"><i class="fa fa-coffee"></i>设置白名单 </a>
                             </li>
-<!--                            <li>-->
-<!--                                <a href="/examinee/examList?pay=1"><i class="fa fa-coffee"></i>查看白名单信息 </a>-->
-<!--                            </li>-->
+                            <!--                            <li>-->
+                            <!--                                <a href="/examinee/examList?pay=1"><i class="fa fa-coffee"></i>查看白名单信息 </a>-->
+                            <!--                            </li>-->
                         </ul>
                     </li>
                     <li>
