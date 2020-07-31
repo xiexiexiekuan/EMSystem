@@ -11,7 +11,7 @@ public class MayorControl {
      * 考点列表
      * @return
      */
-    @RequestMapping("/roommanage")
+    @RequestMapping("/roomManage")
     public String roomManage() {
 
         return "/Mayor/room-manage";
@@ -20,7 +20,7 @@ public class MayorControl {
     /*
      前往添加考点页面
      */
-    @RequestMapping("/roommanageadd")
+    @RequestMapping("/roomManageadd")
     public String roomManageAdd() {
 
         return "/Mayor/room-manage-add";
@@ -29,7 +29,7 @@ public class MayorControl {
     /*
      添加考点
      */
-    @RequestMapping("/roomadd")
+    @RequestMapping("/roomAdd")
     public String roomAdd() {
 
         return "/Mayor/room-manage";
@@ -38,8 +38,8 @@ public class MayorControl {
     /*
      前往更新考点页面
      */
-    @RequestMapping("/roommanageupdate")
-    public String roomManageupdate() {
+    @RequestMapping("/roomManageupdate")
+    public String roomManageUpdate() {
 
         return "/Mayor/room-manage-update";
     }
@@ -47,8 +47,8 @@ public class MayorControl {
     /*
      更新考点
      */
-    @RequestMapping("/roomupdate")
-    public String roomupdate() {
+    @RequestMapping("/roomUpdate")
+    public String roomUpdate() {
 
         return "/Mayor/room-manage";
     }
@@ -56,8 +56,8 @@ public class MayorControl {
     /*
      删除考点
      */
-    @RequestMapping("/roomdelete")
-    public String roomdelete() {
+    @RequestMapping("/roomDelete")
+    public String roomDelete() {
 
         return "/Mayor/room-manage";
     }
@@ -65,8 +65,8 @@ public class MayorControl {
     /*
      考场编排管理
      */
-    @RequestMapping("/examroommanage")
-    public String examroomManage() {
+    @RequestMapping("/examRoomManage")
+    public String examRoomManage() {
 
         return "/Mayor/exam-room-manage";
     }
@@ -74,8 +74,8 @@ public class MayorControl {
     /*
    生成准考证号
    */
-    @RequestMapping("/admitticket")
-    public String admitticket() {
+    @RequestMapping("/admitTicket")
+    public String admitTicket() {
 
         return "/Mayor/exam-room-manage";
     }
@@ -84,7 +84,7 @@ public class MayorControl {
      * 监考老师管理
      * @return
      */
-    @RequestMapping("/examteacher")
+    @RequestMapping("/examTeacher")
     public String examTeacher() {
 
         return "/Mayor/exam-teacher";
@@ -93,7 +93,7 @@ public class MayorControl {
     /*
     个人信息
      */
-    @RequestMapping("/personalinfo")
+    @RequestMapping("/personalInfo")
     public String personalInfo()
     {
         return "/Mayor/personal-info";
@@ -102,7 +102,7 @@ public class MayorControl {
     /*
     去更新个人信息页面
      */
-    @RequestMapping("/personalinfoupdate")
+    @RequestMapping("/personalInfoUpdate")
     public String personalInfoUpdate()
     {
         return "/Mayor/personal-info-update";
@@ -111,7 +111,7 @@ public class MayorControl {
     /*
     更新个人信息
      */
-    @RequestMapping("/personalupdate")
+    @RequestMapping("/personalUpdate")
     public String personalUpdate()
     {
         return "/Mayor/personal-info";
@@ -120,8 +120,8 @@ public class MayorControl {
     /*
     考务老师信息
      */
-    @RequestMapping("/teacherinfo")
-    public String teacherinfo()
+    @RequestMapping("/teacherInfo")
+    public String teacherInfo()
     {
         return "/Mayor/teacher-info";
     }
@@ -129,8 +129,8 @@ public class MayorControl {
     /*
     去更新考务老师信息页面
      */
-    @RequestMapping("/teacherinfoupdate")
-    public String teacherinfoUpdate()
+    @RequestMapping("/teacherInfoUpdate")
+    public String teacherInfoUpdate()
     {
         return "/Mayor/teacher-info-update";
     }
@@ -138,7 +138,7 @@ public class MayorControl {
     /*
     更新考务老师信息
      */
-    @RequestMapping("/teacherupdate")
+    @RequestMapping("/teacherUpdate")
     public String teacherUpdate()
     {
         return "/Mayor/teacher-info";
@@ -147,8 +147,8 @@ public class MayorControl {
     /*
     去添加考务老师信息页面
      */
-    @RequestMapping("/teacherinfoadd")
-    public String teacherinfoadd()
+    @RequestMapping("/teacherInfoAdd")
+    public String teacherInfoAdd()
     {
         return "/Mayor/teacher-info-add";
     }
@@ -156,8 +156,8 @@ public class MayorControl {
     /*
     添加考务老师信息
      */
-    @RequestMapping("/teacheradd")
-    public String teacheradd()
+    @RequestMapping("/teacherAdd")
+    public String teacherAdd()
     {
         return "/Mayor/teacher-info";
     }
@@ -165,8 +165,8 @@ public class MayorControl {
     /*
     删除考务老师信息
      */
-    @RequestMapping("/teacherdelete")
-    public String teacherdelete()
+    @RequestMapping("/teacherDelete")
+    public String teacherDelete()
     {
         return "/Mayor/teacher-info";
     }
@@ -174,8 +174,8 @@ public class MayorControl {
     /*
     考生信息
      */
-    @RequestMapping("/studentinfo")
-    public String studentinfo()
+    @RequestMapping("/studentInfo")
+    public String studentInfo()
     {
         return "/Mayor/student-info";
     }
@@ -184,7 +184,7 @@ public class MayorControl {
      * 前往报告违规信息页面
      * @return
      */
-    @RequestMapping("/reportviolate")
+    @RequestMapping("/reportViolate")
     public String reportViolate() {
 
         return "/Mayor/report-violate";
@@ -194,7 +194,7 @@ public class MayorControl {
      * 报告违规信息
      * @return
      */
-    @RequestMapping("/reportingviolate")
+    @RequestMapping("/reportingViolate")
     public String reportingViolate() {
 
         return "/Mayor/violate-info";
@@ -209,9 +209,7 @@ public class MayorControl {
 
         return "/Mayor/violate-info";
     }
-
-
-
+    
 }
 
 
