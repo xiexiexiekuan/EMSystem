@@ -99,10 +99,6 @@ public class UrlController extends BaseController {
 
     /**
      * 用户登录时的验证
-     * @param user
-     * @param role
-     * @param map
-     * @return
      */
     @RequestMapping("validate")
     public String uservalidate(UserInformation user, @RequestParam(required = false) String role, Map<String,Object> map){

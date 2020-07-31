@@ -13,9 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by zrq on 2018-5-6.
- */
+
 @Controller
 @RequestMapping("manager")
 public class ManagerController {
