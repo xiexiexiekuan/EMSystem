@@ -5,7 +5,7 @@ package com.demo.entity.exam;
  * author name:  
  * create time: 2020-07-30 15:36:31
  */ 
-public class ExamRoomInformationSchool extends EntityHelper{
+public class ExamRoomInformation extends EntityHelper{
 
 	private int examRoomId;
 	private int examRoomNum;
@@ -13,10 +13,10 @@ public class ExamRoomInformationSchool extends EntityHelper{
 	private int roomId;
 	private int useStatus;
 
-	public ExamRoomInformationSchool() {
+	public ExamRoomInformation() {
 		super();
 	}
-	public ExamRoomInformationSchool(int examRoomId,int examRoomNum,String examRoomLocate,int roomId,int useStatus) {
+	public ExamRoomInformation(int examRoomId, int examRoomNum, String examRoomLocate, int roomId, int useStatus) {
 		this.examRoomId=examRoomId;
 		this.examRoomNum=examRoomNum;
 		this.examRoomLocate=examRoomLocate;

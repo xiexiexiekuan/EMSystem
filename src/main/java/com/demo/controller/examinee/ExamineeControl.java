@@ -1,6 +1,5 @@
 package com.demo.controller.examinee;
 
-import com.demo.entity.Exam;
 import com.demo.entity.exam.ExamType;
 import com.demo.util.PageBean;
 import org.springframework.stereotype.Controller;
@@ -15,8 +14,8 @@ public class ExamineeControl {
     /*
     考生查看所有已发布的考试列表
      */
-    @RequestMapping("/examtypelist")
-    public String examTypeList(Map<String,Object> map)
+    @RequestMapping("/examList")
+    public String examList(Map<String,Object> map)
     {
         PageBean<ExamType> examPage = new PageBean<ExamType>();
         map.put("examPage",examPage);
@@ -26,8 +25,8 @@ public class ExamineeControl {
     /*
     选择一个考试去报名
      */
-    @RequestMapping("/signup")
-    public String signUp()
+    @RequestMapping("/toSignUp")
+    public String toSignUp()
     {
         return "/Examinee/sign-up";
     }
@@ -35,8 +34,8 @@ public class ExamineeControl {
     /*
     确认报名，即向后台提交报名信息
      */
-    @RequestMapping("/signupenter")
-    public String signUpEnter()
+    @RequestMapping("/signUp")
+    public String signUp()
     {
         return "/Examinee/exam-list";
     }
@@ -44,8 +43,8 @@ public class ExamineeControl {
     /*
     进入考试管理列表    待审核
      */
-    @RequestMapping("/waitaudit")
-    public String waitAudit()
+    @RequestMapping("/toWaitAudit")
+    public String toWaitAudit()
     {
         return "/Examinee/wait-audit";
     }
@@ -53,8 +52,8 @@ public class ExamineeControl {
     /*
     进入考试管理列表    已审核
      */
-    @RequestMapping("/alreadyaudit")
-    public String alreadyAudit()
+    @RequestMapping("/toAlreadyAudit")
+    public String toAlreadyAudit()
     {
         return "/Examinee/already-audit";
     }
@@ -62,8 +61,8 @@ public class ExamineeControl {
     /*
     进入考试管理列表    未支付
      */
-    @RequestMapping("/waitpay")
-    public String waitPay()
+    @RequestMapping("/toWaitPay")
+    public String toWaitPay()
     {
         return "/Examinee/wait-pay";
     }
@@ -71,8 +70,8 @@ public class ExamineeControl {
     /*
     进入考试管理列表    已支付
      */
-    @RequestMapping("/alreadypay")
-    public String alreadyPay()
+    @RequestMapping("/toAlreadyPay")
+    public String toAlreadyPay()
     {
         return "/Examinee/already-pay";
     }
@@ -80,7 +79,7 @@ public class ExamineeControl {
     /*
     成绩查询
      */
-    @RequestMapping("/inquiregrades")
+    @RequestMapping("/inquireGrades")
     public String inquireGrades()
     {
         return "/Examinee/inquire-grades";
@@ -89,7 +88,7 @@ public class ExamineeControl {
     /*
     违纪查询
      */
-    @RequestMapping("/inquireviolation")
+    @RequestMapping("/inquireViolation")
     public String inquireViolation()
     {
         return "/Examinee/inquire-violation";
@@ -98,7 +97,7 @@ public class ExamineeControl {
     /*
     准考证
      */
-    @RequestMapping("/admissionticket")
+    @RequestMapping("/admissionTicket")
     public String admissionTicket()
     {
         return "/Examinee/admission-ticket";
@@ -107,7 +106,7 @@ public class ExamineeControl {
     /*
     个人信息
      */
-    @RequestMapping("/personalinfo")
+    @RequestMapping("/personalInfo")
     public String personalInfo()
     {
         return "/Examinee/personal-info";
@@ -116,8 +115,8 @@ public class ExamineeControl {
     /*
     去更新个人信息页面
      */
-    @RequestMapping("/personalinfoupdate")
-    public String personalInfoUpdate()
+    @RequestMapping("/toPersonalInfoUpdate")
+    public String toPersonalInfoUpdate()
     {
         return "/Examinee/personal-info-update";
     }
@@ -125,8 +124,8 @@ public class ExamineeControl {
     /*
     更新个人信息
      */
-    @RequestMapping("/infoupdate")
-    public String infoUpdate()
+    @RequestMapping("/personalInfoUpdate")
+    public String personalInfoUpdate()
     {
         return "/Examinee/personal-info";
     }

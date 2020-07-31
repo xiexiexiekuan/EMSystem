@@ -1,6 +1,5 @@
 package com.demo.controller.manager;
 
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -11,7 +10,7 @@ public class ManagerControl {
     /*
     个人信息
      */
-    @RequestMapping("/personalinfo")
+    @RequestMapping("/personalInfo")
     public String personalInfo()
     {
         return "/Manager/personal-info";
@@ -20,8 +19,8 @@ public class ManagerControl {
     /*
     去更新个人信息页面
      */
-    @RequestMapping("/personalinfoupdate")
-    public String personalInfoUpdate()
+    @RequestMapping("/toPersonalInfoUpdate")
+    public String toPersonalInfoUpdate()
     {
         return "/Manager/personal-info-update";
     }
@@ -29,8 +28,8 @@ public class ManagerControl {
     /*
     更新个人信息
      */
-    @RequestMapping("/personalupdate")
-    public String personalUpdate()
+    @RequestMapping("/personalInfoUpdate")
+    public String personalInfoUpdate()
     {
         return "/Manager/personal-info";
     }
@@ -38,8 +37,8 @@ public class ManagerControl {
     /*
     考生信息
      */
-    @RequestMapping("/studentinfo")
-    public String studentinfo()
+    @RequestMapping("/studentInfo")
+    public String studentInfo()
     {
         return "/Manager/student-info";
     }
@@ -47,8 +46,8 @@ public class ManagerControl {
     /*
     去更新考生信息页面
      */
-    @RequestMapping("/studentinfoupdate")
-    public String studentInfoUpdate()
+    @RequestMapping("/toStudentInfoUpdate")
+    public String toStudentInfoUpdate()
     {
         return "/Manager/student-info-update";
     }
@@ -56,8 +55,8 @@ public class ManagerControl {
     /*
     更新考生信息
      */
-    @RequestMapping("/studentupdate")
-    public String studentUpdate()
+    @RequestMapping("/studentInfoUpdate")
+    public String studentInfoUpdate()
     {
         return "/Manager/student-info";
     }
@@ -65,8 +64,8 @@ public class ManagerControl {
     /*
     去添加考生信息页面
      */
-    @RequestMapping("/studentinfoadd")
-    public String studentInfoadd()
+    @RequestMapping("/toStudentInfoAdd")
+    public String toStudentInfoAdd()
     {
         return "/Manager/student-info-add";
     }
@@ -74,8 +73,8 @@ public class ManagerControl {
     /*
     添加考生信息
      */
-    @RequestMapping("/studentadd")
-    public String studentadd()
+    @RequestMapping("/studentInfoAdd")
+    public String studentInfoAdd()
     {
         return "/Manager/student-info";
     }
@@ -83,8 +82,8 @@ public class ManagerControl {
     /*
     删除考生信息
      */
-    @RequestMapping("/studentdelete")
-    public String studentdelete()
+    @RequestMapping("/studentInfoDelete")
+    public String studentInfoDelete()
     {
         return "/Manager/student-info";
     }
@@ -92,8 +91,8 @@ public class ManagerControl {
     /*
     前往集体报名页面
      */
-    @RequestMapping("/groupenter")
-    public String groupenter()
+    @RequestMapping("/toGroupEnter")
+    public String toGroupEnter()
     {
         return "/Manager/group-enter";
     }
@@ -101,8 +100,8 @@ public class ManagerControl {
     /*
    集体报名
     */
-    @RequestMapping("/groupentering")
-    public String groupentering()
+    @RequestMapping("/groupEnter")
+    public String groupEnter()
     {
         return "/Manager/group-enter";
     }
@@ -110,8 +109,8 @@ public class ManagerControl {
     /*
     前往集体报考页面
      */
-    @RequestMapping("/groupapply")
-    public String groupapply()
+    @RequestMapping("/toGroupApply")
+    public String toGroupApply()
     {
         return "/Manager/group-apply";
     }
@@ -119,8 +118,8 @@ public class ManagerControl {
     /*
    集体报考
     */
-    @RequestMapping("/groupapplying")
-    public String groupapplying()
+    @RequestMapping("/groupApply")
+    public String groupApply()
     {
         return "/Manager/group-apply";
     }
@@ -128,8 +127,8 @@ public class ManagerControl {
     /*
    前往集体缴费页面
     */
-    @RequestMapping("/grouppay")
-    public String grouppay()
+    @RequestMapping("/toGroupPay")
+    public String toGroupPay()
     {
         return "/Manager/group-pay";
     }
@@ -137,8 +136,8 @@ public class ManagerControl {
     /*
    集体缴费
     */
-    @RequestMapping("/grouppaying")
-    public String grouppaying()
+    @RequestMapping("/groupPay")
+    public String groupPay()
     {
         return "/Manager/group-pay";
     }
@@ -146,8 +145,8 @@ public class ManagerControl {
     /*
     报考信息查询
    */
-    @RequestMapping("/examinfomation")
-    public String examinfomation()
+    @RequestMapping("/examInfomation")
+    public String examInfomation()
     {
         return "/Manager/exam-infomation";
     }
@@ -164,8 +163,8 @@ public class ManagerControl {
     /*
     去更新白名单信息页面
      */
-    @RequestMapping("/whitelistupdate")
-    public String whitelistUpdate()
+    @RequestMapping("/toWhitelistUpdate")
+    public String toWhitelistUpdate()
     {
         return "/Manager/whitelist-update";
     }
@@ -173,8 +172,8 @@ public class ManagerControl {
     /*
     更新白名单信息
      */
-    @RequestMapping("/whiteupdate")
-    public String whiteUpdate()
+    @RequestMapping("/whitelistUpdate")
+    public String whitelistUpdate()
     {
         return "/Manager/whitelist";
     }
@@ -182,8 +181,8 @@ public class ManagerControl {
     /*
     去添加白名单信息页面
      */
-    @RequestMapping("/whitelistadd")
-    public String whitelistadd()
+    @RequestMapping("/toWhitelistAdd")
+    public String toWhitelistAdd()
     {
         return "/Manager/whitelist-add";
     }
@@ -191,8 +190,8 @@ public class ManagerControl {
     /*
     添加白名单信息
      */
-    @RequestMapping("/whiteadd")
-    public String whiteadd()
+    @RequestMapping("/whitelistAdd")
+    public String whitelistAdd()
     {
         return "/Manager/whitelist";
     }
@@ -200,8 +199,8 @@ public class ManagerControl {
     /*
     删除白名单信息
      */
-    @RequestMapping("/whitedelete")
-    public String whitedelete()
+    @RequestMapping("/whitelistDelete")
+    public String whitelistDelete()
     {
         return "/Manager/whitelist";
     }
@@ -209,8 +208,8 @@ public class ManagerControl {
     /*
     考场信息
      */
-    @RequestMapping("/examroom")
-    public String examroom()
+    @RequestMapping("/examRoom")
+    public String examRoom()
     {
         return "/Manager/exam-room";
     }
@@ -218,8 +217,8 @@ public class ManagerControl {
     /*
     去更新考场信息页面
      */
-    @RequestMapping("/examroomupdate")
-    public String examroomUpdate()
+    @RequestMapping("/toExamRoomUpdate")
+    public String toExamRoomUpdate()
     {
         return "/Manager/exam-room-update";
     }
@@ -227,8 +226,8 @@ public class ManagerControl {
     /*
     更新考场信息
      */
-    @RequestMapping("/roomupdate")
-    public String roomUpdate()
+    @RequestMapping("/examRoomUpdate")
+    public String examRoomUpdate()
     {
         return "/Manager/exam-room";
     }
@@ -236,8 +235,8 @@ public class ManagerControl {
     /*
     去添加考场信息页面
      */
-    @RequestMapping("/examroomadd")
-    public String examroomadd()
+    @RequestMapping("/toExamRoomAdd")
+    public String toExamRoomAdd()
     {
         return "/Manager/exam-room-add";
     }
@@ -245,8 +244,8 @@ public class ManagerControl {
     /*
     添加考场信息
      */
-    @RequestMapping("/roomadd")
-    public String roomadd()
+    @RequestMapping("/examRoomAdd")
+    public String examRoomAdd()
     {
         return "/Manager/exam-room";
     }
@@ -254,8 +253,8 @@ public class ManagerControl {
     /*
     删除考场信息
      */
-    @RequestMapping("/roomdelete")
-    public String roomdelete()
+    @RequestMapping("/examRoomDelete")
+    public String examRoomDelete()
     {
         return "/Manager/exam-room";
     }
@@ -263,8 +262,8 @@ public class ManagerControl {
     /*
     考务老师信息
      */
-    @RequestMapping("/examteacherinfo")
-    public String examteacherinfo()
+    @RequestMapping("/examteacherInfo")
+    public String examteacherInfo()
     {
         return "/Manager/examteacher-info";
     }
@@ -272,8 +271,8 @@ public class ManagerControl {
     /*
     去更新考务老师信息页面
      */
-    @RequestMapping("/examteacherinfoupdate")
-    public String examteacherinfoUpdate()
+    @RequestMapping("/toExamteacherInfoUpdate")
+    public String toExamteacherInfoUpdate()
     {
         return "/Manager/examteacher-info-update";
     }
@@ -281,8 +280,8 @@ public class ManagerControl {
     /*
     更新考务老师信息
      */
-    @RequestMapping("/examteacherupdate")
-    public String examteacherUpdate()
+    @RequestMapping("/examteacherInfoUpdate")
+    public String examteacherInfoUpdate()
     {
         return "/Manager/examteacher-info";
     }
@@ -290,8 +289,8 @@ public class ManagerControl {
     /*
     去添加考务老师信息页面
      */
-    @RequestMapping("/examteacherinfoadd")
-    public String examteacherinfoadd()
+    @RequestMapping("/toExamteacherInfoAdd")
+    public String toExamteacherInfoAdd()
     {
         return "/Manager/examteacher-info-add";
     }
@@ -299,8 +298,8 @@ public class ManagerControl {
     /*
     添加考务老师信息
      */
-    @RequestMapping("/examteacheradd")
-    public String examteacheradd()
+    @RequestMapping("/examteacherInfoAdd")
+    public String examteacherInfoAdd()
     {
         return "/Manager/examteacher-info";
     }
@@ -308,8 +307,8 @@ public class ManagerControl {
     /*
     删除考务老师信息
      */
-    @RequestMapping("/examteacherdelete")
-    public String examteacherdelete()
+    @RequestMapping("/examteacherInfoDelete")
+    public String examteacherInfoDelete()
     {
         return "/Manager/examteacher-info";
     }

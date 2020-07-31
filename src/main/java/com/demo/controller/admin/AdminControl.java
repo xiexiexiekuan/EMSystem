@@ -1,171 +1,170 @@
 package com.demo.controller.admin;
 
-import com.demo.entity.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Map;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/examoffice")
 public class AdminControl {
 
     /*
     查询所有考试类型信息
      */
-    @RequestMapping("examtype")
-    public String examtype(){
+    @RequestMapping("examType")
+    public String examType(){
         return "/administrator/exam-type";
     }
 
     /*
     前往添加考试类型信息
      */
-    @RequestMapping("examtypeadd")
-    public String examtypeadd(){
+    @RequestMapping("toExamTypeAdd")
+    public String toExamTypeAdd(){
         return "/administrator/exam-type-add";
     }
 
     /*
     添加考试类型信息
      */
-    @RequestMapping("typeadd")
-    public String typeadd(){
+    @RequestMapping("examTypeAdd")
+    public String examTypeAdd(){
         return "/administrator/exam-type";
     }
 
     /*
     前往更新考试类型信息页面
      */
-    @RequestMapping("examtypeupdate")
-    public String examtypeupdate(){
+    @RequestMapping("toExamTypeUpdate")
+    public String toExamTypeUpdate(){
         return "/administrator/exam-type-update";
     }
 
     /*
     更新考试类型信息
      */
-    @RequestMapping("typeupdate")
-    public String typeupdate(){
+    @RequestMapping("examTypeUpdate")
+    public String examTypeUpdate(){
         return "/administrator/exam-type";
     }
 
     /*
     删除考试类型信息
      */
-    @RequestMapping("typedelete")
-    public String typedelete(){
+    @RequestMapping("examTypeDelete")
+    public String examTypeDelete(){
         return "/administrator/exam-type";
     }
 
     /*
     前往发布考试信息页面
      */
-    @RequestMapping("publishexam")
-    public String publishexam(){
+    @RequestMapping("toPublishExam")
+    public String toPublishExam(){
         return "/administrator/publish-exam";
     }
 
     /*
     发布考试信息
      */
-    @RequestMapping("publishingexam")
-    public String publishingexam(){
+    @RequestMapping("publishExam")
+    public String publishExam(){
         return "/administrator/exam-info";
     }
 
     /*
     查询所有发布的考试信息
      */
-    @RequestMapping("examinfo")
-    public String examinfo(){
+    @RequestMapping("examInfo")
+    public String examInfo(){
         return "/administrator/exam-info";
     }
 
     /*
     前往评卷管理页面
      */
-    @RequestMapping("testpaperplan")
-    public String testpaperplan(){
+    @RequestMapping("toTestPaperPlan")
+    public String toTestPaperPlan(){
         return "/administrator/test-paper-plan";
     }
 
     /*
     前往添加评卷管理页面
      */
-    @RequestMapping("testpaperplanadd")
-    public String testpaperplanadd(){
+    @RequestMapping("toTestPaperPlanAdd")
+    public String toTestPaperPlanAdd(){
         return "/administrator/test-paper-plan-add";
     }
 
     /*
     前往更新评卷管理页面
      */
-    @RequestMapping("testpaperplanupdate")
-    public String testpaperplanupdate(){
+    @RequestMapping("toTestPaperPlanUpdate")
+    public String toTestPaperPlanUpdate(){
         return "/administrator/test-paper-plan-update";
     }
 
     /*
     添加评卷管理
      */
-    @RequestMapping("testplanadd")
-    public String testplanadd(){
+    @RequestMapping("testPaperPlanAdd")
+    public String testPaperPlanAdd(){
         return "/administrator/test-paper-plan";
     }
 
     /*
     更新评卷管理
      */
-    @RequestMapping("testplanupdate")
-    public String testplanupdate(){
+    @RequestMapping("testPaperPlanUpdate")
+    public String testPaperPlanUpdate(){
         return "/administrator/test-paper-plan";
     }
 
     /*
     删除评卷管理
      */
-    @RequestMapping("testplandelete")
-    public String testplandelete(){
+    @RequestMapping("testPaperPlanDelete")
+    public String testPaperPlanDelete(){
         return "/administrator/test-paper-plan";
     }
 
     /*
     违纪编码库查询
      */
-    @RequestMapping("violatecode")
-    public String violatecode(){
+    @RequestMapping("violateCode")
+    public String violateCode(){
         return "/administrator/violate-code";
     }
 
     /*
     处罚编码库查询
      */
-    @RequestMapping("punishcode")
-    public String punishcode(){
+    @RequestMapping("punishCode")
+    public String punishCode(){
         return "/administrator/punish-code";
     }
 
     /*
     前往违纪记录管理
      */
-    @RequestMapping("violaterecords")
-    public String violaterecords(){
+    @RequestMapping("violateRecords")
+    public String violateRecords(){
         return "/administrator/violate-records";
     }
 
     /*
     违纪记录管理
      */
-    @RequestMapping("violatehandle")
-    public String violatehandle(){
+    @RequestMapping("violateHandle")
+    public String violateHandle(){
         return "/administrator/violate-records";
     }
 
     /*
     个人信息
      */
-    @RequestMapping("/personalinfo")
+    @RequestMapping("/personalInfo")
     public String personalInfo()
     {
         return "/administrator/personal-info";
@@ -174,8 +173,8 @@ public class AdminControl {
     /*
     去更新个人信息页面
      */
-    @RequestMapping("/personalinfoupdate")
-    public String personalInfoUpdate()
+    @RequestMapping("/toPersonalInfoUpdate")
+    public String toPersonalInfoUpdate()
     {
         return "/administrator/personal-info-update";
     }
@@ -183,8 +182,8 @@ public class AdminControl {
     /*
     更新个人信息
      */
-    @RequestMapping("/personalupdate")
-    public String personalUpdate()
+    @RequestMapping("/personalInfoUpdate")
+    public String personalInfoUpdate()
     {
         return "/administrator/personal-info";
     }
@@ -192,8 +191,8 @@ public class AdminControl {
     /*
     市州信息
      */
-    @RequestMapping("/mayorinfo")
-    public String mayorinfo()
+    @RequestMapping("/mayorInfo")
+    public String mayorInfo()
     {
         return "/administrator/mayor-info";
     }
@@ -201,8 +200,8 @@ public class AdminControl {
     /*
     去更新市州信息页面
      */
-    @RequestMapping("/mayorinfoupdate")
-    public String mayorInfoUpdate()
+    @RequestMapping("/toMayorInfoUpdate")
+    public String toMayorInfoUpdate()
     {
         return "/administrator/mayor-info-update";
     }
@@ -210,8 +209,8 @@ public class AdminControl {
     /*
     更新市州信息
      */
-    @RequestMapping("/mayorupdate")
-    public String mayorUpdate()
+    @RequestMapping("/mayorInfoUpdate")
+    public String mayorInfoUpdate()
     {
         return "/administrator/mayor-info";
     }
@@ -219,8 +218,8 @@ public class AdminControl {
     /*
     去添加市州信息页面
      */
-    @RequestMapping("/mayorinfoadd")
-    public String mayorInfoadd()
+    @RequestMapping("/toMayorInfoAdd")
+    public String toMayorInfoAdd()
     {
         return "/administrator/mayor-info-add";
     }
@@ -228,8 +227,8 @@ public class AdminControl {
     /*
     添加市州信息
      */
-    @RequestMapping("/mayoradd")
-    public String mayoradd()
+    @RequestMapping("/mayorInfoAdd")
+    public String mayorInfoAdd()
     {
         return "/administrator/mayor-info";
     }
@@ -237,8 +236,8 @@ public class AdminControl {
     /*
     删除市州信息
      */
-    @RequestMapping("/mayordelete")
-    public String mayordelete()
+    @RequestMapping("/mayorInfoDelete")
+    public String mayorInfoDelete()
     {
         return "/administrator/mayor-info";
     }
@@ -246,8 +245,8 @@ public class AdminControl {
     /*
     院校老师信息
      */
-    @RequestMapping("/teacherinfo")
-    public String teacherinfo()
+    @RequestMapping("/teacherInfo")
+    public String teacherInfo()
     {
         return "/administrator/teacher-info";
     }
@@ -255,8 +254,8 @@ public class AdminControl {
     /*
     考生信息
      */
-    @RequestMapping("/studentinfo")
-    public String studentinfo()
+    @RequestMapping("/studentInfo")
+    public String studentInfo()
     {
         return "/administrator/student-info";
     }
@@ -264,8 +263,8 @@ public class AdminControl {
     /*
     前往成绩管理页面
      */
-    @RequestMapping("/gradesmanage")
-    public String gradesmanage()
+    @RequestMapping("/toGradesManage")
+    public String toGradesManage()
     {
         return "/administrator/grades-manage";
     }
@@ -273,8 +272,8 @@ public class AdminControl {
     /*
     成绩管理
      */
-    @RequestMapping("/gradesmanaging")
-    public String gradesmanaging()
+    @RequestMapping("/gradesManage")
+    public String gradesManage()
     {
         return "/administrator/grades-manage";
     }
