@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/examoffice")
+@RequestMapping("/examOffice")
 public class AdminControl {
 
     /*

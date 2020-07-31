@@ -145,10 +145,10 @@ public class ManagerControl {
     /*
     报考信息查询
    */
-    @RequestMapping("/examInfomation")
-    public String examInfomation()
+    @RequestMapping("/examInformation")
+    public String examInformation()
     {
-        return "/Manager/exam-infomation";
+        return "/Manager/exam-information";
     }
 
     /*
@@ -263,7 +263,7 @@ public class ManagerControl {
     考务老师信息
      */
     @RequestMapping("/examteacherInfo")
-    public String examteacherInfo()
+    public String examTeacherInfo()
     {
         return "/Manager/examteacher-info";
     }
@@ -272,7 +272,7 @@ public class ManagerControl {
     去更新考务老师信息页面
      */
     @RequestMapping("/toExamteacherInfoUpdate")
-    public String toExamteacherInfoUpdate()
+    public String toExamTeacherInfoUpdate()
     {
         return "/Manager/examteacher-info-update";
     }
@@ -281,7 +281,7 @@ public class ManagerControl {
     更新考务老师信息
      */
     @RequestMapping("/examteacherInfoUpdate")
-    public String examteacherInfoUpdate()
+    public String examTeacherInfoUpdate()
     {
         return "/Manager/examteacher-info";
     }
