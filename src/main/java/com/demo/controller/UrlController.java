@@ -102,7 +102,14 @@ public class UrlController extends BaseController {
      */
     @RequestMapping("validate")
     public String userValidate(UserInformation user, @RequestParam(required = false) String role, Map<String,Object> map){
-        return null;
+        UserInformation existUser=loginService.validate(user);
+        if(existUser!=null) {
+            existUser.setPassword("");
+            map.put("user",existUser);
+            return "redirect:"+path+"/home";
+        }
+        map.put("msg","用户名或密码错误");
+        return "login";
     }
 
     /**
@@ -128,7 +135,11 @@ public class UrlController extends BaseController {
      */
     @RequestMapping("regist")
     public String regist(UserInformation user, Map<String,Object> map){
-        return null;
+        Integer i=loginService.regist(user);
+        if(i==0){
+            map.put("msg","用户名信息输入错误！");
+        }
+        return "login";
     }
 
     /**
