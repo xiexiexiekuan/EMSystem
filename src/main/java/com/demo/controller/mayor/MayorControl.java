@@ -8,127 +8,200 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MayorControl {
 
     /**
-     * 考场列表
+     * 考点列表
      * @return
      */
+    @RequestMapping("/roommanage")
+    public String roomManage() {
 
-    @RequestMapping("/examRoomManage")
-    public String examRoomManage() {
+        return "/Mayor/room-manage";
+    }
+
+    /*
+     前往添加考点页面
+     */
+    @RequestMapping("/roommanageadd")
+    public String roomManageAdd() {
+
+        return "/Mayor/room-manage-add";
+    }
+
+    /*
+     添加考点
+     */
+    @RequestMapping("/roomadd")
+    public String roomAdd() {
+
+        return "/Mayor/room-manage";
+    }
+
+    /*
+     前往更新考点页面
+     */
+    @RequestMapping("/roommanageupdate")
+    public String roomManageupdate() {
+
+        return "/Mayor/room-manage-update";
+    }
+
+    /*
+     更新考点
+     */
+    @RequestMapping("/roomupdate")
+    public String roomupdate() {
+
+        return "/Mayor/room-manage";
+    }
+
+    /*
+     删除考点
+     */
+    @RequestMapping("/roomdelete")
+    public String roomdelete() {
+
+        return "/Mayor/room-manage";
+    }
+
+    /*
+     考场编排管理
+     */
+    @RequestMapping("/examroommanage")
+    public String examroomManage() {
 
         return "/Mayor/exam-room-manage";
     }
-    /**
-     * 添加考场
-     * @return
-     */
-    @RequestMapping("/examRoomManageAdd")
-    public String examRoomManageAdd() {
 
-        return "/Mayor/exam-room-manage-add";
+    /*
+   生成准考证号
+   */
+    @RequestMapping("/admitticket")
+    public String admitticket() {
+
+        return "/Mayor/exam-room-manage";
     }
 
     /**
-     * 更新考场
+     * 监考老师管理
      * @return
      */
-    @RequestMapping("examRoomManageUpdate")
-    public String examRoomManageUpdate() {
-
-        return "/Mayor/exam-room-manage-update";
-    }
-
-    /**
-     * 监考老师
-     * @return
-     */
-    @RequestMapping("/examTeacher")
+    @RequestMapping("/examteacher")
     public String examTeacher() {
 
         return "/Mayor/exam-teacher";
     }
 
-    /**
-     * 个人信息
-     * @return
+    /*
+    个人信息
      */
-    @RequestMapping("/personalInfo")
-    public String personalInfo() {
-
+    @RequestMapping("/personalinfo")
+    public String personalInfo()
+    {
         return "/Mayor/personal-info";
     }
 
+    /*
+    去更新个人信息页面
+     */
+    @RequestMapping("/personalinfoupdate")
+    public String personalInfoUpdate()
+    {
+        return "/Mayor/personal-info-update";
+    }
+
+    /*
+    更新个人信息
+     */
+    @RequestMapping("/personalupdate")
+    public String personalUpdate()
+    {
+        return "/Mayor/personal-info";
+    }
+
+    /*
+    考务老师信息
+     */
+    @RequestMapping("/teacherinfo")
+    public String teacherinfo()
+    {
+        return "/Mayor/teacher-info";
+    }
+
+    /*
+    去更新考务老师信息页面
+     */
+    @RequestMapping("/teacherinfoupdate")
+    public String teacherinfoUpdate()
+    {
+        return "/Mayor/teacher-info-update";
+    }
+
+    /*
+    更新考务老师信息
+     */
+    @RequestMapping("/teacherupdate")
+    public String teacherUpdate()
+    {
+        return "/Mayor/teacher-info";
+    }
+
+    /*
+    去添加考务老师信息页面
+     */
+    @RequestMapping("/teacherinfoadd")
+    public String teacherinfoadd()
+    {
+        return "/Mayor/teacher-info-add";
+    }
+
+    /*
+    添加考务老师信息
+     */
+    @RequestMapping("/teacheradd")
+    public String teacheradd()
+    {
+        return "/Mayor/teacher-info";
+    }
+
+    /*
+    删除考务老师信息
+     */
+    @RequestMapping("/teacherdelete")
+    public String teacherdelete()
+    {
+        return "/Mayor/teacher-info";
+    }
+
+    /*
+    考生信息
+     */
+    @RequestMapping("/studentinfo")
+    public String studentinfo()
+    {
+        return "/Mayor/student-info";
+    }
+
     /**
-     * 更新个人信息
+     * 前往报告违规信息页面
      * @return
      */
-    @RequestMapping("/personalInfoUpdate")
-    public String personalInfoUpdate() {
+    @RequestMapping("/reportviolate")
+    public String reportViolate() {
 
-        return "/Mayor/personal-info-update";
+        return "/Mayor/report-violate";
     }
 
     /**
      * 报告违规信息
      * @return
      */
-    @RequestMapping("/reportViolate")
-    public String reportViolate() {
+    @RequestMapping("/reportingviolate")
+    public String reportingViolate() {
 
         return "/Mayor/violate-info";
     }
 
     /**
-     * 考场管理
-     * @return
-     */
-    @RequestMapping("/roomManage")
-    public String roomManage() {
-
-        return "/Mayor/room-manage";
-    }
-
-    /**
-     * 学生信息查看
-     * @return
-     */
-    @RequestMapping("/studentInfo")
-    public String studentInfo() {
-
-        return "/Mayor/student-info";
-    }
-
-    /**
-     * 老师列表
-     * @return
-     */
-    @RequestMapping("/teacherInfo")
-    public String teacherInfo() {
-
-        return "/Mayor/teacher-info";
-    }
-
-    /**
-     * 增加老师
-     * @return
-     */
-    @RequestMapping("/teacherInfoAdd")
-    public String teacherInfoAdd() {
-
-        return "/Mayor/teacher-info-add";
-    }
-
-    /**
-     * 更新老师信息
-     * @return
-     */
-    @RequestMapping("/teacherInfoUpdate")
-    public String teacherInfoUpdate() {
-
-        return "/Mayor/teacher-info-update";
-    }
-
-    /**
-     * 违规信息
+     * 违规信息查询
      * @return
      */
     @RequestMapping("/violateInfo")
