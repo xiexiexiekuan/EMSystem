@@ -1,18 +1,19 @@
 package com.demo.service.admin;
 
+import com.demo.controller.UrlController;
+import com.demo.dao.admin.Admin;
 import com.demo.dao.admin.AdminDao;
 import com.demo.entity.Address;
 import com.demo.entity.MyExam;
 import com.demo.entity.Room;
 import com.demo.entity.User;
+import com.demo.entity.exam.ExamType;
 import com.demo.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.sql.Timestamp;
+import java.util.*;
 
 /**
  * Created by zrq on 2018-5-12.
@@ -21,7 +22,10 @@ import java.util.TreeMap;
 public class AdminService {
     @Autowired
     private AdminDao adminDao;
+    @Autowired
+    private Admin admin;
 
+    private UrlController urlcontrol;
     /**
      * 查询所有考点区域
      * @return
@@ -206,4 +210,29 @@ public class AdminService {
     public Integer deleteUser(User user) {
         return adminDao.deleteUser(user);
     }
+
+
+
+    /*
+    查询所有考试类型信息
+     */
+    public ExamType findAllExamType(){
+        return admin.findAllExamType();
+    }
+
+    /*
+    添加考试类型信息，其中操作人由全局变量获取，日期取当前时间，需要包装为SQL精确到秒的日期类型
+     */
+    public Integer addExamType(ExamType examType){
+        examType.setUserId(urlcontrol.getCurrentUser().getPrimaryKey());
+        Date date = new Date();
+        Timestamp timeStamp = new Timestamp(date.getTime());
+        examType.setCreateTime(timeStamp);
+        return admin.addExamType(examType);
+    }
+//    public static void main(String[] argv){
+//        Date date = new Date();
+//        Timestamp timeStamp = new Timestamp(date.getTime());
+//        System.out.println(timeStamp);
+//    }
 }

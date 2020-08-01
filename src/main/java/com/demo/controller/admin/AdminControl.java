@@ -1,5 +1,8 @@
 package com.demo.controller.admin;
 
+import com.demo.entity.exam.ExamType;
+import com.demo.service.admin.AdminService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -9,11 +12,19 @@ import java.util.Map;
 @RequestMapping("/examOffice")
 public class AdminControl {
 
+    @Autowired
+    private AdminService adminService;
+
+    @RequestMapping(value = {"","index"})
+    public String index(){return "common/home";}
+
     /*
     查询所有考试类型信息
      */
     @RequestMapping("examType")
-    public String examType(){
+    public String examType(Map<String,Object> map){
+        ExamType examType = adminService.findAllExamType();
+        map.put("examType",examType);
         return "/administrator/exam-type";
     }
 
@@ -29,8 +40,15 @@ public class AdminControl {
     添加考试类型信息
      */
     @RequestMapping("examTypeAdd")
-    public String examTypeAdd(){
-        return "/administrator/exam-type";
+    public String examTypeAdd(Map<String,Object> map, ExamType examType){
+
+        Integer i = adminService.addExamType(examType);
+        if(i>0){
+            map.put("msg","考试类型信息添加成功！");
+            return "/administrator/exam-type";
+        }
+        map.put("msg","考试类型信息添加失败，请重试！");
+        return "/administrator/exam-type-add";
     }
 
     /*

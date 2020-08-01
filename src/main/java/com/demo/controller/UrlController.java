@@ -38,6 +38,8 @@ public class UrlController extends BaseController {
 
     private final ResourceLoader resourceLoader;
 
+    private UserInformation currentUser;
+
     //初始化资源加载器
     @Autowired
     public UrlController(ResourceLoader resourceLoader) {
@@ -61,6 +63,9 @@ public class UrlController extends BaseController {
     @RequestMapping("/regist")
     public String regist(){return "regist";}
 
+    public UserInformation getCurrentUser() {
+        return currentUser;
+    }
     /**
      * 退出登录
      * @param request
@@ -104,6 +109,7 @@ public class UrlController extends BaseController {
     public String userValidate(UserInformation user, @RequestParam(required = false) String role, Map<String,Object> map){
         UserInformation existUser=loginService.validate(user);
         if(existUser!=null) {
+            currentUser = existUser;
             existUser.setPassword("");
             map.put("user",existUser);
             return "redirect:"+path+"/home";
