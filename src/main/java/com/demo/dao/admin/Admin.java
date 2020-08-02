@@ -1,6 +1,7 @@
 package com.demo.dao.admin;
 
 import com.demo.entity.exam.ExamType;
+import com.demo.entity.exam.PublishExam;
 import com.demo.entity.exam.UserInformation;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
@@ -26,4 +27,13 @@ public interface Admin {
     @Delete("delete from ExamType where typeId=#{typeId}")
     public Integer deleteExamType(int typeId);
 
+    @Insert("insert PublishExam(typeId,registrationStarts,registrationDeadline,applyStarts,applyDeadline,confirmationStarts," +
+            "confirmationDeadline,admissioncardPrintStarts,admissioncardPrintDeadline,userId,publishTime) values(#{typeId}," +
+            "#{registrationStarts},#{registrationDeadline},#{applyStarts},#{applyDeadline},#{confirmationStarts}," +
+            "#{confirmationDeadline},#{admissioncardPrintStarts},#{admissioncardPrintDeadline},#{userId},#{publishTime})")
+    @Options(useGeneratedKeys=true, keyProperty="publishId,", keyColumn="publishId,")
+    public Integer publishExam(PublishExam exam);
+
+    @Select("select * from PublishExam")
+    public List<PublishExam> findAllPublishExam();
 }

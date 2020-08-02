@@ -1,7 +1,9 @@
 package com.demo.controller.admin;
 
 import com.demo.controller.UrlController;
+import com.demo.entity.Exam;
 import com.demo.entity.exam.ExamType;
+import com.demo.entity.exam.PublishExam;
 import com.demo.entity.exam.UserInformation;
 import com.demo.service.admin.AdminServe;
 import com.demo.service.admin.AdminService;
@@ -104,15 +106,23 @@ public class AdminControl {
     发布考试信息
      */
     @RequestMapping("publishExam")
-    public String publishExam(){
-        return "/administrator/exam-info";
+    public String publishExam(PublishExam exam, Map<String,Object> map){
+        Integer i = adminServe.publishExam(exam);
+        if(i>0){
+            map.put("msg","考试信息发布成功！");
+            return examInfo(map);
+        }
+        map.put("msg","考试信息发布失败，请重试！");
+        return toPublishExam();
     }
 
     /*
     查询所有发布的考试信息
      */
     @RequestMapping("examInfo")
-    public String examInfo(){
+    public String examInfo(Map<String,Object> map){
+        List<PublishExam> publichExam = adminServe.findAllPublishExam();
+        map.put("publichExam",publichExam);
         return "/administrator/exam-info";
     }
 

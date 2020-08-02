@@ -3,6 +3,7 @@ package com.demo.service.admin;
 import com.demo.controller.UrlController;
 import com.demo.dao.admin.Admin;
 import com.demo.entity.exam.ExamType;
+import com.demo.entity.exam.PublishExam;
 import com.demo.entity.exam.UserInformation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,4 +61,21 @@ public class AdminServe {
         return admin.deleteExamType(typeId);
     }
 
+    /*
+    发布一场考试
+     */
+    public Integer publishExam(PublishExam exam){
+        exam.setUserId(UrlController.currentUser.getPrimaryKey());
+        Date date = new Date();
+        Timestamp timeStamp = new Timestamp(date.getTime());
+        exam.setPublishTime(timeStamp);
+        return admin.publishExam(exam);
+    }
+
+    /*
+    查询所有已经发的考试信息
+     */
+    public List<PublishExam> findAllPublishExam(){
+        return admin.findAllPublishExam();
+    }
 }
