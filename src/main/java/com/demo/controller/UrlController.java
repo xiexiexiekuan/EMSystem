@@ -38,7 +38,7 @@ public class UrlController extends BaseController {
 
     private final ResourceLoader resourceLoader;
 
-    private UserInformation currentUser;
+    public static UserInformation currentUser;
 
     //初始化资源加载器
     @Autowired
@@ -63,9 +63,6 @@ public class UrlController extends BaseController {
     @RequestMapping("/regist")
     public String regist(){return "regist";}
 
-    public UserInformation getCurrentUser() {
-        return currentUser;
-    }
     /**
      * 退出登录
      * @param request

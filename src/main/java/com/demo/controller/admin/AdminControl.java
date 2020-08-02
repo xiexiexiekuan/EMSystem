@@ -1,11 +1,15 @@
 package com.demo.controller.admin;
 
+import com.demo.controller.UrlController;
 import com.demo.entity.exam.ExamType;
+import com.demo.entity.exam.UserInformation;
+import com.demo.service.admin.AdminServe;
 import com.demo.service.admin.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -13,7 +17,7 @@ import java.util.Map;
 public class AdminControl {
 
     @Autowired
-    private AdminService adminService;
+    private AdminServe adminServe;
 
     @RequestMapping(value = {"","index"})
     public String index(){return "common/home";}
@@ -23,7 +27,7 @@ public class AdminControl {
      */
     @RequestMapping("examType")
     public String examType(Map<String,Object> map){
-        ExamType examType = adminService.findAllExamType();
+        List<ExamType> examType = adminServe.findAllExamType();
         map.put("examType",examType);
         return "/administrator/exam-type";
     }
@@ -41,8 +45,7 @@ public class AdminControl {
      */
     @RequestMapping("examTypeAdd")
     public String examTypeAdd(Map<String,Object> map, ExamType examType){
-
-        Integer i = adminService.addExamType(examType);
+        Integer i = adminServe.addExamType(examType);
         if(i>0){
             map.put("msg","考试类型信息添加成功！");
             return "/administrator/exam-type";
@@ -55,7 +58,9 @@ public class AdminControl {
     前往更新考试类型信息页面
      */
     @RequestMapping("toExamTypeUpdate")
-    public String toExamTypeUpdate(){
+    public String toExamTypeUpdate(int typeId, Map<String,Object> map){
+        ExamType updateType = adminServe.findExamTypeById(typeId);
+        map.put("updateType",updateType);
         return "/administrator/exam-type-update";
     }
 
@@ -63,15 +68,27 @@ public class AdminControl {
     更新考试类型信息
      */
     @RequestMapping("examTypeUpdate")
-    public String examTypeUpdate(){
-        return "/administrator/exam-type";
+    public String examTypeUpdate(Map<String,Object> map, ExamType examType){
+        Integer i = adminServe.updateExamType(examType);
+        if(i>0){
+            map.put("msg","考试类型信息更新成功！");
+            return "/administrator/exam-type";
+        }
+        map.put("msg","考试类型信息更新失败，请重试！");
+        return toExamTypeUpdate(examType.getTypeId(),map);
     }
 
     /*
     删除考试类型信息
      */
     @RequestMapping("examTypeDelete")
-    public String examTypeDelete(){
+    public String examTypeDelete(int typeId, Map<String,Object> map){
+        Integer i = adminServe.deleteExamType(typeId);
+        if(i>0){
+            map.put("msg","考试类型信息删除成功！");
+            return "/administrator/exam-type";
+        }
+        map.put("msg","考试类型信息删除失败，请重试！");
         return "/administrator/exam-type";
     }
 
@@ -177,105 +194,6 @@ public class AdminControl {
     @RequestMapping("violateHandle")
     public String violateHandle(){
         return "/administrator/violate-records";
-    }
-
-    /*
-    个人信息
-     */
-    @RequestMapping("/personalInfo")
-    public String personalInfo()
-    {
-        return "/administrator/personal-info";
-    }
-
-    /*
-    去更新个人信息页面
-     */
-    @RequestMapping("/toPersonalInfoUpdate")
-    public String toPersonalInfoUpdate()
-    {
-        return "/administrator/personal-info-update";
-    }
-
-    /*
-    更新个人信息
-     */
-    @RequestMapping("/personalInfoUpdate")
-    public String personalInfoUpdate()
-    {
-        return "/administrator/personal-info";
-    }
-
-    /*
-    市州信息
-     */
-    @RequestMapping("/mayorInfo")
-    public String mayorInfo()
-    {
-        return "/administrator/mayor-info";
-    }
-
-    /*
-    去更新市州信息页面
-     */
-    @RequestMapping("/toMayorInfoUpdate")
-    public String toMayorInfoUpdate()
-    {
-        return "/administrator/mayor-info-update";
-    }
-
-    /*
-    更新市州信息
-     */
-    @RequestMapping("/mayorInfoUpdate")
-    public String mayorInfoUpdate()
-    {
-        return "/administrator/mayor-info";
-    }
-
-    /*
-    去添加市州信息页面
-     */
-    @RequestMapping("/toMayorInfoAdd")
-    public String toMayorInfoAdd()
-    {
-        return "/administrator/mayor-info-add";
-    }
-
-    /*
-    添加市州信息
-     */
-    @RequestMapping("/mayorInfoAdd")
-    public String mayorInfoAdd()
-    {
-        return "/administrator/mayor-info";
-    }
-
-    /*
-    删除市州信息
-     */
-    @RequestMapping("/mayorInfoDelete")
-    public String mayorInfoDelete()
-    {
-        return "/administrator/mayor-info";
-    }
-
-    /*
-    院校老师信息
-     */
-    @RequestMapping("/teacherInfo")
-    public String teacherInfo()
-    {
-        return "/administrator/teacher-info";
-    }
-
-    /*
-    考生信息
-     */
-    @RequestMapping("/studentInfo")
-    public String studentInfo()
-    {
-        return "/administrator/student-info";
     }
 
     /*

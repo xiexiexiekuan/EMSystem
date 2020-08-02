@@ -25,7 +25,6 @@ public class AdminService {
     @Autowired
     private Admin admin;
 
-    private UrlController urlcontrol;
     /**
      * 查询所有考点区域
      * @return
@@ -211,28 +210,4 @@ public class AdminService {
         return adminDao.deleteUser(user);
     }
 
-
-
-    /*
-    查询所有考试类型信息
-     */
-    public ExamType findAllExamType(){
-        return admin.findAllExamType();
-    }
-
-    /*
-    添加考试类型信息，其中操作人由全局变量获取，日期取当前时间，需要包装为SQL精确到秒的日期类型
-     */
-    public Integer addExamType(ExamType examType){
-        examType.setUserId(urlcontrol.getCurrentUser().getPrimaryKey());
-        Date date = new Date();
-        Timestamp timeStamp = new Timestamp(date.getTime());
-        examType.setCreateTime(timeStamp);
-        return admin.addExamType(examType);
-    }
-//    public static void main(String[] argv){
-//        Date date = new Date();
-//        Timestamp timeStamp = new Timestamp(date.getTime());
-//        System.out.println(timeStamp);
-//    }
 }

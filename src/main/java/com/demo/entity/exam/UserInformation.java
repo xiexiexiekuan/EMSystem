@@ -13,6 +13,7 @@ public class UserInformation extends EntityHelper{
 	private String password;
 	private String sex;
 	private int age;
+	private String photo;
 	private String institute;
 	private String certificateType;
 	private String certificateId;
@@ -23,12 +24,13 @@ public class UserInformation extends EntityHelper{
 	public UserInformation() {
 		super();
 	}
-	public UserInformation(int userId,String userName,String password,String sex,int age,String institute,String certificateType,String certificateId,String phone,String email,int role) {
+	public UserInformation(int userId,String userName,String password,String sex,int age,String photo,String institute,String certificateType,String certificateId,String phone,String email,int role) {
 		this.userId=userId;
 		this.userName=userName;
 		this.password=password;
 		this.sex=sex;
 		this.age=age;
+		this.photo=photo;
 		this.institute=institute;
 		this.certificateType=certificateType;
 		this.certificateId=certificateId;
@@ -66,6 +68,12 @@ public class UserInformation extends EntityHelper{
 	public int getAge(){
 		return age;
 	}
+	public String getPhoto() {
+		return photo;
+	}
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
 	public void setInstitute(String institute){
 		this.institute=institute;
 	}
@@ -102,22 +110,25 @@ public class UserInformation extends EntityHelper{
 	public int getRole(){
 		return role;
 	}
+
 	@Override
 	public String toString() {
-		return "user_information[" + 
-			"userId=" + userId + 
-			", userName=" + userName + 
-			", password=" + password + 
-			", sex=" + sex + 
-			", age=" + age + 
-			", institute=" + institute + 
-			", certificateType=" + certificateType + 
-			", certificateId=" + certificateId + 
-			", phone=" + phone + 
-			", email=" + email + 
-			", role=" + role + 
-			"]";
+		return "UserInformation{" +
+				"userId=" + userId +
+				", userName='" + userName + '\'' +
+				", password='" + password + '\'' +
+				", sex='" + sex + '\'' +
+				", age=" + age +
+				", photo='" + photo + '\'' +
+				", institute='" + institute + '\'' +
+				", certificateType='" + certificateType + '\'' +
+				", certificateId='" + certificateId + '\'' +
+				", phone='" + phone + '\'' +
+				", email='" + email + '\'' +
+				", role=" + role +
+				'}';
 	}
+
 	@Override
 	public String getPrimaryKey() {
 		return "userId";
