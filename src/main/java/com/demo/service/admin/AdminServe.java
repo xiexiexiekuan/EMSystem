@@ -2,11 +2,10 @@ package com.demo.service.admin;
 
 import com.demo.controller.UrlController;
 import com.demo.dao.admin.Admin;
-import com.demo.entity.exam.ExamType;
-import com.demo.entity.exam.PublishExam;
-import com.demo.entity.exam.UserInformation;
+import com.demo.entity.exam.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -77,5 +76,97 @@ public class AdminServe {
      */
     public List<PublishExam> findAllPublishExam(){
         return admin.findAllPublishExam();
+    }
+
+    /*
+     查询所有评卷计划信息
+    */
+    public List<JudgingPlan> findAllJudgingPlan(){
+        return admin.findAllJudgingPlan();
+    }
+
+    /*
+    添加评卷计划信息
+     */
+    public Integer addJudgingPlan(JudgingPlan judgingPlan){
+        return admin.addJudgingPlan(judgingPlan);
+    }
+
+    /*
+    根据ID查询对应的评卷计划信息
+     */
+    public JudgingPlan findJudgingPlanByCode(int planCode){
+        return admin.findJudgingPlanByCode(planCode);
+    }
+
+    /*
+    更新评卷计划信息
+     */
+    public Integer updateJudgingPlan(JudgingPlan judgingPlan){
+        return admin.updateJudgingPlan(judgingPlan);
+    }
+
+    /*
+    删除评卷计划信息
+     */
+    public Integer deleteJudgingPlan(int planCode){
+        return admin.deleteJudgingPlan(planCode);
+    }
+
+    /*
+     查询所有违纪编码库
+    */
+    public List<ViolationsCode> findAllViolationsCode(){
+        return admin.findAllViolationsCode();
+    }
+
+    /*
+     查询所有处罚编码库
+    */
+    public List<PenaltyCode> findAllPenaltyCode(){
+        return admin.findAllPenaltyCode();
+    }
+
+    /*
+     查询所有违纪记录管理
+    */
+    public List<ViolationInfo> findAllViolationInfo(){
+        return admin.findAllViolationInfo();
+    }
+
+    /*
+    处理市州上报的违纪记录
+    本操作仅更新previewStatus,punishmentCode,punishDescription,punishMan,punishTime,processing_state
+     */
+    public Integer handleViolationInfo(ViolationInfo violationInfo){
+        violationInfo.setPreviewStatus(1);//1代表已审核
+        violationInfo.setProcessing_state("1");//1代表已处理
+        violationInfo.setPunishMan(UrlController.currentUser.getUserName());//本处审核人为用户名
+        Date date = new Date();
+        Timestamp timeStamp = new Timestamp(date.getTime());
+        violationInfo.setPunishTime(timeStamp);
+        return admin.handleViolationInfo(violationInfo);
+    }
+
+    /*
+    查询所有考试成绩信息
+     */
+    public List<ApplicationInformation> findAllGradesInfo(){
+        return admin.findAllGradesInfo();
+    }
+
+    /*
+    根据考生Id查询是否有违规记录
+     */
+    public Integer findViolationInfoByUserId(int userId){
+        return admin.findViolationInfoByUserId(userId);
+    }
+
+    /*
+    录入考生的成绩，并将开考状态设为1
+     */
+    public Integer gradesManage(int enterId, String grades){
+        int examStatus = 1;//开考状态设为1
+        return admin.gradesManage(enterId, grades, examStatus);
     }
 }

@@ -2,15 +2,16 @@ package com.demo.controller.admin;
 
 import com.demo.controller.UrlController;
 import com.demo.entity.Exam;
-import com.demo.entity.exam.ExamType;
-import com.demo.entity.exam.PublishExam;
-import com.demo.entity.exam.UserInformation;
+import com.demo.entity.exam.*;
 import com.demo.service.admin.AdminServe;
 import com.demo.service.admin.AdminService;
+import com.sun.org.glassfish.gmbal.ParameterNames;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -50,7 +51,7 @@ public class AdminControl {
         Integer i = adminServe.addExamType(examType);
         if(i>0){
             map.put("msg","考试类型信息添加成功！");
-            return "/administrator/exam-type";
+            return examType(map);
         }
         map.put("msg","考试类型信息添加失败，请重试！");
         return "/administrator/exam-type-add";
@@ -74,7 +75,7 @@ public class AdminControl {
         Integer i = adminServe.updateExamType(examType);
         if(i>0){
             map.put("msg","考试类型信息更新成功！");
-            return "/administrator/exam-type";
+            return examType(map);
         }
         map.put("msg","考试类型信息更新失败，请重试！");
         return toExamTypeUpdate(examType.getTypeId(),map);
@@ -88,10 +89,10 @@ public class AdminControl {
         Integer i = adminServe.deleteExamType(typeId);
         if(i>0){
             map.put("msg","考试类型信息删除成功！");
-            return "/administrator/exam-type";
+            return examType(map);
         }
         map.put("msg","考试类型信息删除失败，请重试！");
-        return "/administrator/exam-type";
+        return examType(map);
     }
 
     /*
@@ -130,7 +131,9 @@ public class AdminControl {
     前往评卷管理页面
      */
     @RequestMapping("toTestPaperPlan")
-    public String toTestPaperPlan(){
+    public String toTestPaperPlan(Map<String,Object> map){
+        List<JudgingPlan> judgingPlan = adminServe.findAllJudgingPlan();
+        map.put("judgingPlan",judgingPlan);
         return "/administrator/test-paper-plan";
     }
 
@@ -146,7 +149,9 @@ public class AdminControl {
     前往更新评卷管理页面
      */
     @RequestMapping("toTestPaperPlanUpdate")
-    public String toTestPaperPlanUpdate(){
+    public String toTestPaperPlanUpdate(int planCode, Map<String,Object> map){
+        JudgingPlan updatePlan = adminServe.findJudgingPlanByCode(planCode);
+        map.put("updatePlan",updatePlan);
         return "/administrator/test-paper-plan-update";
     }
 
@@ -154,31 +159,51 @@ public class AdminControl {
     添加评卷管理
      */
     @RequestMapping("testPaperPlanAdd")
-    public String testPaperPlanAdd(){
-        return "/administrator/test-paper-plan";
+    public String testPaperPlanAdd(Map<String,Object> map, JudgingPlan judgingPlan){
+        Integer i = adminServe.addJudgingPlan(judgingPlan);
+        if(i>0){
+            map.put("msg","评卷管理计划添加成功！");
+            return toTestPaperPlan(map);
+        }
+        map.put("msg","评卷管理计划添加失败，请重试！");
+        return "/administrator/test-paper-plan-add";
     }
 
     /*
     更新评卷管理
      */
     @RequestMapping("testPaperPlanUpdate")
-    public String testPaperPlanUpdate(){
-        return "/administrator/test-paper-plan";
+    public String testPaperPlanUpdate(Map<String,Object> map, JudgingPlan judgingPlan){
+        Integer i = adminServe.updateJudgingPlan(judgingPlan);
+        if(i>0){
+            map.put("msg","评卷管理计划更新成功！");
+            return toTestPaperPlan(map);
+        }
+        map.put("msg","评卷管理计划更新失败，请重试！");
+        return toTestPaperPlanUpdate(judgingPlan.getPlanCode(),map);
     }
 
     /*
     删除评卷管理
      */
     @RequestMapping("testPaperPlanDelete")
-    public String testPaperPlanDelete(){
-        return "/administrator/test-paper-plan";
+    public String testPaperPlanDelete(int planCode, Map<String,Object> map){
+        Integer i = adminServe.deleteJudgingPlan(planCode);
+        if(i>0){
+            map.put("msg","评卷管理计划删除成功！");
+            return toTestPaperPlan(map);
+        }
+        map.put("msg","评卷管理计划删除失败，请重试！");
+        return toTestPaperPlan(map);
     }
 
     /*
     违纪编码库查询
      */
     @RequestMapping("violateCode")
-    public String violateCode(){
+    public String violateCode(Map<String,Object> map){
+        List<ViolationsCode> violationsCode = adminServe.findAllViolationsCode();
+        map.put("violationsCode",violationsCode);
         return "/administrator/violate-code";
     }
 
@@ -186,7 +211,9 @@ public class AdminControl {
     处罚编码库查询
      */
     @RequestMapping("punishCode")
-    public String punishCode(){
+    public String punishCode(Map<String,Object> map){
+        List<PenaltyCode> penaltyCode = adminServe.findAllPenaltyCode();
+        map.put("penaltyCode",penaltyCode);
         return "/administrator/punish-code";
     }
 
@@ -194,7 +221,9 @@ public class AdminControl {
     前往违纪记录管理
      */
     @RequestMapping("violateRecords")
-    public String violateRecords(){
+    public String violateRecords(Map<String,Object> map){
+        List<ViolationInfo> violationInfo = adminServe.findAllViolationInfo();
+        map.put("violationInfo",violationInfo);
         return "/administrator/violate-records";
     }
 
@@ -202,16 +231,28 @@ public class AdminControl {
     违纪记录管理
      */
     @RequestMapping("violateHandle")
-    public String violateHandle(){
-        return "/administrator/violate-records";
+    public String violateHandle(ViolationInfo violationInfo, Map<String,Object> map){
+        Integer i = adminServe.handleViolationInfo(violationInfo);
+        if(i>0){
+            map.put("msg","违纪记录处理成功！");
+            return violateRecords(map);
+        }
+        map.put("msg","违纪记录处理失败，请重试！");
+        return violateRecords(map);
     }
 
     /*
     前往成绩管理页面
      */
     @RequestMapping("/toGradesManage")
-    public String toGradesManage()
+    public String toGradesManage(Map<String,Object> map)
     {
+        List<ApplicationInformation> gradesInfo = adminServe.findAllGradesInfo();
+        for(int i=0; i<gradesInfo.size(); i++){
+            int isViolate = adminServe.findViolationInfoByUserId(gradesInfo.get(i).getUserId());//依次查找每个学生是否有违规记录
+            gradesInfo.get(i).setExamStatus(isViolate);//ExamStatus原为开考状态，在这里用为是否违规
+        }
+        map.put("gradesInfo",gradesInfo);
         return "/administrator/grades-manage";
     }
 
@@ -219,8 +260,14 @@ public class AdminControl {
     成绩管理
      */
     @RequestMapping("/gradesManage")
-    public String gradesManage()
+    public String gradesManage(@RequestParam("enterId")int enterId, @RequestParam("grades")String grades, Map<String,Object> map)
     {
-        return "/administrator/grades-manage";
+        Integer i = adminServe.gradesManage(enterId, grades);
+        if(i>0){
+            map.put("msg","成绩信息录入成功！");
+            return toGradesManage(map);
+        }
+        map.put("msg","成绩信息录入失败，请重试！");
+        return toGradesManage(map);
     }
 }
