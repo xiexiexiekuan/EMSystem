@@ -7,7 +7,7 @@
     function getAreaList() {
         $.ajax({
             type: "post",
-            url: "/examOffice/examType",    //url根据自己的项目实际定义
+            url: "/userInfo/personalInfo",    //url根据自己的项目实际定义
             async: false,
             dataType: "text",
             error: function () {
@@ -34,6 +34,7 @@
     }
 </script>
 <body onload="getAreaList()">
+
 <div id="wrapper" class="row">
     <div th:replace="common/header::nav"></div>
     <div id="page-inner">
@@ -44,7 +45,7 @@
                         考试类型信息表
                     </div>
                     <div class="panel-body">
-                        <form th:action="'/examOffice/saveexamType'" method="post">
+                        <form th:action="'/examOffice/examTypeUpdate'" method="post">
                             <div class="table-responsive">
                                 <table class="table table-striped table-hover">
                                     <thead>
@@ -83,23 +84,15 @@
                                     <tr>
                                         <td>操作时间</td>
                                         <td>
-                                            <input type="text" id="idnumber" name="idnumber" class="required" placeholder="身份证号"
-                                                   value="0" th:value="*{idnumber}">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>地址</td>
-                                        <td>
-                                            <select id="addressId" name="address.id" th:value="*{address.id}"  th:text="*{address.province+address.city}">
-                                                <option>全部</option>
-                                            </select>
+                                            <input type="text"  name="createTime" class="required" placeholder="格式:2020-01-01 00:00:00"
+                                                   value="" id="createTime" data-date-format="yyyy-mm-dd hh:ii:00" alt="格式:yyyy-MM-dd HH:mm:ss">
                                         </td>
                                     </tr>
                                     </tbody>
                                 </table>
                                 <button type="submit" class="btn btn-primary">保存</button>
                                 <button class="btn btn-warning">
-                                    <a th:href="'/examOffice/personalInfo/administrator/personal-info'" style="color:white;">取消</a>
+                                    <a th:href="'/examOffice/examType'" style="color:white;">取消</a>
                                 </button>
                             </div>
                         </form>
