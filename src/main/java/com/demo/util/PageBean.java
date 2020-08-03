@@ -1,10 +1,5 @@
 package com.demo.util;
 
-/**
- * Created by zrq on 2018-4-25.
- * 分页bean
- */
-
 import java.util.List;
 
 public class PageBean<T> {

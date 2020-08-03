@@ -7,6 +7,7 @@ import com.demo.service.admin.AdminServe;
 import com.demo.service.admin.AdminService;
 import com.sun.org.glassfish.gmbal.ParameterNames;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -252,6 +253,25 @@ public class AdminControl {
             int isViolate = adminServe.findViolationInfoByUserId(gradesInfo.get(i).getUserId());//依次查找每个学生是否有违规记录
             gradesInfo.get(i).setExamStatus(isViolate);//ExamStatus原为开考状态，在这里用为是否违规
         }
+        List<ExamType> examMenu = adminServe.findExamMenu();
+        map.put("examMenu",examMenu);
+        map.put("gradesInfo",gradesInfo);
+        return "/administrator/grades-manage";
+    }
+
+    /*
+    前往成绩管理页面--只管理一种考试类型--此接口在菜单栏中调用
+     */
+    @RequestMapping("/toGradesManageOne")
+    public String toGradesManage(int typeId, Map<String,Object> map)
+    {
+        List<ApplicationInformation> gradesInfo = adminServe.findOneGradesInfo(typeId);
+        for(int i=0; i<gradesInfo.size(); i++){
+            int isViolate = adminServe.findViolationInfoByUserId(gradesInfo.get(i).getUserId());//依次查找每个学生是否有违规记录
+            gradesInfo.get(i).setExamStatus(isViolate);//ExamStatus原为开考状态，在这里用为是否违规
+        }
+        List<ExamType> examMenu = adminServe.findExamMenu();
+        map.put("examMenu",examMenu);
         map.put("gradesInfo",gradesInfo);
         return "/administrator/grades-manage";
     }
