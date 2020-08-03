@@ -82,24 +82,6 @@ public class UrlController extends BaseController {
     public String home(){return "home";}
 
     /**
-     * 登录验证        这是旧的方法，用下面的新方法
-     * @param user
-     * @param role
-     * @return
-     */
-    @RequestMapping("validate1")
-    public String validate(User user, @RequestParam(required = false) String role, Map<String,Object> map){
-        User existUser=loginService.findUser(user);
-        if(existUser!=null) {
-            existUser.setPassword("");
-            map.put("user",existUser);
-            return "redirect:"+path+"/home";
-        }
-        map.put("msg","用户名或密码错误");
-        return "login";
-    }
-
-    /**
      * 用户登录时的验证
      */
     @RequestMapping("validate")
@@ -116,27 +98,12 @@ public class UrlController extends BaseController {
     }
 
     /**
-     * 考生注册           这是旧的方法，用下面的新方法
-     * @param user
-     * @param map
-     * @return
-     */
-    @RequestMapping("register")
-    public String register(User user, Map<String,Object> map){
-        Integer i=loginService.registUser(user);
-        if(i==0){
-            map.put("msg","用户名信息输入错误！");
-        }
-        return "login";
-    }
-
-    /**
      * 考生注册
      * @param user
      * @param map
      * @return
      */
-    @RequestMapping("regist")
+    @RequestMapping("register")
     public String regist(UserInformation user, Map<String,Object> map){
         Integer i=loginService.regist(user);
         if(i==0){
