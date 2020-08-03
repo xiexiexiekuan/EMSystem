@@ -1,18 +1,27 @@
 package com.demo.controller.manager;
 
+import com.demo.entity.User;
+import com.demo.service.manager.ManagerServe;
+import com.demo.service.manager.ManagerService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.Map;
 
 @Controller
 @RequestMapping("/school")
 public class ManagerControl {
-    
+
+    @Autowired
+    private ManagerServe managerService;
     /*
     个人信息
      */
     @RequestMapping("/personalInfo")
     public String personalInfo()
     {
+
         return "/Manager/personal-info";
     }
 
@@ -40,6 +49,7 @@ public class ManagerControl {
     @RequestMapping("/studentInfo")
     public String studentInfo()
     {
+
         return "/Manager/student-info";
     }
 
@@ -47,8 +57,9 @@ public class ManagerControl {
     去更新考生信息页面
      */
     @RequestMapping("/toStudentInfoUpdate")
-    public String toStudentInfoUpdate()
+    public String toStudentInfoUpdate(int studentId, Map<String,Object> map)
     {
+
         return "/Manager/student-info-update";
     }
 
@@ -56,9 +67,19 @@ public class ManagerControl {
     更新考生信息
      */
     @RequestMapping("/studentInfoUpdate")
-    public String studentInfoUpdate()
+    public String studentInfoUpdate(User user, Map<String,Object> map)
     {
-        return "/Manager/student-info";
+        User examinee=managerService.findUserById(user.getId());
+        map.put("examinee",examinee);
+        Integer i = managerService.updateUser(examinee);
+
+        if(i>0){
+            map.put("mag","考生信息更新成功！");
+            return "/Manager/student-info";
+        }
+
+        map.put("msg","考生信息更新失败！");
+        return toStudentInfoUpdate(examinee.getId(),map);
     }
 
     /*
@@ -74,8 +95,14 @@ public class ManagerControl {
     添加考生信息
      */
     @RequestMapping("/studentInfoAdd")
-    public String studentInfoAdd()
+    public String studentInfoAdd(Map<String,Object> map,User user )
     {
+        Integer i = managerService.addExaminee(user);
+        if(i>0){
+            map.put("mag","考生添加成功！");
+            return "/Manager/student-info";
+        }
+        map.put("msg","考生添加失败！");
         return "/Manager/student-info";
     }
 
@@ -83,8 +110,14 @@ public class ManagerControl {
     删除考生信息
      */
     @RequestMapping("/studentInfoDelete")
-    public String studentInfoDelete()
+    public String studentInfoDelete(Map<String,Object> map,User user)
     {
+        Integer i = managerService.deleteExaminee(user);
+        if(i>0){
+            map.put("mag","考生添加成功！");
+            return "/Manager/student-info";
+        }
+        map.put("msg","考生添加失败！");
         return "/Manager/student-info";
     }
 
@@ -94,6 +127,7 @@ public class ManagerControl {
     @RequestMapping("/toGroupEnter")
     public String toGroupEnter()
     {
+
         return "/Manager/group-enter";
     }
 
@@ -103,6 +137,7 @@ public class ManagerControl {
     @RequestMapping("/groupEnter")
     public String groupEnter()
     {
+
         return "/Manager/group-enter";
     }
 
@@ -157,6 +192,7 @@ public class ManagerControl {
     @RequestMapping("/whitelist")
     public String whitelist()
     {
+
         return "/Manager/whitelist";
     }
 
@@ -184,6 +220,7 @@ public class ManagerControl {
     @RequestMapping("/toWhitelistAdd")
     public String toWhitelistAdd()
     {
+
         return "/Manager/whitelist-add";
     }
 
@@ -191,8 +228,15 @@ public class ManagerControl {
     添加白名单信息
      */
     @RequestMapping("/whitelistAdd")
-    public String whitelistAdd()
+    public String whitelistAdd(Map<String,Object> map,int listId, int UserID)
+
     {
+        Integer i = managerService.addWhiteList(listId, UserID);
+        if(i>0){
+            map.put("mag","添加成功！");
+            return "/Manager/whitelist";
+        }
+        map.put("msg","添加失败！");
         return "/Manager/whitelist";
     }
 
