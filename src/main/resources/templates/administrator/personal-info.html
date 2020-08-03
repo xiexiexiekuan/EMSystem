@@ -90,11 +90,6 @@
                                     <td th:unless="*{idnumber}" th:text="*{idnumber}">无</td>
                                 </tr>
                                 <tr>
-                                    <td>教育背景</td>
-                                    <td th:if="*{eduback}" th:text="*{eduback}">eduback</td>
-                                    <td th:unless="*{eduback}" th:text="*{eduback}">无</td>
-                                </tr>
-                                <tr>
                                     <td>地址</td>
                                     <td th:if="*{address}" th:text="*{address.province+address.city}">address</td>
                                     <td th:unless="*{address}" th:text="*{address}">无</td>
@@ -113,7 +108,6 @@
     <!-- /. PAGE INNER  -->
 </div>
 <!-- /. WRAPPER  -->
-
 <div th:replace="common/footer"></div>
 </body>
 </html>
