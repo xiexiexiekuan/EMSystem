@@ -71,6 +71,12 @@ public interface Admin {
     @Select("select * from ApplicationInformation")
     public List<ApplicationInformation> findAllGradesInfo();
 
+    @Select("select * from ApplicationInformation where publishId in (select publishId from PublishExam where typeId=#{typeId})")
+    public List<ApplicationInformation> findOneGradesInfo(int typeId);
+
+    @Select("select * from ExamType where typeId in (select typeId from PublishExam group by typeId)")
+    public List<ExamType> findExamMenu();
+
     @Select("select * from ViolationInfo where userId=#{userId}")
     public Integer findViolationInfoByUserId(int userId);
 

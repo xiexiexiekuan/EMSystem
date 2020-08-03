@@ -156,6 +156,20 @@ public class AdminServe {
     }
 
     /*
+    查询一种考试成绩信息
+     */
+    public List<ApplicationInformation> findOneGradesInfo(int typeId){
+        return admin.findOneGradesInfo(typeId);
+    }
+
+    /*
+    查询考试类型菜单
+     */
+    public List<ExamType> findExamMenu(){
+        return admin.findExamMenu();
+    }
+
+    /*
     根据考生Id查询是否有违规记录
      */
     public Integer findViolationInfoByUserId(int userId){
