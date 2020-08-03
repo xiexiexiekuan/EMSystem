@@ -1,11 +1,10 @@
 package com.demo.dao.admin;
 
-import com.demo.entity.exam.ExamType;
-import com.demo.entity.exam.PublishExam;
-import com.demo.entity.exam.UserInformation;
+import com.demo.entity.exam.*;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -36,4 +35,45 @@ public interface Admin {
 
     @Select("select * from PublishExam")
     public List<PublishExam> findAllPublishExam();
+
+    @Select("select * from JudgingPlan")
+    public List<JudgingPlan> findAllJudgingPlan();
+
+    @Insert("insert JudgingPlan(publishId,judgingStart,judgingEnd,schoolCode,schoolName,paperCode,paperNum) values" +
+            "(#{publishId},#{judgingStart},#{judgingEnd},#{schoolCode},#{schoolName},#{paperCode},#{paperNum})")
+    @Options(useGeneratedKeys=true, keyProperty="planCode", keyColumn="planCode")
+    public Integer addJudgingPlan(JudgingPlan judgingPlan);
+
+    @Select("select * from JudgingPlan where planCode = #{planCode}")
+    public JudgingPlan findJudgingPlanByCode(int planCode);
+
+    @Update("update JudgingPlan set publishId=#{publishId},judgingStart=#{judgingStart},judgingEnd=#{judgingEnd},schoolCode=#{schoolCode}" +
+            ",schoolName=#{schoolName},paperCode=#{paperCode},paperNum=#{paperNum} where planCode=#{planCode}")
+    public Integer updateJudgingPlan(JudgingPlan judgingPlan);
+
+    @Delete("delete from JudgingPlan where planCode=#{planCode}")
+    public Integer deleteJudgingPlan(int planCode);
+
+    @Select("select * from ViolationsCode")
+    public List<ViolationsCode> findAllViolationsCode();
+
+    @Select("select * from PenaltyCode")
+    public List<PenaltyCode> findAllPenaltyCode();
+
+    @Select("select * from ViolationInfo")
+    public List<ViolationInfo> findAllViolationInfo();
+
+    @Update("update ViolationInfo set previewStatus=#{previewStatus},punishmentCode=#{punishmentCode},punishDescription=" +
+            "#{punishDescription},punishMan=#{punishMan},punishTime=#{punishTime},processing_state=#{processing_state} " +
+            "where violateRecordId=#{violateRecordId}")
+    public Integer handleViolationInfo(ViolationInfo violationInfo);
+
+    @Select("select * from ApplicationInformation")
+    public List<ApplicationInformation> findAllGradesInfo();
+
+    @Select("select * from ViolationInfo where userId=#{userId}")
+    public Integer findViolationInfoByUserId(int userId);
+
+    @Update("update ApplicationInformation set examStatus=#{examStatus},grades=#{grades} where enterId=#{enterId}")
+    public Integer gradesManage(int enterId, String grades, int examStatus);
 }
