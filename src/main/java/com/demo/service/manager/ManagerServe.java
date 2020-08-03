@@ -1,12 +1,18 @@
 package com.demo.service.manager;
 
+import com.demo.controller.UrlController;
 import com.demo.dao.manager.Manager;
 import com.demo.entity.User;
 import com.demo.entity.exam.ExamRoomInformation;
+import com.demo.entity.exam.ExamTeacher;
+import com.demo.entity.exam.UserInformation;
+import com.demo.entity.exam.Whitelist;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
+
 
 @Service
 public class ManagerServe {
@@ -20,30 +26,133 @@ public class ManagerServe {
     public Integer deleteExaminee(User user) {return managerDao.deleteExaminee(user);}
 
     /**
+     * 查找所有白名单
+     */
+    public List<Whitelist> findAllWhiteList() {return managerDao.findAllWhiteList();}
+
+    /**
      * 添加白名单成员
      */
-    public Integer addWhiteList(int listId,int userId) {
-        return managerDao.insertWhiteList(listId, userId);
+    public Integer addWhiteList(int userId) {
+        return managerDao.insertWhiteList(userId);
     }
 
     /**
      * 更新白名单成员
      */
+    public Integer updateWhiteList(Whitelist whitelist) {
 
-    public Integer updateWhiteList() {
-
-        //待完成
-        return 1;
+        return managerDao.updateWhiteList(whitelist);
     }
 
     /**
      * 删除白名单成员
      */
+    public Integer deleteWhiteList(int listId) {
 
-    public Integer deleteWhiteList() {
+        return managerDao.deleteWhiteList(listId);
+    }
 
-        //待完成
-        return 1;
+    /**
+     * 是否是考点
+     */
+    public boolean checkRoom()
+    {
+        //获得所在院校
+        String roomName = UrlController.currentUser.getInstitute();
+        //查找考点编号
+        Integer roomId = managerDao.findRoomIdByName(roomName);
+        if(roomId>0)
+            return true;
+        return false;
+    }
+    /**
+     * 显示所有考场
+     */
+    public List<ExamRoomInformation> findAllExamRoom() {
+        return managerDao.findAllExamRoom();
+    }
+
+    /**
+     * 查找单个考场
+     */
+    public ExamRoomInformation findExamRoomById(int examRoomId) {
+        return managerDao.findExamRoomById(examRoomId);
+    }
+    /**
+     * 添加考场
+     */
+    public Integer addExamRoom(ExamRoomInformation examRoomInformation) {
+        //获得所在院校
+        String roomName = UrlController.currentUser.getInstitute();
+        //查找考点编号
+        Integer roomId = managerDao.findRoomIdByName(roomName);
+
+        examRoomInformation.setRoomId(roomId);
+        return managerDao.insertExamRoom(examRoomInformation);
+    }
+
+    /**
+     * 更新考场
+     */
+    public Integer updateExamRoom(ExamRoomInformation examRoomInformation) {
+        return managerDao.updateExamRoom(examRoomInformation);
+    }
+
+    /**
+     * 删除考场
+     */
+    public Integer deleteExamRoom(int examRoomId) {
+        return managerDao.deleteExamRoom(examRoomId);
+    }
+
+    /**
+     * 显示所有考务人员
+     */
+    public List<ExamTeacher> findAllExamTeacher() {
+        return managerDao.findAllExamTeacher();
+    }
+
+    /**
+     * 查找单个考务人员
+     */
+    public ExamTeacher findExamTeacherById(int examTeacherId) {
+        return managerDao.findExamTeacherById(examTeacherId);
+    }
+    /**
+     * 添加考务人员
+     */
+    public Integer addExamTeacher(ExamTeacher examTeacher) {
+        //获得所在院校
+        String roomName = UrlController.currentUser.getInstitute();
+        //查找考点编号
+        Integer roomId = managerDao.findRoomIdByName(roomName);
+
+        examTeacher.setRoomId(roomId);
+        return managerDao.insertExamTeacher(examTeacher);
+    }
+
+    /**
+     * 更新考务人员
+     */
+    public Integer updateExamTeacher(ExamTeacher examTeacher) {
+        return managerDao.updateExamTeacher(examTeacher);
+    }
+
+    /**
+     * 删除考务人员
+     */
+    public Integer deleteExamTeacher(int examTeacherId) {
+        return managerDao.deleteExamTeacher(examTeacherId);
+    }
+
+    /**
+     * 查找审核通过的本院校学生
+     * @return
+     */
+    public List<UserInformation> findStudentPassPreview() {
+        return managerDao.findStudentPassPreview();
+
     }
 
     /**
@@ -51,6 +160,7 @@ public class ManagerServe {
      */
 
     public Integer groupEnter() {
+
 
         //待完成
         return 1;
@@ -74,12 +184,6 @@ public class ManagerServe {
         return 1;
     }
 
-    /**
-     * 显示所有考场
-     */
-    public List<ExamRoomInformation> findAllExamRoom() {
-        return managerDao.findAllExamRoom();
-    }
 
     /**
      * 根据用户姓名考试号查询

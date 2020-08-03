@@ -1,12 +1,18 @@
 package com.demo.controller.manager;
 
+import com.demo.entity.Exam;
 import com.demo.entity.User;
+import com.demo.entity.exam.ExamRoomInformation;
+import com.demo.entity.exam.ExamTeacher;
+import com.demo.entity.exam.UserInformation;
+import com.demo.entity.exam.Whitelist;
 import com.demo.service.manager.ManagerServe;
 import com.demo.service.manager.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -125,9 +131,10 @@ public class ManagerControl {
     前往集体报名页面
      */
     @RequestMapping("/toGroupEnter")
-    public String toGroupEnter()
+    public String toGroupEnter(Map<String,Object> map)
     {
-
+        List<UserInformation> userInformationList = managerService.findStudentPassPreview();
+        map.put("userInformationList",userInformationList);
         return "/Manager/group-enter";
     }
 
@@ -137,7 +144,7 @@ public class ManagerControl {
     @RequestMapping("/groupEnter")
     public String groupEnter()
     {
-
+        managerService.groupEnter();
         return "/Manager/group-enter";
     }
 
@@ -190,9 +197,10 @@ public class ManagerControl {
     白名单信息
      */
     @RequestMapping("/whitelist")
-    public String whitelist()
+    public String whitelist(Map<String,Object> map)
     {
-
+        List<Whitelist> whitelistList = managerService.findAllWhiteList();
+        map.put("whitelist",whitelistList);
         return "/Manager/whitelist";
     }
 
@@ -209,9 +217,15 @@ public class ManagerControl {
     更新白名单信息
      */
     @RequestMapping("/whitelistUpdate")
-    public String whitelistUpdate()
+    public String whitelistUpdate(Map<String,Object> map, Whitelist whitelist)
     {
-        return "/Manager/whitelist";
+        Integer i  = managerService.updateWhiteList(whitelist);
+        if(i>0) {
+            map.put("msg","白名单更新成功");
+            return whitelist(map);
+        }
+        map.put("msg","白名单更新失败");
+        return toWhitelistUpdate();
     }
 
     /*
@@ -220,7 +234,6 @@ public class ManagerControl {
     @RequestMapping("/toWhitelistAdd")
     public String toWhitelistAdd()
     {
-
         return "/Manager/whitelist-add";
     }
 
@@ -228,42 +241,61 @@ public class ManagerControl {
     添加白名单信息
      */
     @RequestMapping("/whitelistAdd")
-    public String whitelistAdd(Map<String,Object> map,int listId, int UserID)
+    public String whitelistAdd(Map<String,Object> map,int UserID)
 
     {
-        Integer i = managerService.addWhiteList(listId, UserID);
+        Integer i = managerService.addWhiteList(UserID);
         if(i>0){
             map.put("mag","添加成功！");
-            return "/Manager/whitelist";
+            return whitelist(map);
         }
         map.put("msg","添加失败！");
-        return "/Manager/whitelist";
+        return "/Manager/whitelist-add";
     }
 
     /*
     删除白名单信息
      */
     @RequestMapping("/whitelistDelete")
-    public String whitelistDelete()
+    public String whitelistDelete(Map<String,Object> map,int listId)
     {
-        return "/Manager/whitelist";
+        Integer i = managerService.deleteWhiteList(listId);
+        if(i>0){
+            map.put("mag","添加成功！");
+            return whitelist(map);
+        }
+        map.put("msg","添加失败！");
+        return whitelist(map);
     }
 
     /*
     考场信息
      */
     @RequestMapping("/examRoom")
-    public String examRoom()
+    public String examRoom(Map<String,Object> map)
     {
+        List<ExamRoomInformation> examRoomInformationList = managerService.findAllExamRoom();
+        map.put("examRoomList",examRoomInformationList);
         return "/Manager/exam-room";
+    }
+
+    /**
+     * 检查是否是考点
+     * @return boolean
+     */
+    @RequestMapping("/checkRoom")
+    public boolean checkRoom() {
+        return managerService.checkRoom();
     }
 
     /*
     去更新考场信息页面
      */
     @RequestMapping("/toExamRoomUpdate")
-    public String toExamRoomUpdate()
+    public String toExamRoomUpdate(Map<String,Object> map,int examRoomId)
     {
+        ExamRoomInformation examRoomInformation = managerService.findExamRoomById(examRoomId);
+        map.put("examRoom",examRoomInformation);
         return "/Manager/exam-room-update";
     }
 
@@ -271,9 +303,14 @@ public class ManagerControl {
     更新考场信息
      */
     @RequestMapping("/examRoomUpdate")
-    public String examRoomUpdate()
+    public String examRoomUpdate(Map<String,Object> map, ExamRoomInformation examRoomInformation)
     {
-        return "/Manager/exam-room";
+        Integer i = managerService.updateExamRoom(examRoomInformation);
+        if(i>0) {
+            map.put("msg","更新成功");
+        }
+        map.put("msg","更新失败");
+        return toExamRoomUpdate(map,examRoomInformation.getExamRoomId());
     }
 
     /*
@@ -289,26 +326,41 @@ public class ManagerControl {
     添加考场信息
      */
     @RequestMapping("/examRoomAdd")
-    public String examRoomAdd()
+    public String examRoomAdd(Map<String,Object> map, ExamRoomInformation examRoomInformation)
     {
-        return "/Manager/exam-room";
+        Integer i = managerService.addExamRoom(examRoomInformation);
+        if(i>0) {
+            map.put("msg","更新成功");
+            return examRoom(map);
+        }
+        map.put("msg","更新失败");
+        return toExamRoomAdd();
+
     }
 
     /*
     删除考场信息
      */
     @RequestMapping("/examRoomDelete")
-    public String examRoomDelete()
+    public String examRoomDelete(Map<String,Object> map,int examRoomId)
     {
-        return "/Manager/exam-room";
+        Integer i = managerService.deleteExamRoom(examRoomId);
+        if(i>0) {
+            map.put("msg","成功");
+            return examRoom(map);
+        }
+        map.put("msg","失败");
+        return examRoom(map);
     }
 
     /*
     考务老师信息
      */
     @RequestMapping("/examteacherInfo")
-    public String examTeacherInfo()
+    public String examTeacherInfo(Map<String,Object> map)
     {
+        List<ExamTeacher> examTeacherList = managerService.findAllExamTeacher();
+        map.put("examTeacherList",examTeacherList);
         return "/Manager/examteacher-info";
     }
 
@@ -316,8 +368,10 @@ public class ManagerControl {
     去更新考务老师信息页面
      */
     @RequestMapping("/toExamteacherInfoUpdate")
-    public String toExamTeacherInfoUpdate()
+    public String toExamTeacherInfoUpdate(Map<String,Object> map,int examTeacherId)
     {
+        ExamTeacher examTeacher = managerService.findExamTeacherById(examTeacherId);
+        map.put("examRoom",examTeacher);
         return "/Manager/examteacher-info-update";
     }
 
@@ -325,9 +379,14 @@ public class ManagerControl {
     更新考务老师信息
      */
     @RequestMapping("/examteacherInfoUpdate")
-    public String examTeacherInfoUpdate()
+    public String examTeacherInfoUpdate(Map<String,Object> map, ExamTeacher examTeacher)
     {
-        return "/Manager/examteacher-info";
+        Integer i = managerService.updateExamTeacher(examTeacher);
+        if(i>0) {
+            map.put("msg","更新成功");
+        }
+        map.put("msg","更新失败");
+        return toExamTeacherInfoUpdate(map,examTeacher.getTeacherId());
     }
 
     /*
@@ -343,17 +402,29 @@ public class ManagerControl {
     添加考务老师信息
      */
     @RequestMapping("/examteacherInfoAdd")
-    public String examteacherInfoAdd()
+    public String examteacherInfoAdd(Map<String,Object> map, ExamTeacher examTeacher)
     {
-        return "/Manager/examteacher-info";
+        Integer i = managerService.addExamTeacher(examTeacher);
+        if(i>0) {
+            map.put("msg","更新成功");
+            return examTeacherInfo(map);
+        }
+        map.put("msg","更新失败");
+        return toExamteacherInfoAdd();
     }
 
     /*
     删除考务老师信息
      */
     @RequestMapping("/examteacherInfoDelete")
-    public String examteacherInfoDelete()
+    public String examteacherInfoDelete(Map<String,Object> map,int examTeacherId)
     {
-        return "/Manager/examteacher-info";
+        Integer i = managerService.deleteExamTeacher(examTeacherId);
+        if(i>0) {
+            map.put("msg","成功");
+            return examTeacherInfo(map);
+        }
+        map.put("msg","失败");
+        return examTeacherInfo(map);
     }
 }

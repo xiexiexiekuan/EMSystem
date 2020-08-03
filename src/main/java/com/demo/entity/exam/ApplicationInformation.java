@@ -12,7 +12,8 @@ public class ApplicationInformation extends EntityHelper{
 	private String adminNumber;
 	private int publishId;
 	private String examineePhoto;
-	private String oldSchool;
+	//oldSchool改为curSchool--数据库未改动 oldSchool总是反应不过来
+	private String curSchool;
 	private String stuType;
 	private String wantSchool;
 	private int previewStatus;
@@ -24,13 +25,13 @@ public class ApplicationInformation extends EntityHelper{
 	public ApplicationInformation() {
 		super();
 	}
-	public ApplicationInformation(int enterId,int userId,String adminNumber,int publishId,String examineePhoto,String oldSchool,String stuType,String wantSchool,int previewStatus,int applyStatus,int payStatus,int examStatus,String grades) {
+	public ApplicationInformation(int enterId,int userId,String adminNumber,int publishId,String examineePhoto,String curSchool,String stuType,String wantSchool,int previewStatus,int applyStatus,int payStatus,int examStatus,String grades) {
 		this.enterId=enterId;
 		this.userId=userId;
 		this.adminNumber=adminNumber;
 		this.publishId=publishId;
 		this.examineePhoto =examineePhoto;
-		this.oldSchool=oldSchool;
+		this.curSchool=curSchool;
 		this.stuType=stuType;
 		this.wantSchool=wantSchool;
 		this.previewStatus=previewStatus;
@@ -69,11 +70,11 @@ public class ApplicationInformation extends EntityHelper{
 	public String getExamineePhoto(){
 		return examineePhoto;
 	}
-	public void setOldSchool(String oldSchool){
-		this.oldSchool=oldSchool;
+	public void setCurSchool(String curSchool){
+		this.curSchool=curSchool;
 	}
-	public String getOldSchool(){
-		return oldSchool;
+	public String getCurSchool(){
+		return curSchool;
 	}
 	public void setStuType(String stuType){
 		this.stuType=stuType;
@@ -125,7 +126,7 @@ public class ApplicationInformation extends EntityHelper{
 			", adminNumber=" + adminNumber + 
 			", publishId=" + publishId + 
 			", photo=" + examineePhoto +
-			", oldSchool=" + oldSchool + 
+			", curSchool=" + curSchool +
 			", stuType=" + stuType + 
 			", wantSchool=" + wantSchool + 
 			", previewStatus=" + previewStatus + 
