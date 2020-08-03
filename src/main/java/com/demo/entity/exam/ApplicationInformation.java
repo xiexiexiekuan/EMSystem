@@ -11,7 +11,7 @@ public class ApplicationInformation extends EntityHelper{
 	private int userId;
 	private String adminNumber;
 	private int publishId;
-	private String photo;
+	private String examineePhoto;
 	private String oldSchool;
 	private String stuType;
 	private String wantSchool;
@@ -24,12 +24,12 @@ public class ApplicationInformation extends EntityHelper{
 	public ApplicationInformation() {
 		super();
 	}
-	public ApplicationInformation(int enterId,int userId,String adminNumber,int publishId,String photo,String oldSchool,String stuType,String wantSchool,int previewStatus,int applyStatus,int payStatus,int examStatus,String grades) {
+	public ApplicationInformation(int enterId,int userId,String adminNumber,int publishId,String examineePhoto,String oldSchool,String stuType,String wantSchool,int previewStatus,int applyStatus,int payStatus,int examStatus,String grades) {
 		this.enterId=enterId;
 		this.userId=userId;
 		this.adminNumber=adminNumber;
 		this.publishId=publishId;
-		this.photo=photo;
+		this.examineePhoto =examineePhoto;
 		this.oldSchool=oldSchool;
 		this.stuType=stuType;
 		this.wantSchool=wantSchool;
@@ -63,11 +63,11 @@ public class ApplicationInformation extends EntityHelper{
 	public int getPublishId(){
 		return publishId;
 	}
-	public void setPhoto(String photo){
-		this.photo=photo;
+	public void setExamineePhoto(String examineePhoto){
+		this.examineePhoto = examineePhoto;
 	}
-	public String getPhoto(){
-		return photo;
+	public String getExamineePhoto(){
+		return examineePhoto;
 	}
 	public void setOldSchool(String oldSchool){
 		this.oldSchool=oldSchool;
@@ -124,7 +124,7 @@ public class ApplicationInformation extends EntityHelper{
 			", userId=" + userId + 
 			", adminNumber=" + adminNumber + 
 			", publishId=" + publishId + 
-			", photo=" + photo + 
+			", photo=" + examineePhoto +
 			", oldSchool=" + oldSchool + 
 			", stuType=" + stuType + 
 			", wantSchool=" + wantSchool + 
