@@ -80,14 +80,14 @@
                 <li>
                     <a href="/home" class="active-menu"><i class="fa fa-dashboard "></i>主页</a>
                 </li>
-                <!--role:0管理员，1老师，2考生-->
+                <!--role:0管理员，1市州，2老师，3考生-->
                 <!--考生个人导航条-->
                 <th:block th:if="${session.user.role}==3">
                 <li>
                     <a href="#"><i class="fa fa-desktop "></i>考试信息<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="/student/Examinee/exam-list"><i class="fa fa-toggle-on"></i>考试列表</a>
+                            <a href="/student/examList"><i class="fa fa-toggle-on"></i>考试列表</a>
                         </li>
                     </ul>
                 </li>
@@ -95,27 +95,30 @@
                     <a href="#"><i class="fa fa-yelp "></i>考试管理<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="/student/Examinee/exam-list?wait=0"><i class="fa fa-coffee"></i>待审核</a>
+                            <a href="/student/toWaitAudit"><i class="fa fa-coffee"></i>待审核</a>
                         </li>
                         <li>
-                            <a href="/student/Examinee/exam-list?wait=1"><i class="fa fa-coffee"></i>已审核</a>
+                            <a href="/student/toAlreadyAudit"><i class="fa fa-coffee"></i>已审核</a>
                         </li>
                         <li>
-                            <a href="/student/Examinee/exam-list?pay=0"><i class="fa fa-coffee"></i>待缴费</a>
+                            <a href="/student/toWaitPay"><i class="fa fa-coffee"></i>待缴费</a>
                         </li>
                         <li>
-                            <a href="/student/Examinee/exam-list?pay=1"><i class="fa fa-coffee"></i>已缴费</a>
+                            <a href="/student/toAlreadyPay"><i class="fa fa-coffee"></i>已缴费</a>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="/student/Examinee/inquire-grades"><i class="fa fa-flash "></i>成绩查询</a>
-                </li>
-                    <li>
-                    <a href="/student/Examinee/inquire-violation"><i class="fa fa-flash "></i>违纪查询</a>
+                    <a href="/student/inquireGrades"><i class="fa fa-flash "></i>成绩查询</a>
                 </li>
                 <li>
-                    <a href="/student/Examinee/personal-info"><i class="fa fa-bicycle "></i>个人信息 </a>
+                    <a href="/student/inquireViolation"><i class="fa fa-flash "></i>违纪查询</a>
+                </li>
+                <li>
+                        <a href="/student/admissionTicket"><i class="fa fa-flash "></i>打印准考证</a>
+                </li>
+                <li>
+                    <a href="/student/personalInfo"><i class="fa fa-bicycle "></i>个人信息 </a>
                 </li>
                 </th:block>
 
@@ -222,13 +225,13 @@
                         <a href="#"><i class="fa fa-bicycle "></i>考试信息管理 <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="/examOffice/admin/administrator/exam-type"><i class="fa fa-toggle-on"></i>考试类型</a>
+                                <a href="/examOffice/examType"><i class="fa fa-toggle-on"></i>考试类型</a>
                             </li>
                             <li>
-                                <a href="/examOffice/admin/administrator/publish-exam"><i class="fa fa-toggle-on"></i>考试信息发布</a>
+                                <a href="/examOffice/toPublishExam"><i class="fa fa-toggle-on"></i>考试信息发布</a>
                             </li>
                             <li>
-                                <a href="/examOffice/admin/administrator/exam-info"><i class="fa fa-bell "></i>考试信息</a>
+                                <a href="/examOffice/examInfo"><i class="fa fa-bell "></i>考试信息</a>
                             </li>
                         </ul>
                     </li>
@@ -236,7 +239,7 @@
                         <a href="#"><i class="fa fa-bicycle "></i>评卷管理 <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="/examOffice/admin/administrator/test-paper-plan"><i class="fa fa-bicycle "></i>评卷计划</a>
+                                <a href="/examOffice/toTestPaperPlan"><i class="fa fa-bicycle "></i>评卷计划</a>
                             </li>
                         </ul>
                     </li>
@@ -244,13 +247,13 @@
                         <a href="#"><i class="fa fa-bicycle "></i>违纪管理 <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="/examOffice/admin/administrator/violate-code"><i class="fa fa-bicycle "></i>违纪编码库</a>
+                                <a href="/examOffice/violateCode"><i class="fa fa-bicycle "></i>违纪编码库</a>
                             </li>
                             <li>
-                                <a href="/examOffice/admin/administrator/violate-records"><i class="fa fa-bell "></i>处罚编码库</a>
+                                <a href="/examOffice/punishCode"><i class="fa fa-bell "></i>处罚编码库</a>
                             </li>
                             <li>
-                                <a href="/examOffice/admin/administrator/violate-records"><i class="fa fa-bell "></i>违纪记录管理</a>
+                                <a href="/examOffice/violateRecords"><i class="fa fa-bell "></i>违纪记录管理</a>
                             </li>
                         </ul>
                     </li>
@@ -259,21 +262,21 @@
                         <a href="#"><i class="fa fa-bicycle "></i>用户管理 <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="/examOffice/admin/administrator/personal-info"><i class="fa fa-toggle-on"></i>个人信息</a>
+                                <a href="/userInfo/personalInfo"><i class="fa fa-toggle-on"></i>个人信息</a>
                             </li>
                             <li>
-                                <a href="/examOffice/admin/administrator/mayor-info"><i class="fa fa-bell "></i>市州人员</a>
+                                <a href="/userInfo/mayorInfo"><i class="fa fa-bell "></i>市州人员</a>
                             </li>
                             <li>
-                                <a href="/examOffice/admin/administrator/teacher-info"><i class="fa fa-toggle-on"></i>院校人员</a>
+                                <a href="/userInfo/teacherInfo"><i class="fa fa-toggle-on"></i>院校人员</a>
                             </li>
                             <li>
-                                <a href="/examOffice/studentinfo/administrator/student-info"><i class="fa fa-bell "></i>考生人员</a>
+                                <a href="/userInfo/studentInfo"><i class="fa fa-bell "></i>考生人员</a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="/examOffice/gradesmanage/administrator/grades-manage"><i class="fa fa-bicycle "></i>成绩管理 </a>
+                        <a href="/examOffice/toGradesManage"><i class="fa fa-bicycle "></i>成绩管理 </a>
                     </li>
                 </th:block>
             </ul>
