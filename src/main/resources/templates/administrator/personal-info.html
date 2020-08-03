@@ -99,21 +99,9 @@
                                     <td th:if="*{address}" th:text="*{address.province+address.city}">address</td>
                                     <td th:unless="*{address}" th:text="*{address}">无</td>
                                 </tr>
-<!--                                &lt;!&ndash;有待确认考试信息时显示该项&ndash;&gt;-->
-<!--                                <tr th:if="${session.currentExam != null}">-->
-<!--                                    <td>当前信息待确认考试</td>-->
-<!--                                    <td th:text="${session.currentExam.name}"></td>-->
-<!--                                </tr>-->
-<!--                                </tbody>-->
-<!--                            </table>-->
-<!--                            <th:block th:if="${session.currentExam != null}">-->
-<!--                                <button class="btn btn-primary">-->
-<!--                                    <a th:href="'/examinee/joinExam'" style="color:white;">确认</a>-->
-<!--                                </button>-->
-<!--                            </th:block>-->
                             </table>
                             <button class="btn btn-warning">
-                                <a th:href="'/examOffice/personalInfo/administrator/personal-info-update'" style="color:white;">修改</a>
+                                <a th:href="'/userInfo/administrator/personal-info-update'" style="color:white;">修改</a>
                             </button>
                         </div>
                     </div>
