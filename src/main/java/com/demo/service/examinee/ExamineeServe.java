@@ -54,11 +54,11 @@ public class ExamineeServe {
     添加报名信息
      */
     public Integer addApplicationInformation(ApplicationInformation applicationInfo){
-        applicationInfo.setAdminNumber("000");
+        applicationInfo.setExamineeNumber("000");
         applicationInfo.setExamStatus(0);
         applicationInfo.setApplyStatus(0);
         applicationInfo.setPayStatus(0);
-        applicationInfo.setPreviewStatus(0);
+        applicationInfo.setPreviewStatus(-1);
         return examineeDao.addApplicationInformation(applicationInfo);
     }
 

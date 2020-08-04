@@ -9,15 +9,13 @@ public class ApplicationInformation extends EntityHelper{
 
 	private int enterId;
 	private int userId;
-	//改准考证号
 	private String examineeNumber;
 	private int publishId;
 	private String examineePhoto;
-	//oldSchool改为curSchool--数据库未改动 oldSchool总是反应不过来
 	private String curSchool;
 	private String stuType;
 	private String wantSchool;
-	private int previewStatus;
+	private int previewStatus;//审核状态  -1未审核  0审核不通过   1审核通过
 	private int applyStatus;
 	private int payStatus;
 	private int examStatus;
@@ -53,10 +51,10 @@ public class ApplicationInformation extends EntityHelper{
 	public int getUserId(){
 		return userId;
 	}
-	public void setexamineeNumber(String examineeNumber){
+	public void setExamineeNumber(String examineeNumber){
 		this.examineeNumber=examineeNumber;
 	}
-	public String getexamineeNumber(){
+	public String getExamineeNumber(){
 		return examineeNumber;
 	}
 	public void setPublishId(int publishId){

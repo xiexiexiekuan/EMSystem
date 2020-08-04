@@ -203,7 +203,7 @@ public class ExamineeControl extends BaseController {
         Map<String, String> datas = new HashMap<String, String>();
         datas.put("examName", examName.getTypeName());
         datas.put("name", UrlController.currentUser.getUserName());
-        datas.put("examNum",myticket.getAdminNumber());
+        datas.put("examNum",myticket.getExamineeNumber());
         datas.put("sex", UrlController.currentUser.getSex().equals("1")?"男":"女");
         datas.put("idnumber", UrlController.currentUser.getCertificateId());
         datas.put("roomNum", "001");
