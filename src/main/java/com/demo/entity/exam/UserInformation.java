@@ -1,6 +1,5 @@
 package com.demo.entity.exam;
 
-import java.util.Date;
 /**
  * table name:  user_information
  * author name:  
@@ -11,7 +10,7 @@ public class UserInformation extends EntityHelper{
 	private int userId;
 	private String userName;
 	private String password;
-	private String sex;
+	private String sex;//1表示男    0表示女
 	private int age;
 	private String photo;
 	private String institute;

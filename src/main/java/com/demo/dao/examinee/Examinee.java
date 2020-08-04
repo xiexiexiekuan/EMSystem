@@ -1,9 +1,9 @@
 package com.demo.dao.examinee;
 
-import com.demo.entity.Exam;
 import com.demo.entity.exam.ApplicationInformation;
 import com.demo.entity.exam.ExamType;
 import com.demo.entity.exam.PublishExam;
+import com.demo.entity.exam.ViolationInfo;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
@@ -24,10 +24,15 @@ public interface Examinee {
     @Select("select * from PublishExam where typeId=#{typeId}")
     public PublishExam findPublishExamByTypeId(int typeId);
 
+    @Select("select * from PublishExam where publishId=#{publishId}")
+    public PublishExam findPublishExamByPublishId(int publishId);
+
     @Select("select * from Whitelist where userId=#{userId}")
     public Integer findWhitelistHaveStu(int userId);
 
-    @Insert("insert ApplicationInformation(userId,adminNumber,publishId,examineePhoto,curSchool,stuType,previewStatus,applyStatus,payStatus,examStatus) values(#{userId},#{adminNumber},#{publishId},#{examineePhoto},#{curSchool},#{stuType},#{previewStatus},#{applyStatus},#{payStatus},#{examStatus})")
+    @Insert("insert ApplicationInformation(userId,adminNumber,publishId,examineePhoto,curSchool,stuType,previewStatus,applyStatus,payStatus" +
+            ",examStatus) values(#{userId},#{adminNumber},#{publishId},#{examineePhoto},#{curSchool},#{stuType},#{previewStatus}" +
+            ",#{applyStatus},#{payStatus},#{examStatus})")
     @Options(useGeneratedKeys=true, keyProperty="enterId", keyColumn="enterId")
     public Integer addApplicationInformation(ApplicationInformation applicationInfo);
 
@@ -53,5 +58,14 @@ public interface Examinee {
     public List<ApplicationInformation> inquireGrades(int userId);
 
     @Select("select * from ViolationInfo where userId=#{userId}")
-    public List<ApplicationInformation> inquireViolation(int userId);
+    public List<ViolationInfo> inquireViolation(int userId);
+
+    @Select("select * from ApplicationInformation where payStatus=1 and examStatus=0 and userId=#{userId}")
+    public List<ApplicationInformation> admissionTicket(int userId);
+
+    @Select("select * from ApplicationInformation where enterId=#{enterId}")
+    public ApplicationInformation findApplicationInfoById(int enterId);
+
+    @Select("select * from ExamType where typeId=#{typeId}")
+    public ExamType findExamTypeById(int typeId);
 }

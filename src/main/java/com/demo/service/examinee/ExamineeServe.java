@@ -1,19 +1,15 @@
 package com.demo.service.examinee;
 
 import com.demo.controller.UrlController;
-import com.demo.dao.ExamDao;
 import com.demo.dao.examinee.Examinee;
-import com.demo.entity.Exam;
 import com.demo.entity.exam.ApplicationInformation;
 import com.demo.entity.exam.ExamType;
 import com.demo.entity.exam.PublishExam;
+import com.demo.entity.exam.ViolationInfo;
 import com.demo.util.PageBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -41,6 +37,13 @@ public class ExamineeServe {
     }
 
     /*
+    查询已发布的考试类型--通过发布编号
+     */
+    public PublishExam findPublishExamByPublishId(int publishId){
+        return examineeDao.findPublishExamByPublishId(publishId);
+    }
+
+    /*
     查找白名单是否含有本考生
      */
     public Integer findWhitelistHaveStu(int userId){
@@ -51,11 +54,11 @@ public class ExamineeServe {
     添加报名信息
      */
     public Integer addApplicationInformation(ApplicationInformation applicationInfo){
-        applicationInfo.setAdminNumber("000");
+        applicationInfo.setExamineeNumber("000");
         applicationInfo.setExamStatus(0);
         applicationInfo.setApplyStatus(0);
         applicationInfo.setPayStatus(0);
-        applicationInfo.setPreviewStatus(0);
+        applicationInfo.setPreviewStatus(-1);
         return examineeDao.addApplicationInformation(applicationInfo);
     }
 
@@ -116,10 +119,31 @@ public class ExamineeServe {
     /*
     查询违纪情况
      */
-    public List<ApplicationInformation> inquireViolation(){
+    public List<ViolationInfo> inquireViolation(){
         int userId = UrlController.currentUser.getUserId();
         return examineeDao.inquireViolation(userId);
     }
 
+    /*
+    查询准考证情况--已支付，未考试
+     */
+    public List<ApplicationInformation> admissionTicket(){
+        int userId = UrlController.currentUser.getUserId();
+        return examineeDao.admissionTicket(userId);
+    }
+
+    /*
+    查询--个人考试信息--根据报名编号
+     */
+    public ApplicationInformation findApplicationInfoById(int enterId){
+        return examineeDao.findApplicationInfoById(enterId);
+    }
+
+    /*
+    根据考试类型编号查询考试名称
+     */
+    public ExamType findExamTypeById(int typeId){
+        return examineeDao.findExamTypeById(typeId);
+    }
 
 }

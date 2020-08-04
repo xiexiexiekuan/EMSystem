@@ -1,27 +1,31 @@
 package com.demo.controller.examinee;
 
+import com.demo.controller.BaseController;
 import com.demo.controller.UrlController;
-import com.demo.entity.Exam;
-import com.demo.entity.exam.ApplicationInformation;
-import com.demo.entity.exam.ExamType;
-import com.demo.entity.exam.PublishExam;
-import com.demo.entity.exam.UserInformation;
-import com.demo.service.ExamService;
-import com.demo.service.admin.AdminServe;
+import com.demo.entity.exam.*;
 import com.demo.service.examinee.ExamineeServe;
 import com.demo.util.PageBean;
+import org.apache.poi.hwpf.HWPFDocument;
+import org.apache.poi.hwpf.usermodel.Range;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.FileInputStream;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Controller
 @RequestMapping("/student")
-public class ExamineeControl {
+public class ExamineeControl extends BaseController {
 
     //获取配置文件属性
     @Value("${page.size}")
@@ -167,7 +171,7 @@ public class ExamineeControl {
     @RequestMapping("/inquireViolation")
     public String inquireViolation(Map<String,Object> map)
     {
-        List<ApplicationInformation> violation = examineeServe.inquireViolation();
+        List<ViolationInfo> violation = examineeServe.inquireViolation();
         map.put("violation",violation);
         return "/Examinee/inquire-violation";
     }
@@ -178,7 +182,60 @@ public class ExamineeControl {
     @RequestMapping("/admissionTicket")
     public String admissionTicket(Map<String,Object> map)
     {
+        List<ApplicationInformation> admissionTicket = examineeServe.admissionTicket();
+        map.put("admissionTicket",admissionTicket);
         return "/Examinee/admission-ticket";
+    }
+
+    /*
+    打印准考证
+     */
+    @RequestMapping(method = RequestMethod.GET, value = "printTicket")
+    @ResponseBody
+    public void printTicket(HttpServletResponse response, @RequestParam("enterId")Integer enterId) throws Exception
+    {
+        String tmpFile = admissionPath;
+        ApplicationInformation myticket = examineeServe.findApplicationInfoById(enterId);//查找考生个人考试数据
+        PublishExam punishId = examineeServe.findPublishExamByPublishId(myticket.getPublishId());
+        ExamType examName = examineeServe.findExamTypeById(punishId.getTypeId());
+
+        //-------------模板数据Map设置开始----------------
+        Map<String, String> datas = new HashMap<String, String>();
+        datas.put("examName", examName.getTypeName());
+        datas.put("name", UrlController.currentUser.getUserName());
+        datas.put("examNum",myticket.getExamineeNumber());
+        datas.put("sex", UrlController.currentUser.getSex().equals("1")?"男":"女");
+        datas.put("idnumber", UrlController.currentUser.getCertificateId());
+        datas.put("roomNum", "001");
+        datas.put("seat", "215/325");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm");
+        if(punishId.getAdmissioncardPrintDeadline()!=null){
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(punishId.getAdmissioncardPrintDeadline());
+            calendar.add(Calendar.DAY_OF_YEAR,2);//准考证截止日期后的第二天开始考试
+            datas.put("time", sdf.format(calendar.getTime()));
+        }else {
+            datas.put("time", "2020年12月21日 09:00");
+        }
+        //--------------模板数据Map设置完毕---------------
+
+        System.out.println("准考证模板文件读取-->");
+        FileInputStream tempFileInputStream = new FileInputStream(tmpFile);//准考证模板文件读取
+        HWPFDocument document = new HWPFDocument(tempFileInputStream);
+        // 读取文本内容
+        Range bodyRange = document.getRange();
+        System.out.println("替换内容-->"  );
+        // 替换内容
+        for (Map.Entry<String, String> entry : datas.entrySet()) {
+            bodyRange.replaceText("${" + entry.getKey() + "}", entry.getValue());
+        }
+        System.out.println("<--替换内容"  );
+        //导出到http响应
+        String tempFileName=datas.get("name")+"-"+datas.get("examName")+"-"+"准考证.doc";
+        response.setContentType("application/octet-stream");
+        response.setHeader("Content-disposition", "attachment;filename="+tempFileName);//默认Excel名称
+        response.flushBuffer();
+        document.write(response.getOutputStream());
     }
 
 }
