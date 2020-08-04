@@ -7,6 +7,7 @@ import com.demo.entity.User;
 import com.demo.entity.exam.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Map;
@@ -170,23 +171,30 @@ public class ManagerServe {
      * 查找审核通过的本院校学生
      * @return
      */
-    public List<UserInformation> findStudentPassPreview() {
+    public List<ApplicationInformation> findPassPreview() {
         //获得所在院校
         String roomName = UrlController.currentUser.getInstitute();
-        return managerDao.findStudentPassPreview(roomName);
+        return managerDao.findPassPreview(roomName);
     }
 
     /**
      * 查找未缴费的学生
      */
 
-    public List<UserInformation> findStudentNotPay() {
+    public List<ApplicationInformation> findNotPay() {
         //获得所在院校
         String roomName = UrlController.currentUser.getInstitute();
-        return managerDao.findStudentNotPay(roomName);
+        return managerDao.findNotPay(roomName);
     }
 
 
+    /**
+     * 报考类型
+     */
+
+    public void setPublishId(int publishId) {
+        managerDao.setPublishId(publishId);
+    }
     /**
      * 集体报名
      */
@@ -199,12 +207,12 @@ public class ManagerServe {
         for (UserInformation student : studentList) {
             ApplicationInformation applicationInformation = new ApplicationInformation();
             applicationInformation.setUserId(student.getUserId());
-            applicationInformation.setexamineeNumber(student.getCertificateId());
+            applicationInformation.setExamineeNumber("000");
             applicationInformation.setExamineePhoto(student.getPhoto());
             applicationInformation.setCurSchool(roomName);
             applicationInformation.setStuType("0"); //应用型考生
             applicationInformation.setWantSchool(roomName);
-            applicationInformation.setPreviewStatus(0); //未审核
+            applicationInformation.setPreviewStatus(-1); //未审核
             applicationInformation.setApplyStatus(0); //未报考
             applicationInformation.setPayStatus(0);//未缴费
             //插入一条报考信息
@@ -223,12 +231,10 @@ public class ManagerServe {
         String roomName = UrlController.currentUser.getInstitute();
 
         //查找审核通过的学生
-        List<UserInformation> studentList = managerDao.findStudentPassPreview(roomName);
-        for (UserInformation student : studentList) {
-            ApplicationInformation applicationInformation = new ApplicationInformation();
-            applicationInformation.setApplyStatus(1); //已经报考
-            Integer integer = managerDao.updateApply(applicationInformation);
-            if(integer==0) return 0;
+        List<ApplicationInformation> applicationInformationList = managerDao.findPassPreview(roomName);
+        for(ApplicationInformation applicationInformation : applicationInformationList) {
+            Integer i = managerDao.updateApply(applicationInformation.getEnterId());
+            if(i == 0) return 0;
         }
         return 1;
     }
@@ -241,12 +247,10 @@ public class ManagerServe {
         String roomName = UrlController.currentUser.getInstitute();
 
         //查找审核通过的学生
-        List<UserInformation> studentList = managerDao.findStudentNotPay(roomName);
-        for (UserInformation student : studentList) {
-            ApplicationInformation applicationInformation = new ApplicationInformation();
-            applicationInformation.setPayStatus(1); //已经缴费
-            Integer integer = managerDao.updateApply(applicationInformation);
-            if(integer==0) return 0;
+        List<ApplicationInformation> applicationInformationList = managerDao.findNotPay(roomName);
+        for(ApplicationInformation applicationInformation : applicationInformationList) {
+            Integer i = managerDao.updatePay(applicationInformation.getEnterId());
+            if(i == 0) return 0;
         }
         return 1;
     }

@@ -70,13 +70,13 @@ public interface Manager {
 
     //插入考务老师信息
     @Insert("insert ExamTeacher(teacherName,sex,age,phone,position,roomId,examRoomId)"+
-            "values (#{teacherName},#{sex},#{age},#{phone},#{position},#{roomId},#{examRoomId})")
+            "values (#{teacherName},#{sex},#{age},#{phone},#{position},#{roomId})")
     @Options(useGeneratedKeys=true, keyProperty="teacherId", keyColumn="teacherId")
     public Integer insertExamTeacher(ExamTeacher examTeacher);
 
     //更新考务老师信息
     @Update("update ExamTeacher set teacherId=#{teacherId},teacherName=#{teacherName}," +
-            "sex=#{sex},age=#{age},phone=#{phone},position=#{position},roomId=#{roomId},examRoomId=#{examRoomId}")
+            "sex=#{sex},age=#{age},phone=#{phone},position=#{position},roomId=#{roomId}")
     public Integer updateExamTeacher(ExamTeacher examTeacher);
 
     //删除考务老师信息
@@ -89,33 +89,44 @@ public interface Manager {
      */
 
     //查找本院校的所有未报名学生
-    @Select("select * from UserInformation where UserInformation.userId not in (select distinct userId from ApplicationInformation)" +
+    @Select("select * from UserInformation where UserInformation.userId not in (select distinct userId from ApplicationInformation" +
+            "where publishId = #{publishId})" +
             " and role = '3'  and institute = #{roomName}")
     public List<UserInformation> findStudentNotEnter(String roomName);
 
     //查找审核状态
     @Select("select UserInformation.*,ApplicationInformation.previewStatus from UserInformation ,ApplicationInformation where UserInformation.userId = ApplicationInformation.userId" +
-            " and UserInformation.role = '3'  and UserInformation.institute = #{roomName}")
+            " and UserInformation.role = 3  and UserInformation.institute = #{roomName}")
     public List<UserInformation> findStudentPreviewStatus(String rooName);
 
     //查找本院校所有审核通过的学生
-    @Select("select * from UserInformation where UserInformation.userId in (select distinct userId from ApplicationInformation where " +
-            "previewStatus = '1') and role = '3'  and institute = #{roomName}")
-    public List<UserInformation> findStudentPassPreview(String roomName);
+    @Select("select * from ApplicationInformation where ApplicationInformation.userId in (select userId from UserInformation where" +
+            " role = 3  and institute = #{roomName}) and previewStatus = 1 ")
+    public List<ApplicationInformation> findPassPreview(String roomName);
 
-    @Select("select * from UserInformation where UserInformation.userId in (select distinct userId from ApplicationInformation where " +
-            "applyStatus = '1') and role = '3'  and institute = #{roomName}")
-    //查找本院校所有审核通过而且没有缴费的
-    public List<UserInformation> findStudentNotPay(String roomName);
+    @Select("select * from ApplicationInformation where ApplicationInformation.userId in (select userId from UserInformation where" +
+            " role = 3  and institute = #{roomName}) and applyStatus = 1 and payStatus = 0")
+    //查找本院校所有报考通过而且没有缴费的
+    public List<ApplicationInformation> findNotPay(String roomName);
+
+
+    @Update("update ApplicationInformation set publishId = ${publishId}")
+    public void setPublishId(int publishId);
 
     //插入报名信息
+    @Insert("insert ApplicationInformation(userId,examineeNumber,publishId,examineePhoto,curSchool,stuType,previewStatus,applyStatus,payStatus" +
+            ",examStatus,wantSchool) values(#{userId},#{examineeNumber},#{publishId},#{examineePhoto},#{curSchool},#{stuType},#{previewStatus}" +
+            ",#{applyStatus},#{payStatus},#{examStatus},#{wantSchool})")
+    @Options(useGeneratedKeys=true, keyProperty="enterId", keyColumn="enterId")
     public Integer insertEnter(ApplicationInformation applicationInformation);
 
     //更新报考信息
-    public Integer updateApply(ApplicationInformation applicationInformation);
+    @Update("update ApplicationInformation set applyStatus=1 where userId=#{userId}")
+    public Integer updateApply(int enterId);
 
     //更新缴费信息
-    public Integer updatePay(ApplicationInformation applicationInformation);
+    @Update("update ApplicationInformation set payStatus=1 where userId=#{userId}")
+    public Integer updatePay(int enterId);
 
     /**
      * 插入一条考生信息，默认密码与用户名一致，返回插入记录主键

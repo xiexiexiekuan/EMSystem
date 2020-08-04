@@ -2,15 +2,13 @@ package com.demo.controller.manager;
 
 import com.demo.entity.Exam;
 import com.demo.entity.User;
-import com.demo.entity.exam.ExamRoomInformation;
-import com.demo.entity.exam.ExamTeacher;
-import com.demo.entity.exam.UserInformation;
-import com.demo.entity.exam.Whitelist;
+import com.demo.entity.exam.*;
 import com.demo.service.manager.ManagerServe;
 import com.demo.service.manager.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Map;
@@ -104,9 +102,11 @@ public class ManagerControl {
     前往集体报名页面
      */
     @RequestMapping("/toGroupEnter")
-    public String toGroupEnter(Map<String,Object> map)
+    public String toGroupEnter(Map<String,Object> map,@RequestParam("publishId") int publishId)
     {
         List<UserInformation> userInformationList = managerService.findStudentNotEnter();
+        //设置报考类型
+        managerService.setPublishId(publishId);
         map.put("userInformationList",userInformationList);
         return "/Manager/group-enter";
     }
@@ -120,10 +120,10 @@ public class ManagerControl {
         Integer i = managerService.groupEnter();
         if(i>0){
             map.put("msg","报名成功");
-            return toGroupEnter(map);
+            return toGroupEnter(map,0);
         }
         map.put("msg","报名失败");
-        return toGroupEnter(map);
+        return toGroupEnter(map,0);
     }
 
     /*
@@ -132,18 +132,17 @@ public class ManagerControl {
     @RequestMapping("/toGroupApply")
     public String toGroupApply(Map<String,Object> map)
     {
-        List<UserInformation> userInformationList = managerService.findStudentPassPreview();
-        map.put("userInformationList",userInformationList);
+        List<ApplicationInformation> applicationInformationList = managerService.findPassPreview();
+        map.put("applicationInformationList",applicationInformationList);
         return "/Manager/group-apply";
     }
-
     /*
    集体报考
     */
     @RequestMapping("/groupApply")
     public String groupApply(Map<String,Object> map)
     {
-        Integer i = managerService.groupEnter();
+        Integer i = managerService.groupApply();
         if(i>0){
             map.put("msg","报考成功");
             return toGroupApply(map);
@@ -159,8 +158,8 @@ public class ManagerControl {
     @RequestMapping("/toGroupPay")
     public String toGroupPay(Map<String,Object> map)
     {
-        List<UserInformation> userInformationList = managerService.findStudentNotPay();
-        map.put("userInformationList",userInformationList);
+        List<ApplicationInformation> applicationInformationList = managerService.findNotPay();
+        map.put("applicationInformationList",applicationInformationList);
         return "/Manager/group-apply";
 
     }
