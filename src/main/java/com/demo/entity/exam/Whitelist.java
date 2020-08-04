@@ -1,6 +1,5 @@
 package com.demo.entity.exam;
 
-import java.util.Date;
 /**
  * table name:  whitelist
  * author name:  
@@ -10,41 +9,42 @@ public class Whitelist extends EntityHelper{
 
 	private int listId;
 	private int userId;
-	private String examineeNum;
+	private String certificateId;//身份证号码
 
 	public Whitelist() {
 		super();
 	}
-	public Whitelist(int listId,int userId,String examineeNum) {
+	public Whitelist(int listId,int userId,String certificateId) {
 		this.listId=listId;
 		this.userId=userId;
-		this.examineeNum=examineeNum;
+		this.certificateId =certificateId;
 	}
-
-	public int getListId() {
+	public void setListId(int listId){
+		this.listId=listId;
+	}
+	public int getListId(){
 		return listId;
 	}
-
-	public void setListId(int listId) {
-		this.listId = listId;
+	public void setUserId(int userId){
+		this.userId=userId;
 	}
-
-	public int getUserId() {
+	public int getUserId(){
 		return userId;
 	}
-
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setCertificateId(String certificateId){
+		this.certificateId =certificateId;
 	}
-
-	public String getExamineeNum() {
-		return examineeNum;
+	public String getCertificateId(){
+		return certificateId;
 	}
-
-	public void setExamineeNum(String examineeNum) {
-		this.examineeNum = examineeNum;
+	@Override
+	public String toString() {
+		return "whitelist[" + 
+			"listId=" + listId + 
+			", userId=" + userId + 
+			", certificateId=" + certificateId +
+			"]";
 	}
-
 	@Override
 	public String getPrimaryKey() {
 		return "listId";

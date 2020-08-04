@@ -109,6 +109,11 @@ public class AdminControl {
      */
     @RequestMapping("publishExam")
     public String publishExam(PublishExam exam, Map<String,Object> map){
+        Integer h = adminServe.findPublishExamByTypeId(exam.getTypeId());//同一种类型考试只能发布一次
+        if(h>=1){
+            map.put("msg","本类型考试已经发布！");
+            return toPublishExam();
+        }
         Integer i = adminServe.publishExam(exam);
         if(i>0){
             map.put("msg","考试信息发布成功！");
