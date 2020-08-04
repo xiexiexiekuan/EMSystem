@@ -1,12 +1,11 @@
 package com.demo.entity.exam;
 
-import java.util.Date;
 /**
  * table name:  test_center_information
  * author name:  
  * create time: 2020-07-30 15:36:32
  */ 
-public class TestCenterInformation extends EntityHelper{
+public class roomManage extends EntityHelper{
 
 	private int roomId;
 	private String roomName;
@@ -15,10 +14,10 @@ public class TestCenterInformation extends EntityHelper{
 	private int numberStart;
 	private int numberEnd;
 
-	public TestCenterInformation() {
+	public roomManage() {
 		super();
 	}
-	public TestCenterInformation(int roomId,String roomName,String roomAddress,int roomNumber,int numberStart,int numberEnd) {
+	public roomManage(int roomId, String roomName, String roomAddress, int roomNumber, int numberStart, int numberEnd) {
 		this.roomId=roomId;
 		this.roomName=roomName;
 		this.roomAddress=roomAddress;
