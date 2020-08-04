@@ -42,7 +42,7 @@ public class Whitelist extends EntityHelper{
 		return "whitelist[" + 
 			"listId=" + listId + 
 			", userId=" + userId + 
-			", adminNumber=" + certificateId +
+			", certificateId=" + certificateId +
 			"]";
 	}
 	@Override
