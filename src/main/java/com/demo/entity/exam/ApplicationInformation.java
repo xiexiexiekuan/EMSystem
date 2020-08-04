@@ -9,13 +9,14 @@ public class ApplicationInformation extends EntityHelper{
 
 	private int enterId;
 	private int userId;
-	private String adminNumber;
+	//改准考证号
+	private String examineeNumber;
 	private int publishId;
 	private String examineePhoto;
+	//oldSchool改为curSchool--数据库未改动 oldSchool总是反应不过来
 	private String curSchool;
 	private String stuType;
 	private String wantSchool;
-	//审核状态    -1未审核    0审核不通过    1审核通过
 	private int previewStatus;
 	private int applyStatus;
 	private int payStatus;
@@ -25,10 +26,10 @@ public class ApplicationInformation extends EntityHelper{
 	public ApplicationInformation() {
 		super();
 	}
-	public ApplicationInformation(int enterId,int userId,String adminNumber,int publishId,String examineePhoto,String curSchool,String stuType,String wantSchool,int previewStatus,int applyStatus,int payStatus,int examStatus,String grades) {
+	public ApplicationInformation(int enterId,int userId,String examineeNumber,int publishId,String examineePhoto,String curSchool,String stuType,String wantSchool,int previewStatus,int applyStatus,int payStatus,int examStatus,String grades) {
 		this.enterId=enterId;
 		this.userId=userId;
-		this.adminNumber=adminNumber;
+		this.examineeNumber=examineeNumber;
 		this.publishId=publishId;
 		this.examineePhoto =examineePhoto;
 		this.curSchool=curSchool;
@@ -52,11 +53,11 @@ public class ApplicationInformation extends EntityHelper{
 	public int getUserId(){
 		return userId;
 	}
-	public void setAdminNumber(String adminNumber){
-		this.adminNumber=adminNumber;
+	public void setexamineeNumber(String examineeNumber){
+		this.examineeNumber=examineeNumber;
 	}
-	public String getAdminNumber(){
-		return adminNumber;
+	public String getexamineeNumber(){
+		return examineeNumber;
 	}
 	public void setPublishId(int publishId){
 		this.publishId=publishId;
@@ -123,7 +124,7 @@ public class ApplicationInformation extends EntityHelper{
 		return "application_information[" + 
 			"enterId=" + enterId + 
 			", userId=" + userId + 
-			", adminNumber=" + adminNumber + 
+			", examineeNumber=" + examineeNumber +
 			", publishId=" + publishId + 
 			", photo=" + examineePhoto +
 			", curSchool=" + curSchool +

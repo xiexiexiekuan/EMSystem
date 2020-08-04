@@ -106,7 +106,7 @@ public class ManagerControl {
     @RequestMapping("/toGroupEnter")
     public String toGroupEnter(Map<String,Object> map)
     {
-        List<UserInformation> userInformationList = managerService.findStudentPassPreview();
+        List<UserInformation> userInformationList = managerService.findStudentNotEnter();
         map.put("userInformationList",userInformationList);
         return "/Manager/group-enter";
     }
@@ -130,8 +130,10 @@ public class ManagerControl {
     前往集体报考页面
      */
     @RequestMapping("/toGroupApply")
-    public String toGroupApply()
+    public String toGroupApply(Map<String,Object> map)
     {
+        List<UserInformation> userInformationList = managerService.findStudentPassPreview();
+        map.put("userInformationList",userInformationList);
         return "/Manager/group-apply";
     }
 
@@ -139,35 +141,53 @@ public class ManagerControl {
    集体报考
     */
     @RequestMapping("/groupApply")
-    public String groupApply()
+    public String groupApply(Map<String,Object> map)
     {
-        return "/Manager/group-apply";
+        Integer i = managerService.groupEnter();
+        if(i>0){
+            map.put("msg","报考成功");
+            return toGroupApply(map);
+        }
+        map.put("msg","报考失败");
+        return toGroupApply(map);
+
     }
 
     /*
    前往集体缴费页面
     */
     @RequestMapping("/toGroupPay")
-    public String toGroupPay()
+    public String toGroupPay(Map<String,Object> map)
     {
-        return "/Manager/group-pay";
+        List<UserInformation> userInformationList = managerService.findStudentNotPay();
+        map.put("userInformationList",userInformationList);
+        return "/Manager/group-apply";
+
     }
 
     /*
    集体缴费
     */
     @RequestMapping("/groupPay")
-    public String groupPay()
+    public String groupPay(Map<String,Object> map)
     {
-        return "/Manager/group-pay";
+        Integer i = managerService.groupPay();
+        if(i>0){
+            map.put("msg","缴费成功");
+            return toGroupPay(map);
+        }
+        map.put("msg","缴费失败");
+        return toGroupPay(map);
     }
 
     /*
     报考信息查询
    */
     @RequestMapping("/examInformation")
-    public String examInformation()
+    public String examInformation(Map<String,Object> map)
     {
+        List<UserInformation> userInformationList = managerService.findStudentPreviewStatus();
+        map.put("userInformationList",userInformationList);
         return "/Manager/exam-information";
     }
 

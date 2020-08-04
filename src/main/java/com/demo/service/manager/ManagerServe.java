@@ -1,12 +1,10 @@
 package com.demo.service.manager;
 
 import com.demo.controller.UrlController;
+import com.demo.controller.UserInfoController;
 import com.demo.dao.manager.Manager;
 import com.demo.entity.User;
-import com.demo.entity.exam.ExamRoomInformation;
-import com.demo.entity.exam.ExamTeacher;
-import com.demo.entity.exam.UserInformation;
-import com.demo.entity.exam.Whitelist;
+import com.demo.entity.exam.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,16 +32,16 @@ public class ManagerServe {
      * 添加白名单成员
      */
     public Integer addWhiteList(int userId) {
-        String num = managerDao.findExamineeNumById(userId);
+        String certificateId = managerDao.findCertificateIdById(userId);
 
-        return managerDao.insertWhiteList(userId,num);
+        return managerDao.insertWhiteList(userId,certificateId);
     }
 
     /**
      * 更新白名单成员
      */
     public Integer updateWhiteList(Whitelist whitelist) {
-        whitelist.setExamineeNum(managerDao.findExamineeNumById(whitelist.getUserId()));
+        whitelist.setCertificateId(managerDao.findCertificateIdById(whitelist.getUserId()));
         return managerDao.updateWhiteList(whitelist);
     }
 
@@ -148,25 +146,70 @@ public class ManagerServe {
         return managerDao.deleteExamTeacher(examTeacherId);
     }
 
+    /*接下来是报名报考相关操作*/
+
+    /**
+     * 查找未报名的本院校学生
+     */
+    public List<UserInformation> findStudentNotEnter() {
+        //获得所在院校
+        String roomName = UrlController.currentUser.getInstitute();
+        return managerDao.findStudentNotEnter(roomName);
+    };
+
+    /**
+     * 查找学生审核状态
+     */
+    public List<UserInformation> findStudentPreviewStatus() {
+        //获得所在院校
+        String roomName = UrlController.currentUser.getInstitute();
+        return managerDao.findStudentPreviewStatus(roomName);
+    }
+
     /**
      * 查找审核通过的本院校学生
      * @return
      */
     public List<UserInformation> findStudentPassPreview() {
-        return managerDao.findStudentPassPreview();
-
+        //获得所在院校
+        String roomName = UrlController.currentUser.getInstitute();
+        return managerDao.findStudentPassPreview(roomName);
     }
+
+    /**
+     * 查找未缴费的学生
+     */
+
+    public List<UserInformation> findStudentNotPay() {
+        //获得所在院校
+        String roomName = UrlController.currentUser.getInstitute();
+        return managerDao.findStudentNotPay(roomName);
+    }
+
 
     /**
      * 集体报名
      */
-
     public Integer groupEnter() {
+        //获得所在院校
+        String roomName = UrlController.currentUser.getInstitute();
+
         //应用型考生
-        List<UserInformation> studentList = managerDao.findStudentPassPreview();
-        for(int i=0;i<studentList.size();i++) {
-            UserInformation student = studentList.get(i);
+        List<UserInformation> studentList = managerDao.findStudentNotEnter(roomName);
+        for (UserInformation student : studentList) {
+            ApplicationInformation applicationInformation = new ApplicationInformation();
+            applicationInformation.setUserId(student.getUserId());
+            applicationInformation.setexamineeNumber(student.getCertificateId());
+            applicationInformation.setExamineePhoto(student.getPhoto());
+            applicationInformation.setCurSchool(roomName);
+            applicationInformation.setStuType("0"); //应用型考生
+            applicationInformation.setWantSchool(roomName);
+            applicationInformation.setPreviewStatus(0); //未审核
+            applicationInformation.setApplyStatus(0); //未报考
+            applicationInformation.setPayStatus(0);//未缴费
             //插入一条报考信息
+            Integer integer = managerDao.insertEnter(applicationInformation);
+            if(integer==0) return 0;
         }
         return 1;
     }
@@ -176,8 +219,17 @@ public class ManagerServe {
      */
 
     public Integer groupApply() {
+        //获得所在院校
+        String roomName = UrlController.currentUser.getInstitute();
 
-        //待完成
+        //查找审核通过的学生
+        List<UserInformation> studentList = managerDao.findStudentPassPreview(roomName);
+        for (UserInformation student : studentList) {
+            ApplicationInformation applicationInformation = new ApplicationInformation();
+            applicationInformation.setApplyStatus(1); //已经报考
+            Integer integer = managerDao.updateApply(applicationInformation);
+            if(integer==0) return 0;
+        }
         return 1;
     }
     /**
@@ -185,7 +237,17 @@ public class ManagerServe {
      */
     public Integer groupPay() {
 
-        //待完成
+        //获得所在院校
+        String roomName = UrlController.currentUser.getInstitute();
+
+        //查找审核通过的学生
+        List<UserInformation> studentList = managerDao.findStudentNotPay(roomName);
+        for (UserInformation student : studentList) {
+            ApplicationInformation applicationInformation = new ApplicationInformation();
+            applicationInformation.setPayStatus(1); //已经缴费
+            Integer integer = managerDao.updateApply(applicationInformation);
+            if(integer==0) return 0;
+        }
         return 1;
     }
 
