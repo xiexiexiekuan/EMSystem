@@ -26,6 +26,9 @@ public interface Admin {
     @Delete("delete from ExamType where typeId=#{typeId}")
     public Integer deleteExamType(int typeId);
 
+    @Select("select * from PublishExam where typeId = #{typeId}")
+    public Integer findPublishExamByTypeId(int typeId);
+
     @Insert("insert PublishExam(typeId,registrationStarts,registrationDeadline,applyStarts,applyDeadline,confirmationStarts," +
             "confirmationDeadline,admissioncardPrintStarts,admissioncardPrintDeadline,userId,publishTime) values(#{typeId}," +
             "#{registrationStarts},#{registrationDeadline},#{applyStarts},#{applyDeadline},#{confirmationStarts}," +

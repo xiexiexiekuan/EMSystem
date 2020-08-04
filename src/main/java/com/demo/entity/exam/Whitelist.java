@@ -1,6 +1,5 @@
 package com.demo.entity.exam;
 
-import java.util.Date;
 /**
  * table name:  whitelist
  * author name:  
@@ -10,15 +9,15 @@ public class Whitelist extends EntityHelper{
 
 	private int listId;
 	private int userId;
-	private String adminNumber;
+	private String certificateId;//身份证号码
 
 	public Whitelist() {
 		super();
 	}
-	public Whitelist(int listId,int userId,String adminNumber) {
+	public Whitelist(int listId,int userId,String certificateId) {
 		this.listId=listId;
 		this.userId=userId;
-		this.adminNumber=adminNumber;
+		this.certificateId =certificateId;
 	}
 	public void setListId(int listId){
 		this.listId=listId;
@@ -32,18 +31,18 @@ public class Whitelist extends EntityHelper{
 	public int getUserId(){
 		return userId;
 	}
-	public void setAdminNumber(String adminNumber){
-		this.adminNumber=adminNumber;
+	public void setCertificateId(String certificateId){
+		this.certificateId =certificateId;
 	}
-	public String getAdminNumber(){
-		return adminNumber;
+	public String getCertificateId(){
+		return certificateId;
 	}
 	@Override
 	public String toString() {
 		return "whitelist[" + 
 			"listId=" + listId + 
 			", userId=" + userId + 
-			", adminNumber=" + adminNumber + 
+			", adminNumber=" + certificateId +
 			"]";
 	}
 	@Override

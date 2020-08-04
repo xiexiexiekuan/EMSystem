@@ -61,6 +61,13 @@ public class AdminServe {
     }
 
     /*
+    查询考试类型是否已经发布
+     */
+    public Integer findPublishExamByTypeId(int typeId){
+        return admin.findPublishExamByTypeId(typeId);
+    }
+
+    /*
     发布一场考试
      */
     public Integer publishExam(PublishExam exam){

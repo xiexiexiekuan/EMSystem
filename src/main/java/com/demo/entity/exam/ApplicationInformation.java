@@ -12,10 +12,10 @@ public class ApplicationInformation extends EntityHelper{
 	private String adminNumber;
 	private int publishId;
 	private String examineePhoto;
-	//oldSchool改为curSchool--数据库未改动 oldSchool总是反应不过来
 	private String curSchool;
 	private String stuType;
 	private String wantSchool;
+	//审核状态    -1未审核    0审核不通过    1审核通过
 	private int previewStatus;
 	private int applyStatus;
 	private int payStatus;
@@ -52,10 +52,10 @@ public class ApplicationInformation extends EntityHelper{
 	public int getUserId(){
 		return userId;
 	}
-	public void setAdmiiNumber(String adminNumber){
+	public void setAdminNumber(String adminNumber){
 		this.adminNumber=adminNumber;
 	}
-	public String getAdmiiNumber(){
+	public String getAdminNumber(){
 		return adminNumber;
 	}
 	public void setPublishId(int publishId){
