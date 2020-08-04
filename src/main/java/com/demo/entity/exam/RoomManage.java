@@ -5,7 +5,7 @@ package com.demo.entity.exam;
  * author name:  
  * create time: 2020-07-30 15:36:32
  */ 
-public class roomManage extends EntityHelper{
+public class RoomManage extends EntityHelper{
 
 	private int roomId;
 	private String roomName;
@@ -14,10 +14,10 @@ public class roomManage extends EntityHelper{
 	private int numberStart;
 	private int numberEnd;
 
-	public roomManage() {
+	public RoomManage() {
 		super();
 	}
-	public roomManage(int roomId, String roomName, String roomAddress, int roomNumber, int numberStart, int numberEnd) {
+	public RoomManage(int roomId, String roomName, String roomAddress, int roomNumber, int numberStart, int numberEnd) {
 		this.roomId=roomId;
 		this.roomName=roomName;
 		this.roomAddress=roomAddress;
