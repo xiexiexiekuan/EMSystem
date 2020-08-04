@@ -136,7 +136,6 @@ public class ManagerControl {
         map.put("applicationInformationList",applicationInformationList);
         return "/Manager/group-apply";
     }
-
     /*
    集体报考
     */
