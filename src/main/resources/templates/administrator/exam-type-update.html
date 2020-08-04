@@ -4,10 +4,10 @@
       xmlns:th="http://www.thymeleaf.org">
 <!--考试类型更新-->
 <script>
-    function getAreaList() {
+    function getExamTypeList() {
         $.ajax({
             type: "post",
-            url: "/admin/areaList",    //url根据自己的项目实际定义  ????哪
+            url: "/examOffice/examType",    //url根据自己的项目实际定义
             async: false,
             dataType: "text",
             error: function () {
@@ -15,11 +15,11 @@
                 return false;
             },
             success: function (text) {
-                var expressExam = $("#addressId");
+                var $examType = $("#examType");
                 var str = '';
                 var data = eval("(" + text + ")");
-                var tid=expressExam.attr("value");
-                expressExam.empty();
+                var tid=examType.attr("value");
+                examType.empty();
                 console.log(tid)
                 for (var o in data) {
                     if(tid==data[o].id) {
@@ -28,12 +28,13 @@
                         str += '<option value="' + data[o].id + '">' + data[o].province + data[o].city + '</option>';
                     }
                 }
-                expressExam.append(str);
+                examType.append(str);
             }
         });
     }
 </script>
-<body onload="getAreaList()">
+<body onload="getExamTypeList()">
+
 
 <div id="wrapper" class="row">
     <div th:replace="common/header::nav"></div>
@@ -54,19 +55,18 @@
                                         <th>信息</th>
                                     </tr>
                                     </thead>
-
-                                    <tbody th:object="${currentExam}">
+                                    <tbody th:object="${examType}">
                                     <tr>
                                         <td>考试类型编码</td>
                                         <td>
-                                            <input type="text" id="typeId" name="typeId" class="required" placeholder="typeId"
-                                                   value="无" th:value="*{typeId}">
+                                            <input type="text" id="typeId" name="typeId" class="required" placeholder="考试类型编码"
+                                                           value="无" th:value="*{typeId}">
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>考试类型名称</td>
                                         <td>
-                                            <input type="text" id="typeName" name="typeName" class="required" placeholder="typeName"
+                                            <input type="text" id="typeName" name="typeName" class="required" placeholder="考试类型名称"
                                                    value="无" th:value="*{typeName}">
                                         </td>
                                     </tr>
@@ -92,7 +92,7 @@
                                 </table>
                                 <button type="submit" class="btn btn-primary">保存</button>
                                 <button class="btn btn-warning">
-                                    <a th:href="'/examOffice/examType'" style="color:white;">取消</a>
+                                    <a href="javascript:history.go(-1)" style="color:white;">取消</a>
                                 </button>
                             </div>
                         </form>
