@@ -2,10 +2,7 @@ package com.demo.dao.manager;
 
 import com.demo.entity.Exam;
 import com.demo.entity.User;
-import com.demo.entity.exam.ExamRoomInformation;
-import com.demo.entity.exam.ExamTeacher;
-import com.demo.entity.exam.UserInformation;
-import com.demo.entity.exam.Whitelist;
+import com.demo.entity.exam.*;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
@@ -21,15 +18,15 @@ public interface Manager {
 
     //查准考证号
     @Select("select certificateId from UserInformation where userId=#{userId}")
-    public String findExamineeNumById(int userId);
+    public String findCertificateIdById(int userId);
 
     //插入白名单
-    @Insert("insert " + "Whitelist(userId,examineeNum) " + "values(#{userId},#{examineeNum})")
+    @Insert("insert " + "Whitelist(userId,certificateId) " + "values(#{userId},#{certificateId})")
     @Options(useGeneratedKeys=true, keyProperty="listId", keyColumn="listId")
-    public Integer insertWhiteList(int userId,String examineeNum);
+    public Integer insertWhiteList(int userId,String certificateId);
 
     //更新白名单
-    @Update("update Whitelist set userId = #{userId},examineeNum = ${examineeNum} where listId = #{listId}")
+    @Update("update Whitelist set userId = #{userId},certificateId = ${certificateId} where listId = #{listId}")
     public Integer updateWhiteList(Whitelist whitelist);
 
     //删除白名单
@@ -91,17 +88,34 @@ public interface Manager {
      * 报名报考相关操作
      */
 
-    //查找本院校的所有学生
-    public List<UserInformation> findAllStudentInSchool();
+    //查找本院校的所有未报名学生
+    @Select("select * from UserInformation where UserInformation.userId not in (select distinct userId from ApplicationInformation)" +
+            " and role = '3'  and institute = #{roomName}")
+    public List<UserInformation> findStudentNotEnter(String roomName);
 
-    //查找本院校审核通过的学生
-    public List<UserInformation> findStudentPassPreview();
+    //查找审核状态
+    @Select("select UserInformation.*,ApplicationInformation.previewStatus from UserInformation ,ApplicationInformation where UserInformation.userId = ApplicationInformation.userId" +
+            " and UserInformation.role = '3'  and UserInformation.institute = #{roomName}")
+    public List<UserInformation> findStudentPreviewStatus(String rooName);
+
+    //查找本院校所有审核通过的学生
+    @Select("select * from UserInformation where UserInformation.userId in (select distinct userId from ApplicationInformation where " +
+            "previewStatus = '1') and role = '3'  and institute = #{roomName}")
+    public List<UserInformation> findStudentPassPreview(String roomName);
+
+    @Select("select * from UserInformation where UserInformation.userId in (select distinct userId from ApplicationInformation where " +
+            "applyStatus = '1') and role = '3'  and institute = #{roomName}")
+    //查找本院校所有审核通过而且没有缴费的
+    public List<UserInformation> findStudentNotPay(String roomName);
 
     //插入报名信息
-    public Integer insertApply();
+    public Integer insertEnter(ApplicationInformation applicationInformation);
 
-    //插入报考信息
+    //更新报考信息
+    public Integer updateApply(ApplicationInformation applicationInformation);
 
+    //更新缴费信息
+    public Integer updatePay(ApplicationInformation applicationInformation);
 
     /**
      * 插入一条考生信息，默认密码与用户名一致，返回插入记录主键
