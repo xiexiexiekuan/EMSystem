@@ -21,33 +21,6 @@ public class ManagerControl {
 
     @Autowired
     private ManagerServe managerService;
-    /*
-    个人信息
-     */
-    @RequestMapping("/personalInfo")
-    public String personalInfo()
-    {
-
-        return "/Manager/personal-info";
-    }
-
-    /*
-    去更新个人信息页面
-     */
-    @RequestMapping("/toPersonalInfoUpdate")
-    public String toPersonalInfoUpdate()
-    {
-        return "/Manager/personal-info-update";
-    }
-
-    /*
-    更新个人信息
-     */
-    @RequestMapping("/personalInfoUpdate")
-    public String personalInfoUpdate()
-    {
-        return "/Manager/personal-info";
-    }
 
     /*
     考生信息
@@ -142,10 +115,15 @@ public class ManagerControl {
    集体报名
     */
     @RequestMapping("/groupEnter")
-    public String groupEnter()
+    public String groupEnter(Map<String,Object> map)
     {
-        managerService.groupEnter();
-        return "/Manager/group-enter";
+        Integer i = managerService.groupEnter();
+        if(i>0){
+            map.put("msg","报名成功");
+            return toGroupEnter(map);
+        }
+        map.put("msg","报名失败");
+        return toGroupEnter(map);
     }
 
     /*
@@ -204,14 +182,6 @@ public class ManagerControl {
         return "/Manager/whitelist";
     }
 
-    /*
-    去更新白名单信息页面
-     */
-    @RequestMapping("/toWhitelistUpdate")
-    public String toWhitelistUpdate()
-    {
-        return "/Manager/whitelist-update";
-    }
 
     /*
     更新白名单信息
@@ -225,7 +195,7 @@ public class ManagerControl {
             return whitelist(map);
         }
         map.put("msg","白名单更新失败");
-        return toWhitelistUpdate();
+        return whitelist(map);
     }
 
     /*

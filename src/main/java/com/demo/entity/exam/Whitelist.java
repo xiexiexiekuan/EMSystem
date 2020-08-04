@@ -10,42 +10,41 @@ public class Whitelist extends EntityHelper{
 
 	private int listId;
 	private int userId;
-	private String adminNumber;
+	private String examineeNum;
 
 	public Whitelist() {
 		super();
 	}
-	public Whitelist(int listId,int userId,String adminNumber) {
+	public Whitelist(int listId,int userId,String examineeNum) {
 		this.listId=listId;
 		this.userId=userId;
-		this.adminNumber=adminNumber;
+		this.examineeNum=examineeNum;
 	}
-	public void setListId(int listId){
-		this.listId=listId;
-	}
-	public int getListId(){
+
+	public int getListId() {
 		return listId;
 	}
-	public void setUserId(int userId){
-		this.userId=userId;
+
+	public void setListId(int listId) {
+		this.listId = listId;
 	}
-	public int getUserId(){
+
+	public int getUserId() {
 		return userId;
 	}
-	public void setAdminNumber(String adminNumber){
-		this.adminNumber=adminNumber;
+
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
-	public String getAdminNumber(){
-		return adminNumber;
+
+	public String getExamineeNum() {
+		return examineeNum;
 	}
-	@Override
-	public String toString() {
-		return "whitelist[" + 
-			"listId=" + listId + 
-			", userId=" + userId + 
-			", adminNumber=" + adminNumber + 
-			"]";
+
+	public void setExamineeNum(String examineeNum) {
+		this.examineeNum = examineeNum;
 	}
+
 	@Override
 	public String getPrimaryKey() {
 		return "listId";

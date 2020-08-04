@@ -19,13 +19,17 @@ public interface Manager {
     @Select("select * from Whitelist")
     public List<Whitelist> findAllWhiteList();
 
+    //查准考证号
+    @Select("select certificateId from UserInformation where userId=#{userId}")
+    public String findExamineeNumById(int userId);
+
     //插入白名单
-    @Insert("insert" + "Whitelist(listId,userId,adminNumber" + "values(#{listId},#{userId})")
+    @Insert("insert " + "Whitelist(userId,examineeNum) " + "values(#{userId},#{examineeNum})")
     @Options(useGeneratedKeys=true, keyProperty="listId", keyColumn="listId")
-    public Integer insertWhiteList(int userId);
+    public Integer insertWhiteList(int userId,String examineeNum);
 
     //更新白名单
-    @Update("update Whitelist set userID = #{userId} where listID = #{listId}")
+    @Update("update Whitelist set userId = #{userId},examineeNum = ${examineeNum} where listId = #{listId}")
     public Integer updateWhiteList(Whitelist whitelist);
 
     //删除白名单
@@ -45,8 +49,9 @@ public interface Manager {
     public Integer findRoomIdByName(String roomName);
 
     //插入考场信息
-    @Insert("insert ExamRoomInformation(examRoomId,examRoomNum,examRoomLocate,roomId,userStatus)"+
-            "values (#{examRoomId},#{examRoomNum},#{examRoomLocate},#{roomId},#{userStatus})")
+    @Insert("insert ExamRoomInformation(examRoomNum,examRoomLocate,roomId,userStatus)"+
+            "values (#{examRoomNum},#{examRoomLocate},#{roomId},#{userStatus})")
+    @Options(useGeneratedKeys=true, keyProperty="examRoomId", keyColumn="examRoomId")
     public Integer insertExamRoom(ExamRoomInformation examRoomInformation);
 
     //更新考场信息
@@ -67,8 +72,9 @@ public interface Manager {
     public ExamTeacher findExamTeacherById(int examTeacherId);
 
     //插入考务老师信息
-    @Insert("insert ExamTeacher(teacherId,teacherName,sex,age,phone,position,roomId,examRoomId)"+
-            "values (#{teacherId},#{teacherName},#{sex},#{age},#{phone},#{position},#{roomId},#{examRoomId})")
+    @Insert("insert ExamTeacher(teacherName,sex,age,phone,position,roomId,examRoomId)"+
+            "values (#{teacherName},#{sex},#{age},#{phone},#{position},#{roomId},#{examRoomId})")
+    @Options(useGeneratedKeys=true, keyProperty="teacherId", keyColumn="teacherId")
     public Integer insertExamTeacher(ExamTeacher examTeacher);
 
     //更新考务老师信息
@@ -90,6 +96,11 @@ public interface Manager {
 
     //查找本院校审核通过的学生
     public List<UserInformation> findStudentPassPreview();
+
+    //插入报名信息
+    public Integer insertApply();
+
+    //插入报考信息
 
 
     /**
