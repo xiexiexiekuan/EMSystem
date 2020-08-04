@@ -34,14 +34,16 @@ public class ManagerServe {
      * 添加白名单成员
      */
     public Integer addWhiteList(int userId) {
-        return managerDao.insertWhiteList(userId);
+        String num = managerDao.findExamineeNumById(userId);
+
+        return managerDao.insertWhiteList(userId,num);
     }
 
     /**
      * 更新白名单成员
      */
     public Integer updateWhiteList(Whitelist whitelist) {
-
+        whitelist.setExamineeNum(managerDao.findExamineeNumById(whitelist.getUserId()));
         return managerDao.updateWhiteList(whitelist);
     }
 
@@ -160,9 +162,12 @@ public class ManagerServe {
      */
 
     public Integer groupEnter() {
-
-
-        //待完成
+        //应用型考生
+        List<UserInformation> studentList = managerDao.findStudentPassPreview();
+        for(int i=0;i<studentList.size();i++) {
+            UserInformation student = studentList.get(i);
+            //插入一条报考信息
+        }
         return 1;
     }
 
