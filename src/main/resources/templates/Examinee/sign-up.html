@@ -1,10 +1,106 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<div th:replace="common/header::header('个人主页')"></div>
 <body>
+<div id="wrapper" class="row" th:object="${publishExam}">
+    <div th:replace="common/header::nav"></div>
+    <div id="page-inner">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="page-head-line" >报名前须知</h1>
+            </div>
+        </div>
+        <!-- /. ROW  -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        考试须知
+                    </div>
+                    <div class="panel-body">
+                        一、考试开始前15分钟考生凭学生证和有效身份证件（身份证等）进入规定考场对号入座，并将有效证件放在考桌左上角，以便监考人员查验。考试开始指令发出后，考生才能开始答卷。
+                        二、考生进入考场必须关闭各种通讯工具。
+                        参加闭卷考试考生在入场时除携带必要的文具外，,不准携带其它物品...
+                    </div>
 
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <tr>
+                                <td>报名开始时间</td>
+                                <td>
+                                    <th:block th:text="*{registrationStarts}"></th:block>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>报名截止时间</td>
+                                <td>
+                                    <th:block th:text="*{registrationDeadline}"></th:block>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>报考开始时间</td>
+                                <td>
+                                    <th:block th:text="*{applyStarts}"></th:block>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>报考结束时间</td>
+                                <td>
+                                    <th:block th:text="*{applyDeadline}"></th:block>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>现场确认开始时间</td>
+                                <td>
+                                    <th:block th:text="*{confirmationStarts}"></th:block>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>现场确认截止时间</td>
+                                <td>
+                                    <th:block th:text="*{confirmationDeadline}"></th:block>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>打印准考证开始时间</td>
+                                <td>
+                                    <th:block th:text="*{admissioncardPrintStarts}"></th:block>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>打印准考证结束时间</td>
+                                <td>
+                                    <th:block th:text="*{admissioncardPrintDeadline}"></th:block>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <th:block th:if="${session.currentExam != null}">
+                            <button class="btn btn-primary">
+                                <a th:href="'/erems/examinee/joinExam'" style="color:white;">确认</a>
+                            </button>
+                        </th:block>
+                        <button class="btn btn-warning">
+                            <a th:href="'/erems/'+${session.user.role==0?'admin':(session.user.role==1?'manager':'examinee')}+'/updateInfo'" style="color:white;">修改</a>
+                        </button>
+                    </div>
+
+                    <div class="panel-footer">
+                        <button class="btn btn-primary">
+                            <a th:href="'/student/Examinee/personal-info'" style="color:white;">了解，并参加</a>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /. ROW  -->
+    </div>
+    <!-- /. PAGE INNER  -->
+</div>
+<!-- /. WRAPPER  -->
+
+<div th:replace="common/footer"></div>
 </body>
 </html>
