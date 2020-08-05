@@ -36,7 +36,7 @@
                                 <tr th:if="${session.user.photo==null || session.user.photo==''}">
                                     <th style="width:40%;">头像</th>
                                     <th>
-                                        <form  class="form-inline" action="/uploadUserPhoto" method="post" enctype="multipart/form-data">
+                                        <form  class="form-inline" action="/userInfo/uploadUserPhoto" method="post" enctype="multipart/form-data">
                                             <div class="form-group">
                                                 <input type="file" name="file" title=""/>
                                                 <img src="" id="imageShow" style="display: none"/>
