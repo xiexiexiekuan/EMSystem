@@ -14,7 +14,7 @@
                         个人信息表
                     </div>
                     <div class="panel-body">
-                        <form th:action="'/userInfo/toPersonalInfoUpdate'" method="post">
+                        <form th:action="'/userInfo/PersonalInfoUpdate'" method="post">
                             <div class="table-responsive">
                                 <table class="table table-striped table-hover">
                                     <thead>
@@ -23,49 +23,41 @@
                                         <th>信息</th>
                                     </tr>
                                     </thead>
-                                    <tbody th:object="${updateUser}">
                                     <tr>
                                         <td>姓名</td>
                                         <td>
-                                            <input type="text" id="username" name="username" class="required" placeholder="姓名"
-                                                   value="无" th:value="*{username}">
+                                            <input type="text" id="username" name="username" class="required" placeholder="姓名">
                                         </td>
                                     </tr>
-
+                                    </tr>
                                     <tr>
                                         <td>性别</td>
                                         <td>
-                                            <input type="text" id="sex" name="sex" class="required" placeholder="性别"
-                                                   value="无" th:value="*{sex}">
+                                            <input type="text" id="sex" name="sex" class="required" placeholder="性别">
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>邮箱</td>
                                         <td>
-                                            <input type="text" id="email" name="email" class="required" placeholder="邮箱"
-                                                   value="无" th:value="*{email}">
+                                            <input type="text" id="email" name="email" class="required" placeholder="邮箱">
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>电话</td>
                                         <td>
-                                            <input type="text" id="phone" name="phone" class="required" placeholder="电话"
-                                                   value="0" th:value="*{phone}">
+                                            <input type="text" id="phone" name="phone" class="required" placeholder="电话">
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>身份证号</td>
                                         <td>
-                                            <input type="text" id="idnumber" name="idnumber" class="required" placeholder="身份证号"
-                                                   value="0" th:value="*{idnumber}">
+                                            <input type="text" id="idnumber" name="idnumber" class="required" placeholder="身份证号">
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>地址</td>
+                                        <td>所属单位</td>
                                         <td>
-                                            <select id="addressId" name="address.id" th:value="*{address.id}"  th:text="*{address.province+address.city}">
-                                                <option>全部</option>
-                                            </select>
+                                            <input type="text" id="institute" name="institute" class="required" placeholder="身份证号">
                                         </td>
                                     </tr>
                                     </tbody>
