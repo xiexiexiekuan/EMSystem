@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface UserInfoDao {
 
-    @Update("update UserInformation set userName=#{userName},password=#{password},sex=#{sex},age=#{age},photo=#{photo},institute=#{institute}," +
+    @Update("update UserInformation set userName=#{userName},password=#{password},sex=#{sex},age=#{age},institute=#{institute}," +
             "certificateType=#{certificateType},certificateId=#{certificateId},phone=#{phone},email=#{email} where userId=#{userId}")
     public Integer updatePersonalInfo(UserInformation myInfo);
 

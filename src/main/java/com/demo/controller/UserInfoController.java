@@ -214,6 +214,7 @@ public class UserInfoController extends BaseController{
         }
         //返回json
         UrlController.currentUser = userInfoService.findUserInfoById(UrlController.currentUser.getUserId());
+        System.out.println(UrlController.currentUser);
         return personalInfo(map);
     }
 }
