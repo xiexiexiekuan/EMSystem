@@ -1,10 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<div th:replace="common/header::header('考试信息')"></div>
 <body>
+<div id="wrapper" class="row">
+    <div th:replace="common/header::nav"></div>
+    <div id="page-inner">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>发布编码</th>
+                            <th>考试类型编码</th>
+                            <th>报名开始时间</th>
+                            <th>报名截止时间</th>
+                            <th>报考开始时间</th>
+                            <th>报考结束时间</th>
+                            <th>现场确认开始时间</th>
+                            <th>现场确认截止时间</th>
+                            <th>打印准考证开始时间</th>
+                            <th>打印准考证结束时间</th>
+                            <th>操作人</th>
+                            <th>发布时间</th>
+                            <th>报考开始时间</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <th:block th:each="p:${publichExam}">
+                            <tr >
+                                <td th:text="${p.publishId}"></td>
+                                <td th:text="${p.typeId}"></td>
+                                <td th:text="${p.registrationStarts}"></td>
+                                <td th:text="${p.registrationDeadline}"></td>
+                                <td th:text="${p.applyStarts}"></td>
+                                <td th:text="${p.applyDeadline}"></td>
+                                <td th:text="${p.confirmationStarts}"></td>
+                                <td th:text="${p.confirmationDeadline}"></td>
+                                <td th:text="${p.admissioncardPrintStarts}"></td>
+                                <td th:text="${p.admissioncardPrintDeadline}"></td>
+                                <td th:text="${p.userId}"></td>
+                                <td th:text="${p.publishTime}"></td>
+                            </tr>
+                        </th:block>
+                        <tr th:unless="${#lists.size(publichExam)>0}">
+                            <td colspan="3">未查询到已发布考试信息！</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /. PAGE INNER  -->
+</div>
+<!-- /. WRAPPER  -->
 
+<div th:replace="common/footer"></div>
 </body>
 </html>
