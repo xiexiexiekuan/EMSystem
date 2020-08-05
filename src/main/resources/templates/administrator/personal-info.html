@@ -62,7 +62,7 @@
                                 <tbody th:object="${session.user}">
                                 <tr>
                                     <td>姓名</td>
-                                    <td th:if="*{userName}" th:text="*{userName}">name</td>
+                                    <td th:if="*{userName}" th:text="*{userName}">user1</td>
                                     <td th:unless="*{userName}" th:text="*{userName}">无</td>
                                 </tr>
                                 <tr>
@@ -72,7 +72,7 @@
                                 </tr>
                                 <tr>
                                     <td>年龄</td>
-                                    <td th:if="*{age}" th:text="*{age}">age</td>
+                                    <td th:if="*{age}" th:text="*{age}">18</td>
                                     <td th:unless="*{age}" th:text="*{age}">无</td>
                                 </tr>
                                 <tr>
@@ -87,12 +87,12 @@
                                 </tr>
                                 <tr>
                                     <td>身份证号</td>
-                                    <td th:if="*{certificateId}" th:text="*{certificateId}">idnumber</td>
+                                    <td th:if="*{certificateId}" th:text="*{certificateId}">6581366x</td>
                                     <td th:unless="*{certificateId}" th:text="*{certificateId}">无</td>
                                 </tr>
                                 <tr>
                                     <td>单位</td>
-                                    <td th:if="*{institute}" th:text="*{institute}">institute</td>
+                                    <td th:if="*{institute}" th:text="*{institute}">mayor</td>
                                     <td th:unless="*{institute}" th:text="*{institute}">无</td>
                                 </tr>
                             </table>
