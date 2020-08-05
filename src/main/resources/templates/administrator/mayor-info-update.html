@@ -2,8 +2,8 @@
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<div th:replace="common/header::header('市州人员更新')"></div>
-<body>
+<div th:replace="common/header::header('市州人员信息更新')"></div>
+
 <div id="wrapper" class="row">
     <div th:replace="common/header::nav"></div>
     <div id="page-inner">
@@ -11,10 +11,10 @@
             <div class="col-md-6 col-md-offset-3">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        市州人员信息表
+                        个人信息表
                     </div>
                     <div class="panel-body">
-                        <form th:action="'/userInfo/touserInfoUpdate'" method="post">
+                        <form th:action="'/userInfo/PersonalInfoUpdate'" method="post">
                             <div class="table-responsive">
                                 <table class="table table-striped table-hover">
                                     <thead>
@@ -23,49 +23,43 @@
                                         <th>信息</th>
                                     </tr>
                                     </thead>
-                                    <tbody th:object="${updateUser}">
                                     <tr>
-                                        <td>用户名</td>
+                                        <td>姓名</td>
                                         <td>
-                                            <input type="text" id="userName" name="userName" class="required" placeholder="用户名"
-                                                   value="无" th:value="*{userName}">
+                                            <input type="text" id="username" name="username" class="required" placeholder="姓名">
+                                        </td>
+                                    </tr>
+                                    </tr>
+                                    <tr>
+                                        <td>性别</td>
+                                        <td>
+                                            <input type="text" id="sex" name="sex" class="required" placeholder="性别">
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>职业</td>
+                                        <td>邮箱</td>
                                         <td>
-                                            <input type="text" id="institute" name="institute" class="required" placeholder="职业"
-                                                   value="无" th:value="*{institute}">
+                                            <input type="text" id="email" name="email" class="required" placeholder="邮箱">
                                         </td>
                                     </tr>
-<!--                                    <tr>-->
-<!--                                        <td>评卷结束日期</td>-->
-<!--                                        <td>-->
-<!--                                            <input type="text" id="judgingEnd" name="judgingEnd" class="required" placeholder="评卷结束日期"-->
-<!--                                                   value="无" th:value="*{judgingEnd}">-->
-<!--                                        </td>-->
-<!--                                    </tr>-->
-<!--                                    <tr>-->
-<!--                                        <td>院校编号</td>-->
-<!--                                        <td>-->
-<!--                                            <input type="text" id="schoolCode" name="schoolCode" class="required" placeholder="院校编号"-->
-<!--                                                   value="无" th:value="*{schoolCode}">-->
-<!--                                        </td>-->
-<!--                                    </tr>-->
-<!--                                    <tr>-->
-<!--                                        <td>试卷规格</td>-->
-<!--                                        <td>-->
-<!--                                            <input type="text" id="phone" name="phone" class="required" placeholder="试卷规格"-->
-<!--                                                   value="无" th:value="*{phone}">-->
-<!--                                        </td>-->
-<!--                                    </tr>-->
-<!--                                    <tr>-->
-<!--                                        <td>试卷份数</td>-->
-<!--                                        <td>-->
-<!--                                            <input type="text" id="email" name="email" class="required" placeholder="试卷份数"-->
-<!--                                                   value="无" th:value="*{email}">-->
-<!--                                        </td>-->
-<!--                                    </tr>-->
+                                    <tr>
+                                        <td>电话</td>
+                                        <td>
+                                            <input type="text" id="phone" name="phone" class="required" placeholder="电话">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>身份证号</td>
+                                        <td>
+                                            <input type="text" id="idnumber" name="idnumber" class="required" placeholder="身份证号">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>所属单位</td>
+                                        <td>
+                                            <input type="text" id="institute" name="institute" class="required" placeholder="身份证号">
+                                        </td>
+                                    </tr>
                                     </tbody>
                                 </table>
                                 <button type="submit" class="btn btn-primary">保存</button>
@@ -83,7 +77,6 @@
     <!-- /. PAGE INNER  -->
 </div>
 <!-- /. WRAPPER  -->
-
 
 <div th:replace="common/footer"></div>
 </body>
