@@ -23,9 +23,9 @@
                 console.log(tid)
                 for (var o in data) {
                     if(tid==data[o].id) {
-                        str += '<option value="' + data[o].id + '" selected>' + data[o].province + data[o].city + '</option>';
+                        str += '<option value="' + data[o].typeId + '" selected>' + data[o].typeName + data[o].certificate + '</option>';
                     }else{
-                        str += '<option value="' + data[o].id + '">' + data[o].province + data[o].city + '</option>';
+                        str += '<option value="' + data[o].typeId + '">' + data[o].typeName + data[o].certificate + '</option>';
                     }
                 }
                 examType.append(str);
@@ -34,7 +34,6 @@
     }
 </script>
 <body onload="getExamTypeList()">
-
 
 <div id="wrapper" class="row">
     <div th:replace="common/header::nav"></div>
