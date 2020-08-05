@@ -81,12 +81,25 @@ public class ExamineeControl extends BaseController {
     }
 
     /*
+    根据报名报考信息表的发布考生编码找到考试类型名称
+     */
+    public List<ApplicationInformation> setExamName(List<ApplicationInformation> applicationInfo){
+        for(int i=0; i<applicationInfo.size(); i++) {
+            PublishExam punishId = examineeServe.findPublishExamByPublishId(applicationInfo.get(i).getPublishId());
+            ExamType examName = examineeServe.findExamTypeById(punishId.getTypeId());
+            applicationInfo.get(i).setExamineePhoto(examName.getTypeName());//替换字段
+        }
+        return applicationInfo;
+    }
+
+    /*
     进入考试管理列表    待审核
      */
     @RequestMapping("/toWaitAudit")
     public String toWaitAudit(Map<String,Object> map)
     {
         List<ApplicationInformation> applicationInfo = examineeServe.findWaitAuditApplication();
+        applicationInfo = setExamName(applicationInfo);
         map.put("applicationInfo",applicationInfo);
         return "/Examinee/wait-audit";
     }
@@ -98,6 +111,7 @@ public class ExamineeControl extends BaseController {
     public String toAlreadyAudit(Map<String,Object> map)
     {
         List<ApplicationInformation> applicationInfo = examineeServe.findAlreadyAuditApplication();
+        applicationInfo = setExamName(applicationInfo);
         map.put("applicationInfo",applicationInfo);
         return "/Examinee/already-audit";
     }
@@ -124,6 +138,7 @@ public class ExamineeControl extends BaseController {
     public String toWaitPay(Map<String,Object> map)
     {
         List<ApplicationInformation> applicationInfo = examineeServe.findWaitPayApplication();
+        applicationInfo = setExamName(applicationInfo);
         map.put("applicationInfo",applicationInfo);
         return "/Examinee/wait-pay";
     }
@@ -150,6 +165,7 @@ public class ExamineeControl extends BaseController {
     public String toAlreadyPay(Map<String,Object> map)
     {
         List<ApplicationInformation> applicationInfo = examineeServe.findAlreadyPayApplication();
+        applicationInfo = setExamName(applicationInfo);
         map.put("applicationInfo",applicationInfo);
         return "/Examinee/already-pay";
     }
@@ -161,6 +177,7 @@ public class ExamineeControl extends BaseController {
     public String inquireGrades(Map<String,Object> map)
     {
         List<ApplicationInformation> grades = examineeServe.inquireGrades();
+        grades = setExamName(grades);
         map.put("grades",grades);
         return "/Examinee/inquire-grades";
     }
@@ -183,6 +200,7 @@ public class ExamineeControl extends BaseController {
     public String admissionTicket(Map<String,Object> map)
     {
         List<ApplicationInformation> admissionTicket = examineeServe.admissionTicket();
+        admissionTicket = setExamName(admissionTicket);
         map.put("admissionTicket",admissionTicket);
         return "/Examinee/admission-ticket";
     }
