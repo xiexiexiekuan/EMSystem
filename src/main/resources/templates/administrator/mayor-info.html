@@ -4,7 +4,6 @@
       xmlns:th="http://www.thymeleaf.org">
 <div th:replace="common/header::header('市州人员')"></div>
 <body>
-
 <div id="wrapper" class="row">
     <div th:replace="common/header::nav"></div>
     <div id="page-inner">
@@ -12,6 +11,7 @@
             <div>
                 <div>
                     <div class="panel-heading">
+                        <div th:text="${msg}" style="color: red;"></div>
                         市州人员信息表
                     </div>
                     <div class="col-md-12">

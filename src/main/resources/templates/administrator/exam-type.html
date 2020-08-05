@@ -3,60 +3,7 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <div th:replace="common/header::header('考试类型')"></div>
-<script>
-    Date.prototype.Format = function (fmt) { //将蓝括号的这段要放在调用时间的上面，
-        var o = {
-            "M+": this.getMonth() + 1, //月份
-            "d+": this.getDate(), //日
-            "h+": this.getHours(), //小时
-            "m+": this.getMinutes(), //分
-            "s+": this.getSeconds(), //秒
-            "q+": Math.floor((this.getMonth() + 3) / 3), //季度
-            "S": this.getMilliseconds() //毫秒
-        };
-        if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
-        for (var k in o)
-            if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
-        return fmt;
-    }
-    function getExamTypeList() {
-        $.ajax({
-            type: "post",
-            url: "/examOffice/examType",    //url根据自己的项目实际定义
-            async: false,
-            dataType: "text",
-            error: function () {
-                alert("系统忙，请稍后再试！");
-                return false;
-            },
-            success: function (text) {
-                var $examType = $("#examType");
-                var str = '';
-                var count = 1;
-                var data = eval("(" + text + ")");
-                examType.empty();
-                for (var o in data) {
-                    var desc = data[o].certificate;
-                    if (desc.length > 15) {//大于15个字符的隐藏处理
-                        desc = desc.substring(0, 15) + '...'
-                    }
-                    str += '<tr>'
-                        + '<td>' + count + '</td>'
-                        + '<td>' + data[o].typeName + '</td>'
-                        + '<td>' + desc + '</td>'
-                        + '<td>' + userId + '</td>'
-                        + '<td>' +new Date(data[o].time).Format("yyyy-MM-dd hh:mm")  + '</td>'
-                        + '<td><a href="/examOffice/administrator/exam-type-update ' + '" class="btn btn-primary">修改</a>'
-                        +'<a href="/examOffice/administrator/exam-type-add ' + '" class="btn btn-primary">增加</a></td>'
-                        + '</tr>';
-                    count++;
-                }
-                examType.append(str);
-            }
-        });
-    }
-</script>
-<body onload="getExamTypeList()">
+<body >
 <div id="wrapper" class="row">
     <div th:replace="common/header::nav"></div>
     <div id="page-inner">
@@ -78,11 +25,26 @@
                             <th>描述</th>
                             <th>操作人</th>
                             <th>操作时间</th>
+                            <th>选择操作</th>
                         </tr>
                         </thead>
-                        <tbody id="examTypeList">
+                        <tbody>
+                        <th:block th:each="e:${examType}">
+                            <tr th:object="${e}">
+                                <td th:text="*{typeId}">1</td>
+                                <td th:text="*{typeName}">1</td>
+                                <td th:text="*{certificate}">1</td>
+                                <td th:text="*{userId}">1</td>
+                                <td th:text="*{createTime}">1</td>
+                                <td>
+                                    <a th:href="'/examOffice/toExamTypeUpdate?typeId='+*{typeId}">修改</a>
+                                    <a th:href="'/examOffice/examTypeDelete?typeId='+*{typeId}">删除</a>
+                                </td>
+                            </tr>
+                        </th:block>
                         </tbody>
                     </table>
+                    <a href="/examOffice/toExamTypeAdd">添加考试类型信息</a>
                 </div>
             </div>
         </div>
