@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface UserInfoDao {
 
-    @Update("update UserInformation set userName=#{userName},password=#{password},sex=#{sex},age=#{age},photo=#{photo},institute=#{institute}," +
+    @Update("update UserInformation set userName=#{userName},password=#{password},sex=#{sex},age=#{age},institute=#{institute}," +
             "certificateType=#{certificateType},certificateId=#{certificateId},phone=#{phone},email=#{email} where userId=#{userId}")
     public Integer updatePersonalInfo(UserInformation myInfo);
 
@@ -33,6 +33,6 @@ public interface UserInfoDao {
     @Delete("delete from UserInformation where userId=#{userId}")
     public Integer deleteUserInfo(int userId);
 
-    @Update("update UserInformation set photo=#{fileName} where userId=#{userId}")
+    @Update("update UserInformation set photo=#{fileName} where userId=#{id}")
     public Integer saveUserImage(@Param("fileName") String fileName,@Param("id")Integer id);
 }
