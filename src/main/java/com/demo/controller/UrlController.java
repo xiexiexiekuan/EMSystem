@@ -96,9 +96,7 @@ public class UrlController extends BaseController {
             currentUser = existUser;
             existUser.setPassword("");
             map.put("user",existUser);
-//            return "redirect:"+path+"/common/home";
-//            return "common/home";
-            return home();
+            return "redirect:"+path+"/home";
         }
         map.put("msg","用户名或密码错误");
         return "/common/login";
