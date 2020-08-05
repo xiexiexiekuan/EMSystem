@@ -1,5 +1,7 @@
 package com.demo.entity.exam;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 /**
  * table name:  publish_exam
@@ -10,13 +12,21 @@ public class PublishExam extends EntityHelper{
 
 	private int publishId;
 	private int typeId;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date registrationStarts;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date registrationDeadline;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date applyStarts;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date applyDeadline;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date confirmationStarts;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date confirmationDeadline;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date admissioncardPrintStarts;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date admissioncardPrintDeadline;
 	private String userId;
 	private Date publishTime;

@@ -1,5 +1,7 @@
 package com.demo.entity.exam;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 /**
  * table name:  judging_plan
@@ -10,7 +12,9 @@ public class JudgingPlan extends EntityHelper{
 
 	private int planCode;
 	private int publishId;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date judgingStart;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date judgingEnd;
 	private int schoolCode;
 	private String schoolName;

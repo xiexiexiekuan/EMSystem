@@ -21,6 +21,7 @@
                             <th>院校名称</th>
                             <th>试卷规格</th>
                             <th>试卷份数</th>
+                            <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -34,13 +35,18 @@
                                 <td th:text="${j.schoolName}"></td>
                                 <td th:text="${j.paperCode}"></td>
                                 <td th:text="${j.paperNum}"></td>
+                                <td>
+                                    <a th:href="'/examOffice/toTestPaperPlanUpdate?planCode='+${j.planCode}">修改</a>
+                                    <a th:href="'/examOffice/testPaperPlanDelete?planCode='+${j.planCode}">删除</a>
+                                </td>
                             </tr>
                         </th:block>
                         <tr th:unless="${#lists.size(judgingPlan)>0}">
-                            <td colspan="3">未查询到相应违规库信息！</td>
+                            <td colspan="3">未查询到相应库信息！</td>
                         </tr>
                         </tbody>
                     </table>
+                    <a href="/examOffice/toTestPaperPlanAdd">添加评卷信息</a>
                 </div>
             </div>
 

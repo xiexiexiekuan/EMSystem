@@ -95,7 +95,7 @@ public class AdminControl {
      */
     @RequestMapping("toPublishExam")
     public String toPublishExam(){
-        return "/administrator/publish-exam";
+        return "administrator/publish-exam";
     }
 
     /*
@@ -103,8 +103,9 @@ public class AdminControl {
      */
     @RequestMapping("publishExam")
     public String publishExam(PublishExam exam, Map<String,Object> map){
+        System.out.println(exam);
         Integer h = adminServe.findPublishExamByTypeId(exam.getTypeId());//同一种类型考试只能发布一次
-        if(h>=1){
+        if(h!=null){//如果没有查询到结果，会返回一个空指针给h
             map.put("msg","本类型考试已经发布！");
             return toPublishExam();
         }
@@ -124,7 +125,7 @@ public class AdminControl {
     public String examInfo(Map<String,Object> map){
         List<PublishExam> publichExam = adminServe.findAllPublishExam();
         map.put("publichExam",publichExam);
-        return "/administrator/exam-info";
+        return "administrator/exam-info";
     }
 
     /*
@@ -134,7 +135,7 @@ public class AdminControl {
     public String toTestPaperPlan(Map<String,Object> map){
         List<JudgingPlan> judgingPlan = adminServe.findAllJudgingPlan();
         map.put("judgingPlan",judgingPlan);
-        return "/administrator/test-paper-plan";
+        return "administrator/test-paper-plan";
     }
 
     /*
@@ -142,7 +143,7 @@ public class AdminControl {
      */
     @RequestMapping("toTestPaperPlanAdd")
     public String toTestPaperPlanAdd(){
-        return "/administrator/test-paper-plan-add";
+        return "administrator/test-paper-plan-add";
     }
 
     /*
@@ -152,7 +153,7 @@ public class AdminControl {
     public String toTestPaperPlanUpdate(int planCode, Map<String,Object> map){
         JudgingPlan updatePlan = adminServe.findJudgingPlanByCode(planCode);
         map.put("updatePlan",updatePlan);
-        return "/administrator/test-paper-plan-update";
+        return "administrator/test-paper-plan-update";
     }
 
     /*
@@ -204,7 +205,7 @@ public class AdminControl {
     public String violateCode(Map<String,Object> map){
         List<ViolationsCode> violationsCode = adminServe.findAllViolationsCode();
         map.put("violationsCode",violationsCode);
-        return "/administrator/violate-code";
+        return "administrator/violate-code";
     }
 
     /*
@@ -214,7 +215,7 @@ public class AdminControl {
     public String punishCode(Map<String,Object> map){
         List<PenaltyCode> penaltyCode = adminServe.findAllPenaltyCode();
         map.put("penaltyCode",penaltyCode);
-        return "/administrator/punish-code";
+        return "administrator/punish-code";
     }
 
     /*
@@ -224,7 +225,7 @@ public class AdminControl {
     public String violateRecords(Map<String,Object> map){
         List<ViolationInfo> violationInfo = adminServe.findAllViolationInfo();
         map.put("violationInfo",violationInfo);
-        return "/administrator/violate-records";
+        return "administrator/violate-records";
     }
 
     /*
@@ -255,7 +256,7 @@ public class AdminControl {
         List<ExamType> examMenu = adminServe.findExamMenu();
         map.put("examMenu",examMenu);
         map.put("gradesInfo",gradesInfo);
-        return "/administrator/grades-manage";
+        return "administrator/grades-manage";
     }
 
     /*
@@ -272,7 +273,7 @@ public class AdminControl {
         List<ExamType> examMenu = adminServe.findExamMenu();
         map.put("examMenu",examMenu);
         map.put("gradesInfo",gradesInfo);
-        return "/administrator/grades-manage";
+        return "administrator/grades-manage";
     }
 
     /*

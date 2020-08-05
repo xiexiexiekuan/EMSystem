@@ -28,7 +28,7 @@ public class AdminServe {
     添加考试类型信息，其中操作人由全局变量获取，日期取当前时间，需要包装为SQL精确到秒的日期类型
      */
     public Integer addExamType(ExamType examType){
-        examType.setUserId(UrlController.currentUser.getPrimaryKey());
+        examType.setUserId(UrlController.currentUser.getUserName());
         Date date = new Date();
         Timestamp timeStamp = new Timestamp(date.getTime());
         examType.setCreateTime(timeStamp);
@@ -46,7 +46,7 @@ public class AdminServe {
     更新考试类型信息
      */
     public Integer updateExamType(ExamType examType){
-        examType.setUserId(UrlController.currentUser.getPrimaryKey());
+        examType.setUserId(UrlController.currentUser.getUserName());
         Date date = new Date();
         Timestamp timeStamp = new Timestamp(date.getTime());
         examType.setCreateTime(timeStamp);
