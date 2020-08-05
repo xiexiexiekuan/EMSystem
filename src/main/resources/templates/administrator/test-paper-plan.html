@@ -1,10 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<div th:replace="common/header::header('评卷计划')"></div>
 <body>
+<div id="wrapper" class="row">
+    <div th:replace="common/header::nav"></div>
+    <div id="page-inner">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>计划编号</th>
+                            <th>考试编码</th>
+                            <th>评卷开始日期</th>
+                            <th>评卷结束日期</th>
+                            <th>院校编号</th>
+                            <th>院校名称</th>
+                            <th>试卷规格</th>
+                            <th>试卷份数</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <th:block th:each="j:${judgingPlan}">
+                            <tr >
+                                <td th:text="${j.planCode}"></td>
+                                <td th:text="${j.publishId}"></td>
+                                <td th:text="${j.judgingStart}"></td>
+                                <td th:text="${j.judgingEnd}"></td>
+                                <td th:text="${j.schoolCode}"></td>
+                                <td th:text="${j.schoolName}"></td>
+                                <td th:text="${j.paperCode}"></td>
+                                <td th:text="${j.paperNum}"></td>
+                            </tr>
+                        </th:block>
+                        <tr th:unless="${#lists.size(judgingPlan)>0}">
+                            <td colspan="3">未查询到相应违规库信息！</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
+        </div>
+
+    </div>
+    <!-- /. PAGE INNER  -->
+</div>
+<!-- /. WRAPPER  -->
+
+<div th:replace="common/footer"></div>
 </body>
 </html>
