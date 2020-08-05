@@ -86,7 +86,12 @@
                                     <td th:unless="*{phone}" th:text="*{phone}">无</td>
                                 </tr>
                                 <tr>
-                                    <td>身份证号</td>
+                                    <td>证件类型</td>
+                                    <td th:if="*{certificateType}" th:text="*{certificateType}">身份证</td>
+                                    <td th:unless="*{certificateType}" th:text="*{certificateType}">无</td>
+                                </tr>
+                                <tr>
+                                    <td>证件号码</td>
                                     <td th:if="*{certificateId}" th:text="*{certificateId}">6581366x</td>
                                     <td th:unless="*{certificateId}" th:text="*{certificateId}">无</td>
                                 </tr>
