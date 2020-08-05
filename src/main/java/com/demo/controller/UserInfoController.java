@@ -76,7 +76,7 @@ public class UserInfoController extends BaseController{
     {
         List<UserInformation> mayorInfo = userInfoService.findAllMayorInfo();
         map.put("mayorInfo",mayorInfo);
-        return "/administrator/mayor-info";
+        return "administrator/mayor-info";
     }
 
     /*
@@ -117,6 +117,7 @@ public class UserInfoController extends BaseController{
     @RequestMapping("/toUserInfoUpdate")
     public String toUserInfoUpdate(int userId, Map<String,Object> map)
     {
+        System.out.println("userId = "+userId);
         UserInformation updateUser = userInfoService.findUserInfoById(userId);
         int role = UrlController.currentUser.getRole();
         map.put("updateUser",updateUser);
