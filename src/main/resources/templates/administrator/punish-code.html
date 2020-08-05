@@ -7,21 +7,7 @@
 <div id="wrapper" class="row">
     <div th:replace="common/header::nav"></div>
     <div id="page-inner">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <form role="form" action="/EMSystem/examOffice/punishCode" method="post">
-                    <div class="form-group">
-                        <label for="punishmentCode">处罚编码</label>
-                        <select id="punishmentCode" name="punishmentDes">
-                            <option value="">全部</option>
-                        </select>
-                        <button type="submit" class="btn btn-primary">查询</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <!-- /. ROW  -->
-        <hr>
+
         <div class="row">
             <div class="col-md-12">
                 <div class="table-responsive">
@@ -32,11 +18,53 @@
                             <th>处罚描述</th>
                         </tr>
                         </thead>
+                        <tbody>
+                        <th:block th:each="p:${penaltyCode}">
+                            <tr >
+                                <td th:text="${p.punishmentCode}"></td>
+                                <td th:text="${p.punishmentDes}"></td>
+                            </tr>
+                        </th:block>
+                        <tr th:unless="${#lists.size(penaltyCode)>0}">
+                            <td colspan="3">未查询到处罚编码库信息！</td>
+                        </tr>
+                        </tbody>
                     </table>
                 </div>
             </div>
+
         </div>
-        <!-- /. ROW  -->
+
+<!--        <div class="row">-->
+<!--            <div class="col-md-10 col-md-offset-1">-->
+<!--                <form role="form" action="/EMSystem/examOffice/punishCode" method="post">-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="punishmentCode">处罚编码</label>-->
+<!--                        <select id="punishmentCode" name="punishmentDes">-->
+<!--                            <option value="">全部</option>-->
+<!--                        </select>-->
+<!--                        <button type="submit" class="btn btn-primary">查询</button>-->
+<!--                    </div>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; /. ROW  &ndash;&gt;-->
+<!--        <hr>-->
+<!--        <div class="row">-->
+<!--            <div class="col-md-12">-->
+<!--                <div class="table-responsive">-->
+<!--                    <table class="table table-striped table-bordered table-hover">-->
+<!--                        <thead>-->
+<!--                        <tr>-->
+<!--                            <th>处罚编码</th>-->
+<!--                            <th>处罚描述</th>-->
+<!--                        </tr>-->
+<!--                        </thead>-->
+<!--                    </table>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; /. ROW  &ndash;&gt;-->
     </div>
     <!-- /. PAGE INNER  -->
 </div>
