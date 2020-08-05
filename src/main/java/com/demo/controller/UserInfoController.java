@@ -18,10 +18,10 @@ public class UserInfoController {
     
     public String getFilePosition(int role){
         String position;
-        if(role==0)position="/administrator";
-        else if(role==1)position="/Mayor";
-        else if(role==2)position="/Manager";
-        else position="/Examinee";
+        if(role==0)position="administrator";
+        else if(role==1)position="Mayor";
+        else if(role==2)position="Manager";
+        else position="Examinee";
         return position;
     }
 
@@ -30,6 +30,7 @@ public class UserInfoController {
      */
     @RequestMapping("/personalInfo")
     public String personalInfo(Map<String,Object> map) {
+        System.out.println("personalInfo");
         map.put("myInfo", UrlController.currentUser);
         int role = UrlController.currentUser.getRole();
         return getFilePosition(role)+"/personal-info";
