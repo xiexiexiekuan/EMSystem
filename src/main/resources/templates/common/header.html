@@ -118,38 +118,38 @@
                         <a href="/student/admissionTicket"><i class="fa fa-flash "></i>打印准考证</a>
                 </li>
                 <li>
-                    <a href="/student/personalInfo"><i class="fa fa-bicycle "></i>个人信息 </a>
+                    <a href="/userInfo/personalInfo"><i class="fa fa-bicycle "></i>个人信息 </a>
                 </li>
                 </th:block>
 
                 <!--院校导航条-->
                 <th:block th:if="${session.user.role}==2">
                 <li>
-                    <a href="/manager/entry"><i class="fa fa-bicycle "></i>学生信息管理 </a>
+                    <a href="/userInfo/studentInfo"><i class="fa fa-bicycle "></i>学生信息管理 </a>
                 </li>
                 <li>
-                    <a href="/manager/statistical"><i class="fa fa-bicycle "></i>集体报名 </a>
+                    <a href="/school/toGroupEnter"><i class="fa fa-bicycle "></i>集体报名 </a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-yelp "></i>报考管理<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="/examinee/examList?pay=0"><i class="fa fa-coffee"></i>集体报考 </a>
+                            <a href="/school/toGroupApply"><i class="fa fa-coffee"></i>集体报考 </a>
                         </li>
                         <li>
-                            <a href="/examinee/examList?pay=1"><i class="fa fa-coffee"></i>统一缴费 </a>
+                            <a href="/school/toGroupPay"><i class="fa fa-coffee"></i>统一缴费 </a>
                         </li>
                     </ul>
                 </li>
                     <li>
-                        <a href="/manager/myInfo"><i class="fa fa-bicycle "></i>报考信息查询 </a>
+                        <a href="/school/examInformation"><i class="fa fa-bicycle "></i>报考信息查询 </a>
                     </li>
 
                     <li>
                         <a href="#"><i class="fa fa-yelp "></i>白名单 <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="/examinee/examList?pay=0"><i class="fa fa-coffee"></i>设置白名单 </a>
+                                <a href="/school/whitelist"><i class="fa fa-coffee"></i>设置白名单 </a>
                             </li>
                             <!--                            <li>-->
                             <!--                                <a href="/examinee/examList?pay=1"><i class="fa fa-coffee"></i>查看白名单信息 </a>-->
@@ -160,15 +160,15 @@
                         <a href="#"><i class="fa fa-yelp "></i>考场信息上报 <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="/examinee/examList?pay=0"><i class="fa fa-coffee"></i>考场信息 </a>
+                                <a href="/school/examRoom"><i class="fa fa-coffee"></i>考场信息 </a>
                             </li>
                             <li>
-                                <a href="/examinee/examList?pay=1"><i class="fa fa-coffee"></i>考务人员信息 </a>
+                                <a href="/school/examteacherInfo"><i class="fa fa-coffee"></i>考务人员信息 </a>
                             </li>
                         </ul>
                     </li>
                 <li>
-                    <a href="/manager/myInfo"><i class="fa fa-bicycle "></i>个人信息 </a>
+                    <a href="/userInfo/personalInfo"><i class="fa fa-bicycle "></i>个人信息 </a>
                 </li>
                 </th:block>
 
@@ -178,13 +178,13 @@
                         <a href="#"><i class="fa fa-bicycle "></i>成员信息管理 <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="/admin/a/list"><i class="fa fa-toggle-on"></i>院校信息</a>
+                                <a href="/userInfo/teacherInfo"><i class="fa fa-toggle-on"></i>院校信息</a>
                             </li>
                             <li>
-                                <a href="/admin/outed"><i class="fa fa-toggle-on"></i>考生信息</a>
+                                <a href="/userInfo/studentInfo"><i class="fa fa-toggle-on"></i>考生信息</a>
                             </li>
                             <li>
-                                <a href="/admin/a/updateExam"><i class="fa fa-bell "></i>个人信息</a>
+                                <a href="/userInfo/personalInfo"><i class="fa fa-bell "></i>个人信息</a>
                             </li>
                         </ul>
                     </li>
@@ -192,27 +192,27 @@
                         <a href="#"><i class="fa fa-bicycle "></i>考点信息管理 <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="/admin/examineeInfo"><i class="fa fa-bicycle "></i>考点信息</a>
+                                <a href="/mayor/roomManage"><i class="fa fa-bicycle "></i>考点信息</a>
                             </li>
                             <li>
-                                <a href="/admin/a/createNum"><i class="fa fa-bell "></i>考场编排</a>
+                                <a href="/mayor/examRoomManage"><i class="fa fa-bell "></i>考场编排</a>
                             </li>
                             <li>
-                                <a href="/admin/a/createNum"><i class="fa fa-bell "></i>考务人员管理</a>
+                                <a href="/mayor/examTeacher"><i class="fa fa-bell "></i>考务人员管理</a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="/admin/user?role=2"><i class="fa fa-bell "></i>现场审核</a>
+                        <a href="/mayor/toPreview"><i class="fa fa-bell "></i>现场审核</a>
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-bicycle "></i>违纪管理 <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="/admin/search"><i class="fa fa-toggle-on"></i>上报违纪情况</a>
+                                <a href="/mayor/reportViolate"><i class="fa fa-toggle-on"></i>上报违纪情况</a>
                             </li>
                             <li>
-                                <a href="/admin/a/updateRoom"><i class="fa fa-bell "></i>违纪情况查询</a>
+                                <a href="/mayor/violateInfo"><i class="fa fa-bell "></i>违纪情况查询</a>
                             </li>
                         </ul>
                     </li>

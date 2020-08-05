@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<!--xmlns="http://www.w3.org/1999/xhtml"-->
+<div th:replace="common/header::header('个人主页')"></div>
 <body>
+<div id="wrapper" class="row">
+    <div th:replace="common/header::nav"></div>
+    <div id="page-inner">
+        <div style="margin:20%;">
+            <h1 style="text-align: center;">Welcome to 省考试院考务管理系统!</h1>
+        </div>
+    </div>
+    <!-- /. PAGE INNER  -->
+</div>
+<!-- /. WRAPPER  -->
 
+<div th:replace="common/footer"></div>
 </body>
 </html>

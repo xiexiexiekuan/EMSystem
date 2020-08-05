@@ -2,7 +2,9 @@ package com.demo.service.mayor;
 
 import com.demo.controller.UrlController;
 import com.demo.dao.mayor.Mayor;
+import com.demo.entity.exam.ApplicationInformation;
 import com.demo.entity.exam.RoomManage;
+import com.demo.entity.exam.UserInformation;
 import com.demo.entity.exam.ViolationInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -72,5 +74,26 @@ public class MayorServe {
         Timestamp timeStamp = new Timestamp(date.getTime());
         violationInfo.setReportTime(timeStamp);
         return mayor.addViolationInfo(violationInfo);
+    }
+
+    /*
+    现场审核时----查询所有报名信息
+     */
+    public List<ApplicationInformation> findAllApplicationInfo(){
+        return mayor.findAllApplicationInfo();
+    }
+
+    /*
+    现场审核时----根据Id查找学生
+     */
+    public UserInformation findUserInformationById(int userId){
+        return mayor.findUserInformationById(userId);
+    }
+
+    /*
+    现场审核
+     */
+    public Integer updatePreview(int enterId, int status){
+        return mayor.updatePreview(enterId,status);
     }
 }

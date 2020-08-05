@@ -1,11 +1,11 @@
 package com.demo.controller;
 
+import com.demo.entity.MyExam;
 import com.demo.entity.User;
 import com.demo.entity.exam.UserInformation;
 import com.demo.service.LoginService;
-import com.demo.util.FileUtil;
-import com.demo.entity.MyExam;
 import com.demo.service.UrlService;
+import com.demo.util.FileUtil;
 import org.apache.poi.hwpf.HWPFDocument;
 import org.apache.poi.hwpf.usermodel.Range;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,10 +58,13 @@ public class UrlController extends BaseController {
     public String url(){return "url";}
 
     @RequestMapping("/login")
-    public String login(){return "login";}
+    public String login(){
+        System.out.println("login");
+        return "common/login";
+    }
 
     @RequestMapping("/regist")
-    public String regist(){return "regist";}
+    public String regist(){return "common/regist";}
 
     /**
      * 退出登录
@@ -79,22 +82,25 @@ public class UrlController extends BaseController {
      * @return
      */
     @RequestMapping("/home")
-    public String home(){return "home";}
+    public String home(){return "/common/home";}
 
     /**
      * 用户登录时的验证
      */
     @RequestMapping("validate")
     public String userValidate(UserInformation user, @RequestParam(required = false) String role, Map<String,Object> map){
+        System.out.println(user);
         UserInformation existUser=loginService.validate(user);
         if(existUser!=null) {
             currentUser = existUser;
             existUser.setPassword("");
             map.put("user",existUser);
-            return "redirect:"+path+"/home";
+            System.out.println(path);
+            //return "redirect:"+path+"common/home";
+            return "common/home";
         }
         map.put("msg","用户名或密码错误");
-        return "login";
+        return "/common/login";
     }
 
     /**
@@ -109,7 +115,7 @@ public class UrlController extends BaseController {
         if(i==0){
             map.put("msg","用户名信息输入错误！");
         }
-        return "login";
+        return "/common/login";
     }
 
     /**

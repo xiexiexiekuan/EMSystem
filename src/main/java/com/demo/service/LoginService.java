@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 public class LoginService {
     @Autowired
     private ExamineeDao examineeDao;
+    @Autowired
     private LoginDao loginDao;
 
     public User findUser(User user) {

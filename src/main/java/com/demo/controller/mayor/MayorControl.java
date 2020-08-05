@@ -1,6 +1,8 @@
 package com.demo.controller.mayor;
 
+import com.demo.entity.exam.ApplicationInformation;
 import com.demo.entity.exam.RoomManage;
+import com.demo.entity.exam.UserInformation;
 import com.demo.entity.exam.ViolationInfo;
 import com.demo.service.mayor.MayorServe;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -149,6 +151,34 @@ public class MayorControl {
         List<ViolationInfo> violationInfo = mayorServe.findAllViolationInfo();
         map.put("violationInfo",violationInfo);
         return "/Mayor/violate-info";
+    }
+
+    /**
+     * 去现场审核
+     */
+    @RequestMapping("/toPreview")
+    public String toPreview(Map<String,Object> map) {
+        List<ApplicationInformation> preview = mayorServe.findAllApplicationInfo();
+        for(int i=0; i<preview.size(); i++) {
+            UserInformation user = mayorServe.findUserInformationById(preview.get(i).getUserId());
+            preview.get(i).setExamineeNumber(user.getUserName());//做个替换
+        }
+        map.put("preview",preview);
+        return "/Mayor/preview";
+    }
+
+    /**
+     * 现场审核
+     */
+    @RequestMapping("/preview")
+    public String preview(int enterId, int status, Map<String,Object> map) {
+        Integer i = mayorServe.updatePreview(enterId,status);
+        if(i>0){
+            map.put("msg","现场审核成功！");
+            return toPreview(map);
+        }
+        map.put("msg","现场审核失败，请重试！");
+        return toPreview(map);
     }
     
 }
