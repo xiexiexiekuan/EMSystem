@@ -33,7 +33,7 @@
                         <div class="table-responsive">
                             <table class="table table-striped table-hover">
                                 <thead>
-                                <tr th:if="${session.user.perimage==null || session.user.perimage==''}">
+                                <tr th:if="${session.user.photo==null || session.user.photo==''}">
                                     <th style="width:40%;">头像</th>
                                     <th>
                                         <form  class="form-inline" action="/uploadUserPhoto" method="post" enctype="multipart/form-data">
@@ -45,11 +45,11 @@
                                         </form>
                                     </th>
                                 </tr>
-                                <tr th:unless="${session.user.perimage==null || session.user.perimage==''}">
+                                <tr th:unless="${session.user.photo==null || session.user.photo==''}">
                                     <th style="width:40%;">头像</th>
                                     <th>
-                                        <img th:src="'/img/'+${session.user.perimage}" alt="个人头像" style="width: 100px;"/>
-                                        <form  id="changeFile" class="form-inline" action="/uploadUserPhoto" method="post" enctype="multipart/form-data" style="display: none">
+                                        <img th:src="'/img/'+${session.user.photo}" alt="个人头像" style="width: 100px;"/>
+                                        <form  id="changeFile" class="form-inline" action="/userInfo/uploadUserPhoto" method="post" enctype="multipart/form-data" style="display: none">
                                             <div class="form-group">
                                                 <input type="file" name="file" title=""/>
                                                 <input type="submit" value="上传" class="btn btn-primary"/>
@@ -62,12 +62,8 @@
                                 <tbody th:object="${session.user}">
                                 <tr>
                                     <td>姓名</td>
-                                    <td th:if="*{name}" th:text="*{name}">zrq</td>
-                                    <td th:unless="*{name}" th:text="*{name}">无</td>
-                                </tr>
-                                <tr>
-                                    <td>用户名</td>
-                                    <td th:text="*{username}">zrq</td>
+                                    <td th:if="*{userName}" th:text="*{userName}">name</td>
+                                    <td th:unless="*{userName}" th:text="*{userName}">无</td>
                                 </tr>
                                 <tr>
                                     <td>性别</td>
@@ -75,8 +71,13 @@
                                     <td th:unless="*{sex}" th:text="*{sex}">无</td>
                                 </tr>
                                 <tr>
+                                    <td>年龄</td>
+                                    <td th:if="*{age}" th:text="*{age}">age</td>
+                                    <td th:unless="*{age}" th:text="*{age}">无</td>
+                                </tr>
+                                <tr>
                                     <td>邮箱</td>
-                                    <td th:if="*{email}" th:text="*{email}">zrq@zrq.com</td>
+                                    <td th:if="*{email}" th:text="*{email}">1@qq.com</td>
                                     <td th:unless="*{email}" th:text="*{email}">无</td>
                                 </tr>
                                 <tr>
@@ -86,17 +87,17 @@
                                 </tr>
                                 <tr>
                                     <td>身份证号</td>
-                                    <td th:if="*{idnumber}" th:text="*{idnumber}">idnumber</td>
-                                    <td th:unless="*{idnumber}" th:text="*{idnumber}">无</td>
+                                    <td th:if="*{certificateId}" th:text="*{certificateId}">idnumber</td>
+                                    <td th:unless="*{certificateId}" th:text="*{certificateId}">无</td>
                                 </tr>
                                 <tr>
-                                    <td>地址</td>
-                                    <td th:if="*{address}" th:text="*{address.province+address.city}">address</td>
-                                    <td th:unless="*{address}" th:text="*{address}">无</td>
+                                    <td>单位</td>
+                                    <td th:if="*{institute}" th:text="*{institute}">institute</td>
+                                    <td th:unless="*{institute}" th:text="*{institute}">无</td>
                                 </tr>
                             </table>
                             <button class="btn btn-warning">
-                                <a th:href="'/userInfo/administrator/personal-info-update'" style="color:white;">修改</a>
+                                <a th:href="'/userInfo/personal-info-update'" style="color:white;">修改</a>
                             </button>
                         </div>
                     </div>

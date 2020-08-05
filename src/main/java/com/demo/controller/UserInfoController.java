@@ -1,27 +1,32 @@
 package com.demo.controller;
 
+import com.demo.entity.User;
 import com.demo.entity.exam.UserInformation;
 import com.demo.service.UserInfoService;
+import com.demo.util.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
 @Controller
 @RequestMapping("/userInfo")
-public class UserInfoController {
+public class UserInfoController extends BaseController{
 
     @Autowired
     private UserInfoService userInfoService;
     
     public String getFilePosition(int role){
         String position;
-        if(role==0)position="/administrator";
-        else if(role==1)position="/Mayor";
-        else if(role==2)position="/Manager";
-        else position="/Examinee";
+        if(role==0)position="administrator";
+        else if(role==1)position="Mayor";
+        else if(role==2)position="Manager";
+        else position="Examinee";
         return position;
     }
 
@@ -30,6 +35,7 @@ public class UserInfoController {
      */
     @RequestMapping("/personalInfo")
     public String personalInfo(Map<String,Object> map) {
+        System.out.println("personalInfo");
         map.put("myInfo", UrlController.currentUser);
         int role = UrlController.currentUser.getRole();
         return getFilePosition(role)+"/personal-info";
@@ -178,5 +184,35 @@ public class UserInfoController {
         if(role==0) return mayorInfo(map);
         else if(role==1) return teacherInfo(map);
         else return studentInfo(map);
+    }
+
+    /**
+     * 上传图片
+     * @param file
+     * @param request
+     * @return
+     */
+    @RequestMapping("uploadUserPhoto")
+    public String uploadUserPhoto(@RequestParam("file") MultipartFile file, HttpServletRequest request, Map<String,Object> map) {
+        String contentType = file.getContentType();
+        String fileName = file.getOriginalFilename();
+        System.out.println("fileName-->" + fileName);
+        System.out.println("getContentType-->" + contentType);
+//        String filePath = request.getSession().getServletContext().getRealPath("/");
+        try {
+            System.out.println("getRealPath-->" + filePath+fileName);
+            FileUtil.uploadFile(file.getBytes(), filePath, fileName);
+            Integer id=((UserInformation)request.getSession().getAttribute("user")).getUserId();
+            Integer x=userInfoService.saveUserImage(fileName,id);
+            if(x>0){
+                UserInformation newUser=userInfoService.findUserInfoById(id);
+                request.getSession().setAttribute("user",newUser);
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        //返回json
+        UrlController.currentUser = userInfoService.findUserInfoById(UrlController.currentUser.getUserId());
+        return personalInfo(map);
     }
 }

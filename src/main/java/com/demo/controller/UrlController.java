@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.FileInputStream;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
@@ -95,9 +96,7 @@ public class UrlController extends BaseController {
             currentUser = existUser;
             existUser.setPassword("");
             map.put("user",existUser);
-            System.out.println(path);
-            //return "redirect:"+path+"common/home";
-            return "common/home";
+            return "redirect:"+path+"/home";
         }
         map.put("msg","用户名或密码错误");
         return "/common/login";
@@ -134,7 +133,7 @@ public class UrlController extends BaseController {
         try {
             System.out.println("getRealPath-->" + filePath+fileName);
             FileUtil.uploadFile(file.getBytes(), filePath, fileName);
-            Integer id=((User)request.getSession().getAttribute("user")).getId();
+            Integer id=((UserInformation)request.getSession().getAttribute("user")).getUserId();
             Integer x=loginService.saveUserImage(fileName,id);
             if(x>0){
                 User newUser=loginService.findUserById(id);

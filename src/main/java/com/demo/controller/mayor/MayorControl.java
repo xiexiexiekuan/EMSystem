@@ -90,16 +90,25 @@ public class MayorControl {
     }
 
     /*
-     考场编排管理
+     考场编排管理,给考场分配考生
+     输出：考点，考场，学生座位分配
      */
     @RequestMapping("/examRoomManage")
-    public String examRoomManage() {
+    public String examRoomManage(Map<String,Object> map) {
 
-        return "/Mayor/exam-room-manage";
+        Integer i = mayorServe.hashCode();
+        if(i>0){
+            map.put("msg","考场编排成功！");
+            return examRoomManage(map);
+        }
+        map.put("msg","考场编排失败，请重试！");
+        return examRoomManage(map);
+
     }
 
     /*
    生成准考证号
+   市代码（两位）+ 考点
    */
     @RequestMapping("/admitTicket")
     public String admitTicket() {

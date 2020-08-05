@@ -8,6 +8,7 @@ import com.demo.entity.exam.UserInformation;
 import com.demo.entity.exam.ViolationInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -18,6 +19,7 @@ public class MayorServe {
 
     @Autowired
     private Mayor mayor;
+
 
     /*
      查询所有考点信息

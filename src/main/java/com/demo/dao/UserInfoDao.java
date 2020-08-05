@@ -32,4 +32,7 @@ public interface UserInfoDao {
 
     @Delete("delete from UserInformation where userId=#{userId}")
     public Integer deleteUserInfo(int userId);
+
+    @Update("update UserInformation set photo=#{fileName} where userId=#{userId}")
+    public Integer saveUserImage(@Param("fileName") String fileName,@Param("id")Integer id);
 }
