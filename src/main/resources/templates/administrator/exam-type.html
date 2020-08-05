@@ -36,13 +36,13 @@
                 var data = eval("(" + text + ")");
                 examType.empty();
                 for (var o in data) {
-                    var desc = data[o].description;
+                    var desc = data[o].certificate;
                     if (desc.length > 15) {//大于15个字符的隐藏处理
                         desc = desc.substring(0, 15) + '...'
                     }
                     str += '<tr>'
                         + '<td>' + count + '</td>'
-                        + '<td>' + data[o].name + '</td>'
+                        + '<td>' + data[o].typeName + '</td>'
                         + '<td>' + desc + '</td>'
                         + '<td>' + userId + '</td>'
                         + '<td>' +new Date(data[o].time).Format("yyyy-MM-dd hh:mm")  + '</td>'
@@ -51,7 +51,7 @@
                         + '</tr>';
                     count++;
                 }
-                expressExam.append(str);
+                examType.append(str);
             }
         });
     }
