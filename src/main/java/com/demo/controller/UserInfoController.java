@@ -46,6 +46,7 @@ public class UserInfoController extends BaseController{
      */
     @RequestMapping("/toPersonalInfoUpdate")
     public String toPersonalInfoUpdate(Map<String,Object> map) {
+        System.out.println("toPersonalInfoUpdate");
         map.put("updateUser", UrlController.currentUser);
         int role = UrlController.currentUser.getRole();
         return getFilePosition(role)+"/personal-info-update";
