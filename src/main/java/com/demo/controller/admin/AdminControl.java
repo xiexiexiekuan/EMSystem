@@ -1,18 +1,12 @@
 package com.demo.controller.admin;
 
-import com.demo.controller.UrlController;
-import com.demo.entity.Exam;
 import com.demo.entity.exam.*;
 import com.demo.service.admin.AdminServe;
-import com.demo.service.admin.AdminService;
-import com.sun.org.glassfish.gmbal.ParameterNames;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -172,7 +166,7 @@ public class AdminControl {
             return toTestPaperPlan(map);
         }
         map.put("msg","评卷管理计划添加失败，请重试！");
-        return "/administrator/test-paper-plan-add";
+        return toTestPaperPlanAdd();
     }
 
     /*
