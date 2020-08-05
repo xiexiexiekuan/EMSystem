@@ -66,4 +66,8 @@ public class UserInfoService {
     public Integer deleteUserInfo(int userId){
         return userInfoDao.deleteUserInfo(userId);
     }
+
+    public Integer saveUserImage(String fileName,Integer id) {
+        return userInfoDao.saveUserImage(fileName,id);
+    }
 }

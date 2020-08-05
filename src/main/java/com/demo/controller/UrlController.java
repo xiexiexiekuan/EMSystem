@@ -133,7 +133,7 @@ public class UrlController extends BaseController {
         try {
             System.out.println("getRealPath-->" + filePath+fileName);
             FileUtil.uploadFile(file.getBytes(), filePath, fileName);
-            Integer id=((User)request.getSession().getAttribute("user")).getId();
+            Integer id=((UserInformation)request.getSession().getAttribute("user")).getUserId();
             Integer x=loginService.saveUserImage(fileName,id);
             if(x>0){
                 User newUser=loginService.findUserById(id);
