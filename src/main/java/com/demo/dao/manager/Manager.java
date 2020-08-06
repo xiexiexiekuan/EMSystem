@@ -42,7 +42,7 @@ public interface Manager {
     ExamRoomInformation findExamRoomById(int examRoomId);
 
     //查找当前考点
-    @Select("select roomId from RoomInformation where roomName = #{roomName}")
+    @Select("select roomId from RoomManage where roomName = #{roomName}")
     Integer findRoomIdByName(String roomName);
 
     //插入考场信息
@@ -69,18 +69,18 @@ public interface Manager {
     ExamTeacher findExamTeacherById(int examTeacherId);
 
     //插入考务老师信息
-    @Insert("insert ExamTeacher(teacherName,sex,age,phone,position,roomId,examRoomId)"+
+    @Insert("insert ExamTeacher(teacherName,sex,age,phone,position,roomId)"+
             "values (#{teacherName},#{sex},#{age},#{phone},#{position},#{roomId})")
     @Options(useGeneratedKeys=true, keyProperty="teacherId", keyColumn="teacherId")
     Integer insertExamTeacher(ExamTeacher examTeacher);
 
     //更新考务老师信息
-    @Update("update ExamTeacher set teacherId=#{teacherId},teacherName=#{teacherName}," +
-            "sex=#{sex},age=#{age},phone=#{phone},position=#{position},roomId=#{roomId}")
+    @Update("update ExamTeacher set teacherName=#{teacherName},sex=#{sex},age=#{age},phone=#{phone}," +
+            "position=#{position},roomId=#{roomId} where teacherId=#{teacherId}")
     Integer updateExamTeacher(ExamTeacher examTeacher);
 
     //删除考务老师信息
-    @Delete("delete from ExamTeacher where teacherId=#{teacherId}")
+    @Delete("delete from ExamTeacher where teacherId=#{examTeacherId}")
     Integer deleteExamTeacher(int examTeacherId);
 
 
