@@ -1,10 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+
+
+<div id="wrapper" class="row">
+    <div th:replace="common/header::nav"></div>
+    <div id="page-inner">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>考场编号</th>
+                            <th>考场人数</th>
+                            <th>考场位置</th>
+                            <th>所属院校</th>
+                            <th>启用状态</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <th:block th:each="u:${userInformationList}">
+                            <tr >
+                                <td th:text="${u.examRoomId}"></td>
+                                <td th:text="${u.examRoomNum}"></td>
+                                <td th:text="${u.examRoomLocate}"></td>
+                                <td th:text="${u.roomId}"></td>
+                                <td th:text="${u.useStatus}"></td>
+
+                            </tr>
+                        </th:block>
+                        <tr th:unless="${#lists.size(userInformationList)>0}">
+                            <td colspan="3">未查询到已发布考场信息！</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /. PAGE INNER  -->
+</div>
+<!-- /. WRAPPER  -->
+
+<div th:replace="common/footer"></div>
+
+
 
 </body>
 </html>
