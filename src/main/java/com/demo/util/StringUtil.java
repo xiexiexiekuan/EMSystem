@@ -3,9 +3,6 @@ package com.demo.util;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created by zrq on 2018-5-8.
- */
 public class StringUtil {
     private static Pattern linePattern = Pattern.compile("-(\\w)");
     /**横线转驼峰*/
@@ -47,10 +44,4 @@ public class StringUtil {
         return sb.substring(sb.length()-len,sb.length());
     }
 
-//    public static void main(String[] args) {
-//        String lineToHump = lineToHump("f_parent_no_leader");
-//        System.out.println(lineToHump);//fParentNoLeader
-//        System.out.println(humpToLine(lineToHump));//f_parent_no_leader
-//        System.out.println(humpToLine2(lineToHump));//f_parent_no_leader
-//    }
 }

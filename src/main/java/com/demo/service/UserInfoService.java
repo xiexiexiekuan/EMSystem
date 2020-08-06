@@ -1,6 +1,5 @@
 package com.demo.service;
 
-
 import com.demo.controller.UrlController;
 import com.demo.dao.UserInfoDao;
 import com.demo.entity.exam.UserInformation;
@@ -8,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
 
 @Service
 public class UserInfoService {

@@ -1,13 +1,10 @@
 package com.demo.dao.manager;
 
-import com.demo.entity.Exam;
-import com.demo.entity.User;
 import com.demo.entity.exam.*;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
 
 @Repository
 public interface Manager {

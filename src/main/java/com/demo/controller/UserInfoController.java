@@ -1,6 +1,5 @@
 package com.demo.controller;
 
-import com.demo.entity.User;
 import com.demo.entity.exam.UserInformation;
 import com.demo.service.UserInfoService;
 import com.demo.util.FileUtil;

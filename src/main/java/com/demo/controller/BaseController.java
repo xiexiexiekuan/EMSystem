@@ -2,7 +2,6 @@ package com.demo.controller;
 
 import org.springframework.beans.factory.annotation.Value;
 
-
 public class BaseController {
     //默认路径
     @Value("${server.servlet.path}")
