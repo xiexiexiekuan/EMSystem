@@ -24,11 +24,10 @@
                             <th>报考状态</th>
                             <th>缴费状态</th>
                             <th>开考状态</th>
-                            <th>成绩</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <th:block th:each="u:${userInformationList}">
+                        <th:block th:each="u:${applicationInformation}">
                             <tr >
                                 <td th:text="${u.enterId}"></td>
                                 <td th:text="${u.userId}"></td>
@@ -41,10 +40,9 @@
                                 <td th:text="${u.applyStatus}"></td>
                                 <td th:text="${u.payStatus}"></td>
                                 <td th:text="${u.examStatus}"></td>
-                                <td th:text="${u.grades}"></td>
                             </tr>
                         </th:block>
-                        <tr th:unless="${#lists.size(userInformationList)>0}">
+                        <tr th:unless="${#lists.size(applicationInformation)>0}">
                             <td colspan="3">未查询到已发布考试信息！</td>
                         </tr>
                         </tbody>

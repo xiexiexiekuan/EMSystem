@@ -30,13 +30,8 @@
                                         <th>信息</th>
                                     </tr>
                                     </thead>
-                                    <tbody th:object="${updateUser}">
-                                    <tr>
-                                        <td>考场编号</td>
-                                        <td>
-                                            <input type="text" name="examRoomId" class="required" placeholder="编号" readonly="readonly" th:value="*{userId}">
-                                        </td>
-                                    </tr>
+                                    <tbody th:object="${examRoomInformation}">
+
                                     <tr>
                                         <td>考场人数</td>
                                         <td>
@@ -55,19 +50,12 @@
                                             <input type="text" name="roomId" class="required" placeholder="所属院校" th:value="*{roomId}">
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>启用状态</td>
-                                        <td>
-                                            <input type="text" name="useStatus" class="required" placeholder="启用状态" th:value="*{useStatus}">
-                                        </td>
-                                    </tr>
-
 
                                     </tbody>
                                 </table>
                                 <button type="submit" class="btn btn-primary">保存</button>
                                 <button class="btn btn-warning">
-                                    <a href="/userInfo/personalInfo" style="color:white;">取消</a>
+                                    <a href="/school/examRoom" style="color:white;">取消</a>
                                 </button>
                             </div>
                         </form>

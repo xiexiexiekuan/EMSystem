@@ -5,6 +5,7 @@ import com.demo.service.manager.ManagerServe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -30,12 +31,13 @@ public class ManagerControl {
     /*
     前往集体报名页面
      */
-    @RequestMapping("/toGroupEnter")
+    @RequestMapping(method = RequestMethod.GET, value = "/toGroupEnter")
     public String toGroupEnter(Map<String,Object> map,@RequestParam("publishId") int publishId)
     {
-        List<UserInformation> userInformationList = managerService.findStudentNotEnter();
+        List<UserInformation> userInformationList = managerService.findStudentNotEnter(publishId);
         //设置报考类型
         managerService.setPublishId(publishId);
+        map.put("publishId",publishId);
         map.put("userInformationList",userInformationList);
         return "/Manager/group-enter";
     }
@@ -43,10 +45,10 @@ public class ManagerControl {
     /*
    集体报名
     */
-    @RequestMapping("/groupEnter")
-    public String groupEnter(Map<String,Object> map)
+    @RequestMapping(method = RequestMethod.GET, value ="/groupEnter")
+    public String groupEnter(Map<String,Object> map,@RequestParam("publishId") int publishId)
     {
-        Integer i = managerService.groupEnter();
+        Integer i = managerService.groupEnter(publishId);
         if(i>0){
             map.put("msg","报名成功");
             return toGroupEnter(map,0);
@@ -89,7 +91,7 @@ public class ManagerControl {
     {
         List<ApplicationInformation> applicationInformationList = managerService.findNotPay();
         map.put("applicationInformationList",applicationInformationList);
-        return "/Manager/group-apply";
+        return "/Manager/group-pay";
 
     }
 
@@ -114,8 +116,8 @@ public class ManagerControl {
     @RequestMapping("/examInformation")
     public String examInformation(Map<String,Object> map)
     {
-        List<UserInformation> userInformationList = managerService.findStudentPreviewStatus();
-        map.put("userInformationList",userInformationList);
+        List<ApplicationInformation> applicationInformation = managerService.findApplicationInformation();
+        map.put("applicationInformation",applicationInformation);
         return "/Manager/exam-information";
     }
 
