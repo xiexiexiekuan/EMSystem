@@ -2,10 +2,7 @@ package com.demo.service.mayor;
 
 import com.demo.controller.UrlController;
 import com.demo.dao.mayor.Mayor;
-import com.demo.entity.exam.ApplicationInformation;
-import com.demo.entity.exam.RoomManage;
-import com.demo.entity.exam.UserInformation;
-import com.demo.entity.exam.ViolationInfo;
+import com.demo.entity.exam.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,6 +43,13 @@ public class MayorServe {
     }
 
     /*
+    根据NAME查询对应的考点信息
+     */
+    public RoomManage findRoomManageByName(String name){
+        return mayor.findRoomManageByName(name);
+    }
+
+    /*
     更新考点信息---考点的编号和名字不可修改
      */
     public Integer updateRoomManage(RoomManage roomManage){
@@ -71,7 +75,7 @@ public class MayorServe {
      */
     public Integer addViolationInfo(ViolationInfo violationInfo){
         violationInfo.setPreviewStatus(0);
-        violationInfo.setReportMan(UrlController.currentUser.getPrimaryKey());
+        violationInfo.setReportMan(UrlController.currentUser.getUserName());
         Date date = new Date();
         Timestamp timeStamp = new Timestamp(date.getTime());
         violationInfo.setReportTime(timeStamp);
@@ -97,5 +101,34 @@ public class MayorServe {
      */
     public Integer updatePreview(int enterId, int status){
         return mayor.updatePreview(enterId,status);
+    }
+
+    /*
+     查询所有考场信息
+    */
+    public List<ExamRoomInformation> findAllExamRoomInformation(){
+        return mayor.findAllExamRoomInformation();
+    }
+
+    /*
+    更新考场信息
+     */
+    public Integer updateExamRoom(int examRoomId){
+        int status = 1;
+        return mayor.updateExamRoom(examRoomId, status);
+    }
+
+    /*
+     查询所有老师信息
+    */
+    public List<ExamTeacher> findAllExamTeacher(){
+        return mayor.findAllExamTeacher();
+    }
+
+    /*
+    更新考务老师
+     */
+    public Integer updateExamTeacher(int teacherId, int examRoomId){
+        return mayor.updateExamTeacher(teacherId,examRoomId);
     }
 }

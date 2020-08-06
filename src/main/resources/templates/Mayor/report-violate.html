@@ -11,7 +11,7 @@
             <div class="col-md-6 col-md-offset-3">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        考试信息表
+                        上报违纪情况
                     </div>
                     <div class="panel-body">
                         <form action="/mayor/reportViolate" method="post">
@@ -24,56 +24,29 @@
                                     </tr>
                                     </thead>
                                     <th:block >
-                                        <tbody th:object="${violationInfo}">
+                                        <tbody>
                                         <tr>
                                             <td>考生编码</td>
                                             <td>
-                                                <input type="text" id="userId" name="userId" class="required" placeholder="考生编码"
-                                                       value="无" th:value="*{userId}">
+                                                <input type="text" id="userId" name="userId" class="required" placeholder="考生编码">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>考试编号</td>
                                             <td>
-                                            <td>
-                                                <input type="text" id="publishId" name="publishId" class="required" placeholder="考试编号"
-                                                       value="无" th:value="*{publishId}">
-                                            </td>
+                                                <input type="text" id="publishId" name="publishId" class="required" placeholder="考试编号" >
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>违纪编号</td>
                                             <td>
-                                                <input type="text" id="violationsCode" name="violationsCode" class="required" placeholder="考试编号"
-                                                       value="无" th:value="*{violationsCode}">
+                                                <input type="text" id="violationsCode" name="violationsCode" class="required" placeholder="考试编号" >
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>违纪描述</td>
                                             <td>
-                                                <input type="text" id="violateDescription" name="violateDescription" class="required" placeholder="违规描述"
-                                                       value="无" th:value="*{violateDescription}">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>审核状态</td>
-                                            <td>
-                                                <input type="text" id="previewStatus" name="previewStatus" class="required" placeholder="状态审核"
-                                                       value="无" th:value="*{previewStatus}">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>上报人</td>
-                                            <td>
-                                                <input type="text" id="reportMan" name="reportMan" class="required" placeholder="上报人"
-                                                       value="无" th:value="*{reportMan}">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>上报时间</td>
-                                            <td>
-                                                <input type="text"  name="reportTime" class="required" placeholder="格式:2020-8-1 10:00:00"
-                                                       value="" id="reportTime" data-date-format="yyyy-mm-dd hh:ii:00" alt="格式:yyyy-MM-dd HH:mm:ss">
+                                                <input type="text" id="violateDescription" name="violateDescription" class="required" placeholder="违规描述" >
                                             </td>
                                         </tr>
                                         </tbody>
@@ -81,7 +54,7 @@
                                 </table>
                                 <button type="submit" class="btn btn-primary">保存</button>
                                 <button class="btn btn-warning">
-                                    <a th:href="'/mayor/violateInfo'" style="color:white;">取消</a>
+                                    <a href="/mayor/violateInfo" style="color:white;">取消</a>
                                 </button>
                             </div>
                         </form>

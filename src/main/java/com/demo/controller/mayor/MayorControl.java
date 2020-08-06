@@ -1,9 +1,6 @@
 package com.demo.controller.mayor;
 
-import com.demo.entity.exam.ApplicationInformation;
-import com.demo.entity.exam.RoomManage;
-import com.demo.entity.exam.UserInformation;
-import com.demo.entity.exam.ViolationInfo;
+import com.demo.entity.exam.*;
 import com.demo.service.mayor.MayorServe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -90,20 +87,29 @@ public class MayorControl {
     }
 
     /*
+    去考场管理
+     */
+    @RequestMapping("/toExamRoomManage")
+    public String toExamRoomManage(Map<String,Object> map) {
+        List<ExamRoomInformation> examRoomInformation = mayorServe.findAllExamRoomInformation();
+        map.put("examRoomInformation",examRoomInformation);
+        return "/Mayor/exam-room-manage";
+
+    }
+
+    /*
      考场编排管理,给考场分配考生
      输出：考点，考场，学生座位分配
      */
     @RequestMapping("/examRoomManage")
-    public String examRoomManage(Map<String,Object> map) {
-
-        Integer i = mayorServe.hashCode();
+    public String examRoomManage(int examRoomId, Map<String,Object> map) {
+        Integer i = mayorServe.updateExamRoom(examRoomId);
         if(i>0){
-            map.put("msg","考场编排成功！");
-            return examRoomManage(map);
+            map.put("msg","考场安排成功！");
+            return toExamRoomManage(map);
         }
-        map.put("msg","考场编排失败，请重试！");
-        return examRoomManage(map);
-
+        map.put("msg","考场安排失败，请重试！");
+        return toExamRoomManage(map);
     }
 
     /*
@@ -111,9 +117,48 @@ public class MayorControl {
    市代码（两位）+ 考点
    */
     @RequestMapping("/admitTicket")
-    public String admitTicket() {
+    public String admitTicket(Map<String,Object> map) {
+        List<ApplicationInformation> admit = mayorServe.findAllApplicationInfo();
+        for(int i=0; i<admit.size(); i++) {
+            String ticket = "1600"+"00"+"00"+"00"+"00";
+            ApplicationInformation temp = admit.get(i);
+            String ticket0 = temp.getUserId()<10?"0"+temp.getUserId():String.valueOf(temp.getUserId());
 
-        return "/Mayor/exam-room-manage";
+            String ticket1;
+            RoomManage room = mayorServe.findRoomManageByName(temp.getCurSchool());
+            if(room!=null){
+                ticket1=room.getRoomId()<10?"0"+room.getRoomId():String.valueOf(room.getRoomId());
+            }
+            else ticket1="08";
+
+            long l = System.currentTimeMillis();
+            int a = (int)( l % 30 )+1;
+            String ticket2=a<10?"0"+a:String.valueOf(a);
+
+            l = System.currentTimeMillis();
+            a = (int)( l % 30 )+1;
+            String ticket3=a<10?"0"+a:String.valueOf(a);
+
+            l = System.currentTimeMillis();
+            a = (int)( l % 98 )+1;
+            String ticket4=a<10?"0"+a:String.valueOf(a);
+
+            ticket="16"+ticket0+ticket1+ticket2+ticket3+ticket4;
+            temp.setExamineeNumber(ticket);
+        }
+
+        return toExamRoomManage(map);
+    }
+
+    /**
+     * 去监考老师管理
+     * @return
+     */
+    @RequestMapping("/toExamTeacher")
+    public String toExamTeacher(Map<String,Object> map) {
+        List<ExamTeacher> examTeacher = mayorServe.findAllExamTeacher();
+        map.put("examTeacher",examTeacher);
+        return "/Mayor/exam-teacher";
     }
 
     /**
@@ -121,9 +166,14 @@ public class MayorControl {
      * @return
      */
     @RequestMapping("/examTeacher")
-    public String examTeacher() {
-
-        return "/Mayor/exam-teacher";
+    public String examTeacher(int teacherId, int examRoomId, Map<String,Object> map) {
+        Integer i = mayorServe.updateExamTeacher(teacherId,examRoomId);
+        if(i>0){
+            map.put("msg","监考老师安排成功！");
+            return toExamTeacher(map);
+        }
+        map.put("msg","监考老师安排失败，请重试！");
+        return toExamTeacher(map);
     }
 
 
@@ -133,7 +183,7 @@ public class MayorControl {
      */
     @RequestMapping("/toReportViolate")
     public String toReportViolate() {
-        return "/Mayor/report-violate";
+        return "Mayor/report-violate";
     }
 
     /**
@@ -159,7 +209,7 @@ public class MayorControl {
     public String violateInfo(Map<String,Object> map) {
         List<ViolationInfo> violationInfo = mayorServe.findAllViolationInfo();
         map.put("violationInfo",violationInfo);
-        return "/Mayor/violate-info";
+        return "Mayor/violate-info";
     }
 
     /**
@@ -173,7 +223,7 @@ public class MayorControl {
             preview.get(i).setExamineeNumber(user.getUserName());//做个替换
         }
         map.put("preview",preview);
-        return "/Mayor/preview";
+        return "Mayor/preview";
     }
 
     /**

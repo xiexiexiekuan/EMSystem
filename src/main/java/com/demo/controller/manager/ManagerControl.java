@@ -20,6 +20,15 @@ public class ManagerControl {
     @Autowired
     private ManagerServe managerService;
 
+    /*
+    前往集体报名页面----输入考试类型
+    */
+    @RequestMapping("/toGroupEnterIn")
+    public String toGroupEnterIn(Map<String,Object> map)
+    {
+        return "/Manager/group-enter-in";
+    }
+
 
     /*
     前往集体报名页面

@@ -229,8 +229,8 @@ public class ExamineeControl extends BaseController {
         datas.put("examNum",myticket.getExamineeNumber());
         datas.put("sex", UrlController.currentUser.getSex().equals("1")?"男":"女");
         datas.put("idnumber", UrlController.currentUser.getCertificateId());
-        datas.put("roomNum", "001");
-        datas.put("seat", "215/325");
+        datas.put("roomNum", myticket.getExamineeNumber().substring(4,6));
+        datas.put("seat", myticket.getExamineeNumber().substring(6,8)+"-"+myticket.getExamineeNumber().substring(8,10));
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm");
         if(punishId.getAdmissioncardPrintDeadline()!=null){
             Calendar calendar = Calendar.getInstance();
