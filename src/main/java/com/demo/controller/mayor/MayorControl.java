@@ -149,7 +149,18 @@ public class MayorControl {
             mayorServe.setAdminTicket(temp);
         }
         map.put("msg","准考证号生成成功");
-        return toExamRoomManage(map);
+        return lookTicket(map);
+    }
+
+    /*
+   查看生成的准考证
+   */
+    @RequestMapping("/lookTicket")
+    public String lookTicket(Map<String,Object> map)
+    {
+        List<ApplicationInformation> applicationInfo = mayorServe.findAllApplicationInfo();
+        map.put("applicationInfo",applicationInfo);
+        return "/Mayor/create-permit";
     }
 
     /**
