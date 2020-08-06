@@ -1,9 +1,6 @@
 package com.demo.controller.mayor;
 
-import com.demo.entity.exam.ApplicationInformation;
-import com.demo.entity.exam.RoomManage;
-import com.demo.entity.exam.UserInformation;
-import com.demo.entity.exam.ViolationInfo;
+import com.demo.entity.exam.*;
 import com.demo.service.mayor.MayorServe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -90,20 +87,29 @@ public class MayorControl {
     }
 
     /*
+    去考场管理
+     */
+    @RequestMapping("/toExamRoomManage")
+    public String toExamRoomManage(Map<String,Object> map) {
+        List<ExamRoomInformation> examRoomInformation = mayorServe.findAllExamRoomInformation();
+        map.put("examRoomInformation",examRoomInformation);
+        return "/Mayor/exam-room-manage";
+
+    }
+
+    /*
      考场编排管理,给考场分配考生
      输出：考点，考场，学生座位分配
      */
     @RequestMapping("/examRoomManage")
-    public String examRoomManage(Map<String,Object> map) {
-
-        Integer i = mayorServe.hashCode();
+    public String examRoomManage(int examRoomId, int useStatus, Map<String,Object> map) {
+        Integer i = mayorServe.updateExamRoom(examRoomId,useStatus);
         if(i>0){
-            map.put("msg","考场编排成功！");
-            return examRoomManage(map);
+            map.put("msg","考场安排成功！");
+            return toExamRoomManage(map);
         }
-        map.put("msg","考场编排失败，请重试！");
-        return examRoomManage(map);
-
+        map.put("msg","考场安排失败，请重试！");
+        return toExamRoomManage(map);
     }
 
     /*
@@ -111,9 +117,20 @@ public class MayorControl {
    市代码（两位）+ 考点
    */
     @RequestMapping("/admitTicket")
-    public String admitTicket() {
+    public String admitTicket(Map<String,Object> map) {
 
-        return "/Mayor/exam-room-manage";
+        return toExamRoomManage(map);
+    }
+
+    /**
+     * 去监考老师管理
+     * @return
+     */
+    @RequestMapping("/toExamTeacher")
+    public String toExamTeacher(Map<String,Object> map) {
+        List<ExamTeacher> examTeacher = mayorServe.findAllExamTeacher();
+        map.put("examTeacher",examTeacher);
+        return "/Mayor/exam-teacher";
     }
 
     /**
@@ -121,9 +138,14 @@ public class MayorControl {
      * @return
      */
     @RequestMapping("/examTeacher")
-    public String examTeacher() {
-
-        return "/Mayor/exam-teacher";
+    public String examTeacher(int teacherId, int examRoomId, Map<String,Object> map) {
+        Integer i = mayorServe.updateExamTeacher(teacherId,examRoomId);
+        if(i>0){
+            map.put("msg","监考老师安排成功！");
+            return toExamTeacher(map);
+        }
+        map.put("msg","监考老师安排失败，请重试！");
+        return toExamTeacher(map);
     }
 
 
