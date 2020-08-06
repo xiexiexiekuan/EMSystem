@@ -145,8 +145,10 @@ public class MayorControl {
 
             ticket="16"+ticket0+ticket1+ticket2+ticket3+ticket4;
             temp.setExamineeNumber(ticket);
+            System.out.println("userId: "+temp.getUserId()+"   生成准考证号："+temp.getExamineeNumber());
+            mayorServe.setAdminTicket(temp);
         }
-
+        map.put("msg","准考证号生成成功");
         return toExamRoomManage(map);
     }
 

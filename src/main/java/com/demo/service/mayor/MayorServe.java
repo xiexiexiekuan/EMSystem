@@ -131,4 +131,11 @@ public class MayorServe {
     public Integer updateExamTeacher(int teacherId, int examRoomId){
         return mayor.updateExamTeacher(teacherId,examRoomId);
     }
+
+    /*
+    更新准考证号
+     */
+    public void setAdminTicket(ApplicationInformation temp){
+        mayor.setAdminTicket(temp);
+    }
 }
