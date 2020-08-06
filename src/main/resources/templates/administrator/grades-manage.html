@@ -8,18 +8,17 @@
     <div th:replace="common/header::nav"></div>
     <div id="page-inner">
         <div class="row">
+            <div th:text="${msg}" style="color: red;"></div>
             <div class="col-md-12">
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered table-hover">
                         <thead>
                         <tr>
                             <th>
-                                考试类型
-                                <th:block th:each="e:${examMenu}">
-                                    <a th:href="'/examOffice/toGradesManageOne?typeId='+${e.typeId}" style="color:orangered;">
-                                        <input type="text" th:value="${e.typeName}" class="required">
-                                    </a>
-                                </th:block>
+                                <select class="form-control" name="examType">
+                                    <option value="" selected>考试类型</option>
+                                    <option th:each="e:${examMenu}" th:text="${e.typeName}" th:onclick="'/examOffice/toGradesManageOne?typeId='+${e.typeId}" style="color:orangered;"></option>
+                                </select>
                             </th>
                             <th>考生编号</th>
                             <th>违规情况</th>
@@ -37,7 +36,7 @@
                                 <td th:text="${g.grades}">100</td>
                                 <td th:if="${g.examStatus}==0">
                                     <form action="/examOffice/gradesManage" method="post">
-                                        编码:<input type="hidden" class="form-control" name="enterId" th:value="${g.enterId}"/>
+                                        <input type="hidden" class="form-control" name="enterId" th:value="${g.enterId}"/>
                                         成绩:<input type="text" class="form-control" name="grades" />
                                         <button type="submit">提交成绩结果</button>
                                     </form>
