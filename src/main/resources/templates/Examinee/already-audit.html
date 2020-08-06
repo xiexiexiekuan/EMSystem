@@ -31,7 +31,7 @@
                                 <td th:text="${a.getExamineeNumber()}">1</td>
                                 <td th:if="${a.previewStatus}==1">审核通过</td>
                                 <td th:unless="${a.previewStatus}==1">审核失败</td>
-                                <td th:if="${a.previewStatus}==1">
+                                <td th:if="${a.previewStatus}==1 and ${a.applyStatus}==0 ">
                                     <form action="/student/confirmApply" method="post">
                                         <input type="hidden" class="form-control" name="enterId" th:value="${a.enterId}"/>
                                         报考院校:<input type="text" class="form-control" name="wantSchool" />
