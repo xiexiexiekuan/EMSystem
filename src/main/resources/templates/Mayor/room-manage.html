@@ -69,6 +69,8 @@
                             <th>编号</th>
                             <th>考场数目</th>
                             <th>考点地址</th>
+                            <th>考场起始编号</th>
+                            <th>考场结束编号</th>
                             <th>操作</th>
                         </tr>
                         </thead>
@@ -80,8 +82,10 @@
                                 <td th:text="*{roomId}">编号</td>
                                 <td th:text="*{roomNumber}">考场数目</td>
                                 <td th:text="*{roomAddress}">考点地址</td>
+                                <td th:text="*{numberStart}">考场起始编号</td>
+                                <td th:text="*{numberEnd}">考场结束编号</td>
                                 <td>
-                                    <a th:href="'/mayor/roomManageUpdate?id='+*{roomId}" class="btn btn-primary">修改</a>
+                                    <a th:href="'/mayor/toRoomManageUpdate?id='+*{roomId}" class="btn btn-primary">修改</a>
                                     <a th:href="'/mayor/roomManageDelete?id='+*{roomId}" class="btn btn-danger">删除</a>
                                 </td>
                             </tr>
@@ -94,7 +98,7 @@
                             </tr>
                         </th:block>
                     </table>
-                    <a  class="btn btn-info" href="/mayor/roomManageAdd">添加考点信息</a>
+                    <a  class="btn btn-info" href="/mayor/toRoomManageAdd">添加考点信息</a>
                 </div>
             </div>
         </div>
