@@ -7,6 +7,7 @@
 <div id="wrapper" class="row">
     <div th:replace="common/header::nav"></div>
     <div id="page-inner">
+        <th:block th:if="${#lists.size(applicationInfo)>0}" th:switch="${applicationInfo[0].previewStatus}">
             <!--待缴费-->
             <div class="row" th:case="0">
                 <div class="col-md-12">
@@ -23,7 +24,7 @@
                             <th:block th:each="a:${applicationInfo}">
                                 <tr >
                                     <td th:text="${a.publishId}">1</td>
-                                    <td><a th:href="'/student/payForExam?id='+${a.enterId}">继续支付</a></td>
+                                    <td><a th:href="'student/payForExam?id='+${a.enterId}">继续支付</a></td>
                                 </tr>
                             </th:block>
                             </tbody>
@@ -31,6 +32,7 @@
                     </div>
                 </div>
             </div>
+        </th:block>
             <!-- /. ROW  -->
 
         <!--我的考试不存在时显示-->

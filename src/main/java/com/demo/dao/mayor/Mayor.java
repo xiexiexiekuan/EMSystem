@@ -56,4 +56,7 @@ public interface Mayor {
 
     @Update("update ExamTeacher set examRoomId=#{examRoomId} where teacherId=#{teacherId}")
     public Integer updateExamTeacher(int teacherId, int examRoomId);
+
+    @Update("update ApplicationInformation set examineeNumber=#{examineeNumber} where enterId=#{enterId}")
+    public void setAdminTicket(ApplicationInformation temp);
 }
