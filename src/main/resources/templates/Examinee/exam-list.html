@@ -14,6 +14,7 @@
                 <h1 class="page-subhead-line">以下是所有考试列表，点击了解详情</h1>
             </div>
         </div>
+        <div th:text="${msg}" style="color: red;"></div>
         <!-- /. ROW  -->
         <th:block th:each="exam:${examPage.items}">
             <div class="col-md-4 col-sm-4">

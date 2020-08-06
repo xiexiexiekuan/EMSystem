@@ -69,7 +69,7 @@ public class ExamineeControl extends BaseController {
         System.out.println("考生："+applicationInfo.getStuType());
         if(applicationInfo.getStuType().equals("应用型")){
             Integer i = examineeServe.findWhitelistHaveStu(applicationInfo.getUserId());
-            if(i!=1){
+            if(i==null){
                 map.put("msg","报名失败，用户是不具备自主报名的应用型考生！");
                 return examList("1",map);
             }

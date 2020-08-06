@@ -36,8 +36,8 @@ image:
   path: S:\EMSystem\src\main\resources\static\img\
 #准考证模板路径
 admission:
-  path: F:\code\EMSystem\src\main\resources\static\doc\admission.doc
-  per: F:\EMSystem\src\main\resources\static\doc\per\
+  path: S:\EMSystem\src\main\resources\static\doc\admission.doc
+  per: S:\EMSystem\src\main\resources\static\doc\per\
 ---
 #开发环境配置
 spring:
