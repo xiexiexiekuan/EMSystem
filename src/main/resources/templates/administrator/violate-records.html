@@ -52,7 +52,7 @@
                                 <td th:text="${v.processing_state}"></td>
                                 <td th:if="${v.previewStatus}==0">
                                     <form action="/examOffice/violateHandle" method="post">
-                                        违纪记录:<input type="text" class="form-control" name="violateRecordId" th:value="${v.violateRecordId}" readonly="readonly"/>
+                                        违纪记录:<input type="hidden" class="form-control" name="violateRecordId" th:value="${v.violateRecordId}"/>
                                         处罚编码:<input type="text" class="form-control" name="punishmentCode" />
                                         处罚描述:<input type="text" class="form-control" name="punishDescription" />
                                         <button type="submit">提交审核结果</button>
