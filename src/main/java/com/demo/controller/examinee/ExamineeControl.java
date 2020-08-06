@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.FileInputStream;
 import java.text.SimpleDateFormat;
@@ -42,20 +43,21 @@ public class ExamineeControl extends BaseController {
     {
         PageBean<ExamType> examPage=examineeServe.findByPage(Integer.parseInt(currentPage),pageSize);
         map.put("examPage",examPage);
-        return "/Examinee/exam-list";
+        return "Examinee/exam-list";
     }
 
     /*
     选择一个考试去报名
      */
     @RequestMapping("/toSignUp")
-    public String toSignUp(int typeId, Map<String,Object> map)
+    public String toSignUp(HttpServletRequest request, int typeId, Map<String,Object> map)
     {
         UserInformation studentInfo = UrlController.currentUser;//获取考生当前信息
         PublishExam publishExam = examineeServe.findPublishExamByTypeId(typeId);
         map.put("studentInfo",studentInfo);
         map.put("publishExam",publishExam);
-        return "/Examinee/sign-up";
+        request.getSession().setAttribute("currentExam",publishExam.getPublishId());
+        return "Examinee/sign-up";
     }
 
     /*
@@ -101,7 +103,7 @@ public class ExamineeControl extends BaseController {
         List<ApplicationInformation> applicationInfo = examineeServe.findWaitAuditApplication();
         applicationInfo = setExamName(applicationInfo);
         map.put("applicationInfo",applicationInfo);
-        return "/Examinee/wait-audit";
+        return "Examinee/wait-audit";
     }
 
     /*
@@ -110,10 +112,13 @@ public class ExamineeControl extends BaseController {
     @RequestMapping("/toAlreadyAudit")
     public String toAlreadyAudit(Map<String,Object> map)
     {
+
         List<ApplicationInformation> applicationInfo = examineeServe.findAlreadyAuditApplication();
         applicationInfo = setExamName(applicationInfo);
         map.put("applicationInfo",applicationInfo);
-        return "/Examinee/already-audit";
+
+        //ExamType examType = examineeServe.findExamTypeById();
+        return "Examinee/already-audit";
     }
 
     /*
@@ -140,7 +145,7 @@ public class ExamineeControl extends BaseController {
         List<ApplicationInformation> applicationInfo = examineeServe.findWaitPayApplication();
         applicationInfo = setExamName(applicationInfo);
         map.put("applicationInfo",applicationInfo);
-        return "/Examinee/wait-pay";
+        return "Examinee/wait-pay";
     }
 
     /*
@@ -167,7 +172,7 @@ public class ExamineeControl extends BaseController {
         List<ApplicationInformation> applicationInfo = examineeServe.findAlreadyPayApplication();
         applicationInfo = setExamName(applicationInfo);
         map.put("applicationInfo",applicationInfo);
-        return "/Examinee/already-pay";
+        return "Examinee/already-pay";
     }
 
     /*
@@ -179,7 +184,7 @@ public class ExamineeControl extends BaseController {
         List<ApplicationInformation> grades = examineeServe.inquireGrades();
         grades = setExamName(grades);
         map.put("grades",grades);
-        return "/Examinee/inquire-grades";
+        return "Examinee/inquire-grades";
     }
 
     /*
@@ -190,7 +195,7 @@ public class ExamineeControl extends BaseController {
     {
         List<ViolationInfo> violation = examineeServe.inquireViolation();
         map.put("violation",violation);
-        return "/Examinee/inquire-violation";
+        return "Examinee/inquire-violation";
     }
 
     /*
@@ -202,7 +207,7 @@ public class ExamineeControl extends BaseController {
         List<ApplicationInformation> admissionTicket = examineeServe.admissionTicket();
         admissionTicket = setExamName(admissionTicket);
         map.put("admissionTicket",admissionTicket);
-        return "/Examinee/admission-ticket";
+        return "Examinee/admission-ticket";
     }
 
     /*

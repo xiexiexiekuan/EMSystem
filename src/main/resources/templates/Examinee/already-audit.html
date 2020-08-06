@@ -15,22 +15,30 @@
                         <thead>
                         <tr>
                             <th>考试名称</th>
-                            <th>考试时间</th>
                             <th>准考证号</th>
                             <th>状态</th>
-                            <th>操作</th>
+                            <th>报考</th>
                         </tr>
                         </thead>
                         <tbody>
                         <th:block th:each="a:${applicationInfo}">
                             <tr >
-                                <td th:text="${a.publishId}">1</td>
-                                <td th:text="${a.examStatus}">1</td>
+                                <td th:text="${a.examineePhoto}">1</td>
+                                <td th:text="${a.getExamineeNumber()}">1</td>
+                                <td th:if="${a.examStatus}==1">已审核</td>
+                                <td>
+                                    <form action="/student/confirmApply" method="post">
+                                        <input type="hidden" class="form-control" name="enterId" th:value="${a.enterId}"/>
+                                        报考院校:<input type="text" class="form-control" name="wantSchool" />
+                                        <button type="submit">确认报考</button>
+                                    </form>
+                                </td>
                             </tr>
                         </th:block>
                         </tbody>
                     </table>
                 </div>
+
             </div>
 
         </div>

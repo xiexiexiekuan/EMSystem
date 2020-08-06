@@ -7,27 +7,29 @@
 <div id="wrapper" class="row">
     <div th:replace="common/header::nav"></div>
     <div id="page-inner">
+        <th:block th:if="${#lists.size(applicationInfo)>0}" th:switch="${applicationInfo[0].previewStatus}">
         <!--待审核-->
-        <div class="row" th:case="0">
-            <div class="col-md-12">
-                <div class="table-responsive">
-                    <table class="table table-striped table-bordered table-hover">
-                        <thead>
-                        <tr>
-                            <th>考试编号</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <th:block th:each="a:${applicationInfo}">
-                            <tr >
-                                <td th:text="${a.publishId}">1</td>
+            <div class="row" th:case="0">
+                <div class="col-md-12">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th>考试编号</th>
                             </tr>
-                        </th:block>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                            <th:block th:each="a:${applicationInfo}">
+                                <tr >
+                                    <td th:text="${a.publishId}">1</td>
+                                </tr>
+                            </th:block>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
+        </th:block>
         <!-- /. ROW  -->
 
         <!--我的考试不存在时显示-->
