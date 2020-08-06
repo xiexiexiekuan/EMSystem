@@ -35,22 +35,22 @@
     </script>
 </head>
 <body>
-<div id="nav" th:fragment="nav">
+<div id="nav" th:fragment="nav" style="background-color: #C6E746">
     <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/res/assets/index">考试报名及考务管理系统</a>
+            <a class="navbar-brand" href="#">考试报名及考务管理系统</a>
         </div>
 
         <div class="header-right">
 
-            <a href="/res/assets/message-task" class="btn btn-info" title="New Message"><b>30 </b><i class="fa fa-envelope-o fa-2x"></i></a>
-            <a href="/res/assets/message-task" class="btn btn-primary" title="New Task"><b>40 </b><i class="fa fa-bars fa-2x"></i></a>
-            <a href="/res/assets/login" class="btn btn-danger" title="Logout"><i class="fa fa-exclamation-circle fa-2x"></i></a>
+            <a href="#" class="btn btn-info" title="New Message"><b>15 </b><i class="fa fa-envelope-o fa-2x"></i></a>
+            <a href="#" class="btn btn-primary" title="New Task"><b>9 </b><i class="fa fa-bars fa-2x"></i></a>
+            <small onclick="logout()"><a href="#" class="btn btn-danger" title="Logout"><i class="fa fa-exclamation-circle fa-2x"></i></a></small>
 
         </div>
     </nav>
     <!-- /. NAV TOP  -->
-    <nav class="navbar-default navbar-side" role="navigation">
+    <nav class="navbar-default navbar-side" role="navigation" style="background-color: #afd9ee">
         <div class="sidebar-collapse">
             <ul class="nav" id="main-menu">
                 <li>
@@ -71,7 +71,6 @@
                                 <span th:case="3">考生</span>
                              </th:block>
                             <br />
-                            <small onclick="logout()">注销</small>
                         </div>
                     </div>
 
