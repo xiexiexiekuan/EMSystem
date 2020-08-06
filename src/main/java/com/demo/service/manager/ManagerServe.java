@@ -186,9 +186,9 @@ public class ManagerServe {
      * 报考类型
      */
 
-    public void setPublishId(int publishId) {
-        managerDao.setPublishId(publishId);
-    }
+//    public void setPublishId(int publishId) {
+//        managerDao.setPublishId(publishId);
+//    }
     /**
      * 集体报名
      */

@@ -46,14 +46,14 @@ public interface Manager {
     Integer findRoomIdByName(String roomName);
 
     //插入考场信息
-    @Insert("insert ExamRoomInformation(examRoomNum,examRoomLocate,roomId,userStatus)"+
-            "values (#{examRoomNum},#{examRoomLocate},#{roomId},#{userStatus})")
+    @Insert("insert ExamRoomInformation(examRoomNum,examRoomLocate,roomId,useStatus)"+
+            "values (#{examRoomNum},#{examRoomLocate},#{roomId},#{useStatus})")
     @Options(useGeneratedKeys=true, keyProperty="examRoomId", keyColumn="examRoomId")
     Integer insertExamRoom(ExamRoomInformation examRoomInformation);
 
     //更新考场信息
-    @Update("update ExamRoomInformation set examRoomId=#{examRoomId},examRoomNum=#{examRoomNum}," +
-            "roomId=#{roomId},RoomLocate=#{examRoomLocate},userStatus=#{userStatus}")
+    @Update("update ExamRoomInformation set examRoomNum=#{examRoomNum}," +
+            "roomId=#{roomId},examRoomLocate=#{examRoomLocate},useStatus=#{useStatus} where examRoomId=#{examRoomId}")
     Integer updateExamRoom(ExamRoomInformation examRoomInformation);
 
     //删除考场信息
@@ -109,8 +109,8 @@ public interface Manager {
     List<ApplicationInformation> findNotPay(String roomName);
 
 
-    @Update("update ApplicationInformation set publishId = ${publishId}")
-    void setPublishId(int publishId);
+//    @Update("update ApplicationInformation set publishId = ${publishId}")
+//    void setPublishId(int publishId);
 
     //插入报名信息
     @Insert("insert ApplicationInformation(userId,examineeNumber,publishId,examineePhoto,curSchool,stuType,previewStatus,applyStatus,payStatus" +

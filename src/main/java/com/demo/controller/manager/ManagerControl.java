@@ -36,7 +36,7 @@ public class ManagerControl {
     {
         List<UserInformation> userInformationList = managerService.findStudentNotEnter(publishId);
         //设置报考类型
-        managerService.setPublishId(publishId);
+        //managerService.setPublishId(publishId);
         map.put("publishId",publishId);
         map.put("userInformationList",userInformationList);
         return "/Manager/group-enter";
@@ -215,7 +215,7 @@ public class ManagerControl {
     public String toExamRoomUpdate(Map<String,Object> map,int examRoomId)
     {
         ExamRoomInformation examRoomInformation = managerService.findExamRoomById(examRoomId);
-        map.put("examRoom",examRoomInformation);
+        map.put("examRoomInformation",examRoomInformation);
         return "/Manager/exam-room-update";
     }
 
@@ -228,6 +228,7 @@ public class ManagerControl {
         Integer i = managerService.updateExamRoom(examRoomInformation);
         if(i>0) {
             map.put("msg","更新成功");
+            return examRoom(map);
         }
         map.put("msg","更新失败");
         return toExamRoomUpdate(map,examRoomInformation.getExamRoomId());
@@ -250,10 +251,10 @@ public class ManagerControl {
     {
         Integer i = managerService.addExamRoom(examRoomInformation);
         if(i>0) {
-            map.put("msg","更新成功");
+            map.put("msg","添加成功");
             return examRoom(map);
         }
-        map.put("msg","更新失败");
+        map.put("msg","添加失败");
         return toExamRoomAdd();
 
     }

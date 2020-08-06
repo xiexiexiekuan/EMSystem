@@ -10,6 +10,7 @@
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
                 <div class="panel-body">
+                    <div th:text="${msg}" style="color: red;"></div>
                     <form th:action="'/school/examRoomAdd'" method="post">
                         <div class="table-responsive">
                             <table class="table table-striped table-hover">
@@ -22,9 +23,9 @@
                                 <tbody th:object="${examRoomInformation}">
 
                                 <tr>
-                                    <td>考场人数</td>
+                                    <td>考场编号</td>
                                     <td>
-                                        <input type="text" id="examRoomNum" name="examRoomNum" class="required" placeholder="考场人数">
+                                        <input type="text" id="examRoomNum" name="examRoomNum" class="required" placeholder="考场编号">
                                     </td>
                                 </tr>
                                 <tr>

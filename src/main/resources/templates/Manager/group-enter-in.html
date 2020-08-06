@@ -2,35 +2,22 @@
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<div th:replace="common/header::header('选择集体报考类型')"></div>
+<div th:replace="common/header::header('考生报名')"></div>
 <body>
 <div id="wrapper" class="row">
     <div th:replace="common/header::nav"></div>
     <div id="page-inner">
-
             <div class="row" >
+                <div class="panel-heading">
+                    <div th:text="${msg}" style="color: red;"></div>
+                    输入已发布的考试编号
+                </div>
                 <div class="col-md-12">
                     <div class="table-responsive">
-                        <table class="table table-striped table-bordered table-hover">
-                            <thead>
-                                <tr>
-                                    <th style="width:40%;"></th>
-                                    <th> 输入考试编号(publishId)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr >
-
-                                     </td>
-                                        <form action="/school/toGroupEnter" method="get">
-                                            <input type="text" class="form-control" name="publishId" id = "publishId">
-
-                                            <button type="submit">确认</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <form action="/school/toGroupEnter" method="get">
+                            <input type="text" class="form-control" name="publishId" id = "publishId">
+                            <button type="submit">确认</button>
+                        </form>
                     </div>
                 </div>
             </div>
