@@ -264,10 +264,10 @@ public class ManagerControl {
     {
         Integer i = managerService.deleteExamRoom(examRoomId);
         if(i>0) {
-            map.put("msg","成功");
+            map.put("msg","删除成功");
             return examRoom(map);
         }
-        map.put("msg","失败");
+        map.put("msg","删除失败");
         return examRoom(map);
     }
 
@@ -286,10 +286,10 @@ public class ManagerControl {
     去更新考务老师信息页面
      */
     @RequestMapping("/toExamteacherInfoUpdate")
-    public String toExamTeacherInfoUpdate(Map<String,Object> map,int examTeacherId)
+    public String toExamTeacherInfoUpdate(Map<String,Object> map,int teacherId)
     {
-        ExamTeacher examTeacher = managerService.findExamTeacherById(examTeacherId);
-        map.put("examRoom",examTeacher);
+        ExamTeacher examTeacher = managerService.findExamTeacherById(teacherId);
+        map.put("examTeacher",examTeacher);
         return "/Manager/examteacher-info-update";
     }
 
@@ -302,6 +302,7 @@ public class ManagerControl {
         Integer i = managerService.updateExamTeacher(examTeacher);
         if(i>0) {
             map.put("msg","更新成功");
+            return examTeacherInfo(map);
         }
         map.put("msg","更新失败");
         return toExamTeacherInfoUpdate(map,examTeacher.getTeacherId());
@@ -324,10 +325,10 @@ public class ManagerControl {
     {
         Integer i = managerService.addExamTeacher(examTeacher);
         if(i>0) {
-            map.put("msg","更新成功");
+            map.put("msg","添加成功");
             return examTeacherInfo(map);
         }
-        map.put("msg","更新失败");
+        map.put("msg","添加失败");
         return toExamteacherInfoAdd();
     }
 
@@ -335,14 +336,14 @@ public class ManagerControl {
     删除考务老师信息
      */
     @RequestMapping("/examteacherInfoDelete")
-    public String examteacherInfoDelete(Map<String,Object> map,int examTeacherId)
+    public String examteacherInfoDelete(Map<String,Object> map,int teacherId)
     {
-        Integer i = managerService.deleteExamTeacher(examTeacherId);
+        Integer i = managerService.deleteExamTeacher(teacherId);
         if(i>0) {
-            map.put("msg","成功");
+            map.put("msg","删除成功");
             return examTeacherInfo(map);
         }
-        map.put("msg","失败");
+        map.put("msg","删除失败");
         return examTeacherInfo(map);
     }
 }
