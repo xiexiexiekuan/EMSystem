@@ -250,8 +250,9 @@ public class AdminControl {
     {
         List<ApplicationInformation> gradesInfo = adminServe.findAllGradesInfo();
         for(int i=0; i<gradesInfo.size(); i++){
-            int isViolate = adminServe.findViolationInfoByUserId(gradesInfo.get(i).getUserId());//依次查找每个学生是否有违规记录
-            gradesInfo.get(i).setPayStatus(isViolate);//ExamStatus原为开考状态，在这里用为是否违规
+            Integer isViolate = adminServe.findViolationInfoByUserId(gradesInfo.get(i).getUserId());//依次查找每个学生是否有违规记录
+            if(isViolate==null) gradesInfo.get(i).setPayStatus(0);//ExamStatus原为开考状态，在这里用为是否违规
+            else gradesInfo.get(i).setPayStatus(1);
         }
         List<ExamType> examMenu = adminServe.findExamMenu();
         map.put("examMenu",examMenu);

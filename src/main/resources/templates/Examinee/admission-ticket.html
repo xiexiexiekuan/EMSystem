@@ -7,6 +7,7 @@
 <div id="wrapper" class="row">
     <div th:replace="common/header::nav"></div>
     <div id="page-inner">
+        <h1 class="page-head-line">打印准考证</h1>
         <th:block th:if="${#lists.size(admissionTicket)>0}">
             <!--可以打印-->
             <div class="row" >
