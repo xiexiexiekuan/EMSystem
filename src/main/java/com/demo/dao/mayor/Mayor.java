@@ -1,9 +1,6 @@
 package com.demo.dao.mayor;
 
-import com.demo.entity.exam.ApplicationInformation;
-import com.demo.entity.exam.RoomManage;
-import com.demo.entity.exam.UserInformation;
-import com.demo.entity.exam.ViolationInfo;
+import com.demo.entity.exam.*;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
@@ -21,6 +18,9 @@ public interface Mayor {
 
     @Select("select * from RoomManage where roomId = #{roomId}")
     public RoomManage findRoomManageById(int roomId);
+
+    @Select("select * from RoomManage where roomName = #{name}")
+    public RoomManage findRoomManageByName(String name);
 
     @Update("update RoomManage set roomAddress=#{roomAddress},roomNumber=#{roomNumber},numberStart=#{numberStart},numberEnd=#{numberEnd} where roomId=#{roomId}")
     public Integer updateRoomManage(RoomManage roomManage);
@@ -44,4 +44,16 @@ public interface Mayor {
 
     @Update("update ApplicationInformation set previewStatus=#{status} where enterId=#{enterId}")
     public Integer updatePreview(int enterId, int status);
+
+    @Select("select * from ExamRoomInformation")
+    public List<ExamRoomInformation> findAllExamRoomInformation();
+
+    @Update("update ExamRoomInformation set useStatus=#{status} where examRoomId=#{examRoomId}")
+    public Integer updateExamRoom(int examRoomId, int status);
+
+    @Select("select * from ExamTeacher")
+    public List<ExamTeacher> findAllExamTeacher();
+
+    @Update("update ExamTeacher set examRoomId=#{examRoomId} where teacherId=#{teacherId}")
+    public Integer updateExamTeacher(int teacherId, int examRoomId);
 }

@@ -102,8 +102,8 @@ public class MayorControl {
      输出：考点，考场，学生座位分配
      */
     @RequestMapping("/examRoomManage")
-    public String examRoomManage(int examRoomId, int useStatus, Map<String,Object> map) {
-        Integer i = mayorServe.updateExamRoom(examRoomId,useStatus);
+    public String examRoomManage(int examRoomId, Map<String,Object> map) {
+        Integer i = mayorServe.updateExamRoom(examRoomId);
         if(i>0){
             map.put("msg","考场安排成功！");
             return toExamRoomManage(map);
@@ -118,6 +118,34 @@ public class MayorControl {
    */
     @RequestMapping("/admitTicket")
     public String admitTicket(Map<String,Object> map) {
+        List<ApplicationInformation> admit = mayorServe.findAllApplicationInfo();
+        for(int i=0; i<admit.size(); i++) {
+            String ticket = "1600"+"00"+"00"+"00"+"00";
+            ApplicationInformation temp = admit.get(i);
+            String ticket0 = temp.getUserId()<10?"0"+temp.getUserId():String.valueOf(temp.getUserId());
+
+            String ticket1;
+            RoomManage room = mayorServe.findRoomManageByName(temp.getCurSchool());
+            if(room!=null){
+                ticket1=room.getRoomId()<10?"0"+room.getRoomId():String.valueOf(room.getRoomId());
+            }
+            else ticket1="08";
+
+            long l = System.currentTimeMillis();
+            int a = (int)( l % 30 )+1;
+            String ticket2=a<10?"0"+a:String.valueOf(a);
+
+            l = System.currentTimeMillis();
+            a = (int)( l % 30 )+1;
+            String ticket3=a<10?"0"+a:String.valueOf(a);
+
+            l = System.currentTimeMillis();
+            a = (int)( l % 98 )+1;
+            String ticket4=a<10?"0"+a:String.valueOf(a);
+
+            ticket="16"+ticket0+ticket1+ticket2+ticket3+ticket4;
+            temp.setExamineeNumber(ticket);
+        }
 
         return toExamRoomManage(map);
     }
