@@ -35,15 +35,15 @@
                                 <td th:if="${u.applyStatus}==1">已审核</td>
                             </tr>
                         </th:block>
-                        <tr th:unless="${#lists.size(applicationInformationList)>0}">
 
-                        </tr>
                         </tbody>
                     </table>
 
-                    <button class="btn btn-warning">
-                        <a href="/school/groupApply" style="color:white;">集体报名</a>
-                    </button>
+                    <tr th:if="${#lists.size(applicationInformationList)>0}">
+                        <button class="btn btn-warning">
+                            <a href="/school/groupApply" style="color:white;">集体报考</a>
+                        </button>
+                    </tr>
 
                 </div>
             </div>
