@@ -2,6 +2,7 @@
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
+<div th:replace="common/header::header('考场')"></div>
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -21,27 +22,27 @@
                             <th>考场编号</th>
                             <th>考场人数</th>
                             <th>考场位置</th>
-                            <th>所属院校</th>
                             <th>启用状态</th>
 
                         </tr>
                         </thead>
                         <tbody>
-                        <th:block th:each="u:${userInformationList}">
+                        <th:block th:each="e:${examRoomList}">
                             <tr >
-                                <td th:text="${u.examRoomId}"></td>
-                                <td th:text="${u.examRoomNum}"></td>
-                                <td th:text="${u.examRoomLocate}"></td>
-                                <td th:text="${u.roomId}"></td>
-                                <td th:text="${u.useStatus}"></td>
+                                <td th:text="${e.examRoomId}"></td>
+                                <td th:text="${e.examRoomNum}"></td>
+                                <td th:text="${e.examRoomLocate}"></td>
+
+                                <td th:text="${e.useStatus}"></td>
 
                             </tr>
                         </th:block>
-                        <tr th:unless="${#lists.size(userInformationList)>0}">
+                        <tr th:unless="${#lists.size(examRoomList)>0}">
                             <td colspan="3">未查询到已发布考场信息！</td>
                         </tr>
                         </tbody>
                     </table>
+                    <a href="/school/toExamRoomAdd" class="btn btn-info">添加考场信息</a>
                 </div>
             </div>
         </div>

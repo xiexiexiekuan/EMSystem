@@ -16,6 +16,10 @@ public class ManagerServe {
     private Manager managerDao;
 
 
+    //
+    public List<ApplicationInformation> findApplicationInformation() {
+        return managerDao.findApplicationInformation();
+    }
     /**
      * 查找所有白名单
      */
@@ -142,10 +146,10 @@ public class ManagerServe {
     /**
      * 查找未报名的本院校学生
      */
-    public List<UserInformation> findStudentNotEnter() {
+    public List<UserInformation> findStudentNotEnter(int publishId) {
         //获得所在院校
         String roomName = UrlController.currentUser.getInstitute();
-        return managerDao.findStudentNotEnter(roomName);
+        return managerDao.findStudentNotEnter(publishId,roomName);
     }
 
     /**
@@ -188,12 +192,12 @@ public class ManagerServe {
     /**
      * 集体报名
      */
-    public Integer groupEnter() {
+    public Integer groupEnter(int publishId) {
         //获得所在院校
         String roomName = UrlController.currentUser.getInstitute();
 
         //应用型考生
-        List<UserInformation> studentList = managerDao.findStudentNotEnter(roomName);
+        List<UserInformation> studentList = managerDao.findStudentNotEnter(publishId,roomName);
         for (UserInformation student : studentList) {
             ApplicationInformation applicationInformation = new ApplicationInformation();
             applicationInformation.setUserId(student.getUserId());

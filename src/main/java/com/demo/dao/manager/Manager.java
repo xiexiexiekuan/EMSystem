@@ -9,6 +9,9 @@ import java.util.List;
 @Repository
 public interface Manager {
 
+    //报考信息
+    @Select("select * from ApplicationInformation")
+    List<ApplicationInformation> findApplicationInformation();
     //所有白名单
     @Select("select * from Whitelist")
     List<Whitelist> findAllWhiteList();
@@ -87,9 +90,8 @@ public interface Manager {
 
     //查找本院校的所有未报名学生
     @Select("select * from UserInformation where UserInformation.userId not in (select distinct userId from ApplicationInformation" +
-            "where publishId = #{publishId})" +
-            " and role = '3'  and institute = #{roomName}")
-    List<UserInformation> findStudentNotEnter(String roomName);
+            " where publishId = #{publishId}) and role = 3  and institute = #{roomName}")
+    List<UserInformation> findStudentNotEnter(int publishId, String roomName);
 
     //查找审核状态
     @Select("select UserInformation.*,ApplicationInformation.previewStatus from UserInformation ,ApplicationInformation where UserInformation.userId = ApplicationInformation.userId" +
