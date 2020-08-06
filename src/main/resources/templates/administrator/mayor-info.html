@@ -42,14 +42,14 @@
                                         <td th:text="*{certificateId}">1</td>
                                         <td th:text="*{institute}">1</td>
                                         <td>
-                                            <a th:href="'/userInfo/toUserInfoUpdate?userId='+*{userId}">修改</a>
-                                            <a th:href="'/userInfo/userInfoDelete?userId='+*{userId}">删除</a>
+                                            <a th:href="'/userInfo/toUserInfoUpdate?userId='+*{userId}" class="btn btn-primary">修改</a>
+                                            <a th:href="'/userInfo/userInfoDelete?userId='+*{userId}" class="btn btn-danger">删除</a>
                                         </td>
                                     </tr>
                                 </th:block>
                                 </tbody>
                             </table>
-                            <a href="/userInfo/toUserInfoAdd">添加市州人员信息</a>
+                            <a href="/userInfo/toUserInfoAdd" class="btn btn-info">添加市州人员信息</a>
                         </div>
                     </div>
                 </div>

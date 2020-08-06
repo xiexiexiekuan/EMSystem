@@ -162,12 +162,12 @@ public class ManagerControl {
     添加白名单信息
      */
     @RequestMapping("/whitelistAdd")
-    public String whitelistAdd(Map<String,Object> map,int UserID)
+    public String whitelistAdd(Map<String,Object> map,int userId,String number)
 
     {
-        Integer i = managerService.addWhiteList(UserID);
+        Integer i = managerService.addWhiteList(userId);
         if(i>0){
-            map.put("mag","添加成功！");
+            map.put("msg","添加成功！");
             return whitelist(map);
         }
         map.put("msg","添加失败！");
@@ -182,10 +182,10 @@ public class ManagerControl {
     {
         Integer i = managerService.deleteWhiteList(listId);
         if(i>0){
-            map.put("mag","添加成功！");
+            map.put("msg","删除成功！");
             return whitelist(map);
         }
-        map.put("msg","添加失败！");
+        map.put("msg","删除失败！");
         return whitelist(map);
     }
 

@@ -37,8 +37,8 @@
                                 <td th:text="${j.paperCode}"></td>
                                 <td th:text="${j.paperNum}"></td>
                                 <td>
-                                    <a th:href="'/examOffice/toTestPaperPlanUpdate?planCode='+${j.planCode}">修改</a>
-                                    <a th:href="'/examOffice/testPaperPlanDelete?planCode='+${j.planCode}">删除</a>
+                                    <a th:href="'/examOffice/toTestPaperPlanUpdate?planCode='+${j.planCode}" class="btn btn-primary">修改</a>
+                                    <a th:href="'/examOffice/testPaperPlanDelete?planCode='+${j.planCode}" class="btn btn-danger">删除</a>
                                 </td>
                             </tr>
                         </th:block>
@@ -47,7 +47,7 @@
                         </tr>
                         </tbody>
                     </table>
-                    <a href="/examOffice/toTestPaperPlanAdd">添加评卷信息</a>
+                    <a href="/examOffice/toTestPaperPlanAdd" class="btn btn-info">添加评卷信息</a>
                 </div>
             </div>
 
