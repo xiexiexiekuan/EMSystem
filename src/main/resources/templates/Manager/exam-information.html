@@ -13,36 +13,35 @@
                     <table class="table table-striped table-bordered table-hover">
                         <thead>
                         <tr>
-                            <th>发布编码</th>
-                            <th>考试类型编码</th>
-                            <th>报名开始时间</th>
-                            <th>报名截止时间</th>
-                            <th>报考开始时间</th>
-                            <th>报考结束时间</th>
-                            <th>现场确认开始时间</th>
-                            <th>现场确认截止时间</th>
-                            <th>打印准考证开始时间</th>
-                            <th>打印准考证结束时间</th>
-                            <th>操作人</th>
-                            <th>发布时间</th>
-                            <th>报考开始时间</th>
+                            <th>报考编号</th>
+                            <th>考生编号</th>
+                            <th>准考证号</th>
+                            <th>考试编号</th>
+                            <th>考生学校</th>
+                            <th>考生类型</th>
+                            <th>报考院校</th>
+                            <th>审核状态</th>
+                            <th>报考状态</th>
+                            <th>缴费状态</th>
+                            <th>开考状态</th>
+                            <th>成绩</th>
                         </tr>
                         </thead>
                         <tbody>
                         <th:block th:each="u:${userInformationList}">
                             <tr >
-                                <td th:text="${u.publishId}"></td>
-                                <td th:text="${u.typeId}"></td>
-                                <td th:text="${u.registrationStarts}"></td>
-                                <td th:text="${u.registrationDeadline}"></td>
-                                <td th:text="${u.applyStarts}"></td>
-                                <td th:text="${u.applyDeadline}"></td>
-                                <td th:text="${u.confirmationStarts}"></td>
-                                <td th:text="${u.confirmationDeadline}"></td>
-                                <td th:text="${u.admissioncardPrintStarts}"></td>
-                                <td th:text="${u.admissioncardPrintDeadline}"></td>
+                                <td th:text="${u.enterId}"></td>
                                 <td th:text="${u.userId}"></td>
-                                <td th:text="${u.publishTime}"></td>
+                                <td th:text="${u.examineeNumber}"></td>
+                                <td th:text="${u.publishId}"></td>
+                                <td th:text="${u.curSchool}"></td>
+                                <td th:text="${u.stuType}"></td>
+                                <td th:text="${u.wantSchool}"></td>
+                                <td th:text="${u.previewStatus}"></td>
+                                <td th:text="${u.applyStatus}"></td>
+                                <td th:text="${u.payStatus}"></td>
+                                <td th:text="${u.examStatus}"></td>
+                                <td th:text="${u.grades}"></td>
                             </tr>
                         </th:block>
                         <tr th:unless="${#lists.size(userInformationList)>0}">
