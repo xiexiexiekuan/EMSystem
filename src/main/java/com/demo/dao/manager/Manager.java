@@ -100,7 +100,7 @@ public interface Manager {
 
     //查找本院校所有审核通过的学生
     @Select("select * from ApplicationInformation where ApplicationInformation.userId in (select userId from UserInformation where" +
-            " role = 3  and institute = #{roomName}) and previewStatus = 1 ")
+            " role = 3  and institute = #{roomName}) and applyStatus = 0 and previewStatus = 1 ")
     List<ApplicationInformation> findPassPreview(String roomName);
 
     @Select("select * from ApplicationInformation where ApplicationInformation.userId in (select userId from UserInformation where" +

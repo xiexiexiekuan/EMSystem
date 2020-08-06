@@ -30,8 +30,8 @@ public interface Examinee {
     @Select("select * from Whitelist where userId=#{userId}")
     public Integer findWhitelistHaveStu(int userId);
 
-    @Insert("insert ApplicationInformation(userId,examineeNumber,publishId,examineePhoto,curSchool,stuType,previewStatus,applyStatus,payStatus" +
-            ",examStatus) values(#{userId},#{examineeNumber},#{publishId},#{examineePhoto},#{curSchool},#{stuType},#{previewStatus}" +
+    @Insert("insert ApplicationInformation(userId,examineeNumber,publishId,curSchool,stuType,previewStatus,applyStatus,payStatus" +
+            ",examStatus) values(#{userId},#{examineeNumber},#{publishId},#{curSchool},#{stuType},#{previewStatus}" +
             ",#{applyStatus},#{payStatus},#{examStatus})")
     @Options(useGeneratedKeys=true, keyProperty="enterId", keyColumn="enterId")
     public Integer addApplicationInformation(ApplicationInformation applicationInfo);

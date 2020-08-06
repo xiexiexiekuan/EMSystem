@@ -49,8 +49,8 @@ public class ExamineeControl extends BaseController {
     /*
     选择一个考试去报名
      */
-    @RequestMapping("/toSignUp")
-    public String toSignUp(HttpServletRequest request, int typeId, Map<String,Object> map)
+    @RequestMapping(method = RequestMethod.GET, value = "/toSignUp")
+    public String toSignUp(HttpServletRequest request, @RequestParam("typeId") int typeId, Map<String,Object> map)
     {
         UserInformation studentInfo = UrlController.currentUser;//获取考生当前信息
         PublishExam publishExam = examineeServe.findPublishExamByTypeId(typeId);
@@ -66,6 +66,7 @@ public class ExamineeControl extends BaseController {
     @RequestMapping("/signUp")
     public String signUp(ApplicationInformation applicationInfo, Map<String,Object> map)
     {
+        System.out.println("考生："+applicationInfo.getStuType());
         if(applicationInfo.getStuType().equals("应用型")){
             Integer i = examineeServe.findWhitelistHaveStu(applicationInfo.getUserId());
             if(i!=1){
