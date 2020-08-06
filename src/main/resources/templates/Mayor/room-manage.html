@@ -3,56 +3,10 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <div th:replace="common/header::header('考试列表')"></div>
-<!--<script>-->
-<!--    function getAreaList() {-->
-<!--        $.ajax({-->
-<!--            type: "post",-->
-<!--            url: "/erems/admin/areaList",    //url根据自己的项目实际定义-->
-<!--            async: false,-->
-<!--            dataType: "text",-->
-<!--            error: function () {-->
-<!--                alert("系统忙，请稍后再试！");-->
-<!--                return false;-->
-<!--            },-->
-<!--            success: function (text) {-->
-<!--                var expressExam = $("#sarea");-->
-<!--                var str = '';-->
-<!--                var data = eval("(" + text + ")");-->
-<!--                expressExam.empty();-->
-<!--                for (var o in data) {-->
-<!--                    if(data[o].id==0) {-->
-<!--                        str += '<option value="">' + data[o].province + data[o].city + '</option>';-->
-<!--                    }else {-->
-<!--                        str += '<option value="' + data[o].id + '">' + data[o].province + data[o].city + '</option>';-->
-<!--                    }-->
-<!--                }-->
-<!--                expressExam.append(str);-->
-<!--            }-->
-<!--        });-->
-<!--    }-->
-<!--</script>-->
-<body onload="getAreaList()">
+<body>
 <div id="wrapper" class="row">
     <div th:replace="common/header::nav"></div>
     <div id="page-inner">
-<!--        <div class="row">-->
-<!--            <div class="col-md-10 col-md-offset-1">-->
-<!--                <form role="form" action="/erems/admin/search" method="post">-->
-<!--                    <div class="form-group">-->
-<!--                        <label for="sname">考点名</label>-->
-<!--                        <input type="text" name="sname" id="sname" />-->
-<!--                        <label for="sarea">考点区域</label>-->
-<!--                        <select id="sarea" name="sarea">-->
-<!--                            <option value="">全部</option>-->
-<!--                        </select>-->
-<!--                    </div>-->
-<!--                    <div class="form-group">-->
-<!--                        <button type="submit" class="btn btn-primary">查询</button>-->
-<!--                    </div>-->
-<!--                </form>-->
-<!--            </div>-->
-<!--        </div>-->
-        <!-- /. ROW  -->
         <div class="row">
             <div class="panel-heading">
                 <div th:text="${msg}" style="color: red;"></div>

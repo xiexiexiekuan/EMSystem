@@ -11,7 +11,7 @@
             <div class="panel-heading">
                 <div th:text="${msg}" style="color: red;"></div>
                 <h1 class="page-head-line">现场审核</h1>
-                <h1 class="page-subhead-line">请对考生资格进行审核</h1>
+                <h1 class="page-subhead-line">请对考生资格进行审核（-1未审核   0审核不通过    1审核通过）</h1>
             </div>
             <div class="col-md-12">
                 <div class="table-responsive">
@@ -21,10 +21,10 @@
                         <tr>
                             <th>报名编号</th>
                             <th>考生编号</th>
+                            <th>考生姓名</th>
                             <th>考试编号</th>
                             <th>考生学校</th>
                             <th>考生类型</th>
-                            <th>缴费状态</th>
                             <th>审核状态</th>
                             <th>操作</th>
 
@@ -35,25 +35,25 @@
                             <tr >
                                 <td th:text="${v.enterId}"></td>
                                 <td th:text="${v.userId}"></td>
+                                <td th:text="${v.examineeNumber}"></td>
                                 <td th:text="${v.publishId}"></td>
                                 <td th:text="${v.curSchool}"></td>
                                 <td th:text="${v.stuType}"></td>
                                 <td th:text="${v.previewStatus}"></td>
-                                <td th:text="${v.payStatus}"></td>
-                                <td th:if="${v.previewStatus}==0">
-                                    <form action="/mayor/toPreview" method="post">
+                                <td th:if="${v.previewStatus}==-1">
+                                    <form action="/mayor/preview" method="post">
                                         <input type="hidden" class="form-control" name="enterId" th:value="${v.enterId}"/>
-                                        审核结果:<input type="text" class="form-control" name="previewStatus" />
+                                        审核结果:<input type="text" class="form-control" name="status" />
                                         <button type="submit">提交审核结果</button>
                                     </form>
                                 </td>
-                                <td th:unless="${v.previewStatus}==0">
+                                <td th:unless="${v.previewStatus}==-1">
                                     <button >已审核</button>
                                 </td>
                             </tr>
                         </th:block>
                         <tr th:unless="${#lists.size(preview)>0}">
-                            <td colspan="3">未查询到学生报考信息！</td>
+                            <td colspan="3">未查询到学生报名信息！</td>
                         </tr>
                         </tbody>
                     </table>

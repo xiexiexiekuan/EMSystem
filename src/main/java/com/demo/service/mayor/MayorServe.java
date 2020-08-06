@@ -75,7 +75,7 @@ public class MayorServe {
      */
     public Integer addViolationInfo(ViolationInfo violationInfo){
         violationInfo.setPreviewStatus(0);
-        violationInfo.setReportMan(UrlController.currentUser.getPrimaryKey());
+        violationInfo.setReportMan(UrlController.currentUser.getUserName());
         Date date = new Date();
         Timestamp timeStamp = new Timestamp(date.getTime());
         violationInfo.setReportTime(timeStamp);

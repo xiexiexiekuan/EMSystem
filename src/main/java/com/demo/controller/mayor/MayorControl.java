@@ -183,7 +183,7 @@ public class MayorControl {
      */
     @RequestMapping("/toReportViolate")
     public String toReportViolate() {
-        return "/Mayor/report-violate";
+        return "Mayor/report-violate";
     }
 
     /**
@@ -209,7 +209,7 @@ public class MayorControl {
     public String violateInfo(Map<String,Object> map) {
         List<ViolationInfo> violationInfo = mayorServe.findAllViolationInfo();
         map.put("violationInfo",violationInfo);
-        return "/Mayor/violate-info";
+        return "Mayor/violate-info";
     }
 
     /**
@@ -223,7 +223,7 @@ public class MayorControl {
             preview.get(i).setExamineeNumber(user.getUserName());//做个替换
         }
         map.put("preview",preview);
-        return "/Mayor/preview";
+        return "Mayor/preview";
     }
 
     /**
