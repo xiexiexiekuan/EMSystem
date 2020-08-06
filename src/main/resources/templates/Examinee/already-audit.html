@@ -21,6 +21,7 @@
                             <th>考试名称</th>
                             <th>准考证号</th>
                             <th>状态</th>
+                            <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -28,14 +29,16 @@
                             <tr >
                                 <td th:text="${a.examineePhoto}">1</td>
                                 <td th:text="${a.getExamineeNumber()}">1</td>
-                                <td th:if="${a.examStatus}==1">已审核</td>
-                                <td>
+                                <td th:if="${a.previewStatus}==1">审核通过</td>
+                                <td th:unless="${a.previewStatus}==1">审核失败</td>
+                                <td th:if="${a.previewStatus}==1">
                                     <form action="/student/confirmApply" method="post">
                                         <input type="hidden" class="form-control" name="enterId" th:value="${a.enterId}"/>
                                         报考院校:<input type="text" class="form-control" name="wantSchool" />
                                         <button type="submit">确认报考</button>
                                     </form>
                                 </td>
+                                <td th:unless = "${a.previewStatus}==1">无法报考</td>
                             </tr>
                         </th:block>
                         </tbody>
