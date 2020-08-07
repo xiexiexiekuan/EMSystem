@@ -70,6 +70,13 @@ public class MayorServe {
     }
 
     /*
+        查询所有违纪编码库
+       */
+    public List<ViolationsCode> findAllViolationsCode(){
+        return mayor.findAllViolationsCode();
+    }
+
+    /*
     上报违纪信息
      */
     public Integer addViolationInfo(ViolationInfo violationInfo){
