@@ -214,6 +214,16 @@ public class MayorControl {
         return toReportViolate();
     }
 
+    /*
+   违纪编码库查询
+    */
+    @RequestMapping("violateCode")
+    public String violateCode(Map<String,Object> map){
+        List<ViolationsCode> violationsCode = mayorServe.findAllViolationsCode();
+        map.put("violationsCode",violationsCode);
+        return "administrator/violate-code";
+    }
+
     /**
      * 违规信息查询
      * @return
