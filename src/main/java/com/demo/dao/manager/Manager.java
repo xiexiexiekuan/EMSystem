@@ -76,7 +76,7 @@ public interface Manager {
 
     //更新考务老师信息
     @Update("update ExamTeacher set teacherName=#{teacherName},sex=#{sex},age=#{age},phone=#{phone}," +
-            "position=#{position},roomId=#{roomId} where teacherId=#{teacherId}")
+            "position=#{position} where teacherId=#{teacherId}")
     Integer updateExamTeacher(ExamTeacher examTeacher);
 
     //删除考务老师信息

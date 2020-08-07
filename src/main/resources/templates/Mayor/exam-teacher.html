@@ -10,7 +10,7 @@
         <div class="row">
             <div class="panel-heading">
                 <div th:text="${msg}" style="color: red;"></div>
-                违规情况管理表
+                监考人员情况管理表
             </div>
             <div class="col-md-12">
                 <div class="table-responsive">
@@ -38,6 +38,8 @@
                                 <td th:text="${e.phone}"></td>
                                 <td th:text="${e.position}"></td>
                                 <td th:text="${e.roomId}"></td>
+                                <td th:if="${e.examRoomId}==0">未分配考场</td>
+                                <td th:unless="${e.examRoomId}==0" th:text="${e.examRoomId}"></td>
                                 <td th:if="${e.examRoomId}==0">
                                     <form action="/mayor/examTeacher" method="post">
                                         <input type="hidden" class="form-control" name="teacherId" th:value="${e.teacherId}"/>
