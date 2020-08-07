@@ -18,6 +18,7 @@
                             <thead>
                             <tr>
                                 <th>考试编号</th>
+                                <th>考试名称</th>
                                 <th>操作</th>
 
                             </tr>
@@ -26,6 +27,7 @@
                             <th:block th:each="a:${applicationInfo}">
                                 <tr >
                                     <td th:text="${a.publishId}">1</td>
+                                    <td th:text="${a.examineePhoto}">1</td>
                                     <td><a th:href="'/student/payForExam?enterId='+${a.enterId}">继续支付</a></td>
                                 </tr>
                             </th:block>
@@ -35,7 +37,7 @@
                 </div>
             </div>
         </th:block>
-            <!-- /. ROW  -->
+        <!-- /. ROW  -->
 
         <!--我的考试不存在时显示-->
         <th:block th:unless="${#lists.size(applicationInfo)>0}">
