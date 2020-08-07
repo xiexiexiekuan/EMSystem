@@ -138,6 +138,12 @@ public class MayorServe {
         return mayor.updateExamTeacher(teacherId,examRoomId);
     }
 
+    //查找考务人员所在考场
+    public String findExamName(int roomId){
+        String room = mayor.findRoomName(roomId);
+        return room;
+    }
+
     /*
     更新准考证号
      */

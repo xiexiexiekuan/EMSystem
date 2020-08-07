@@ -29,7 +29,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <th:block th:each="e:${examTeacher}">
+                        <th:block th:each="e,eStat:${examTeacher}">
                             <tr >
                                 <td th:text="${e.teacherId}"></td>
                                 <td th:text="${e.teacherName}"></td>
@@ -37,7 +37,7 @@
                                 <td th:text="${e.age}"></td>
                                 <td th:text="${e.phone}"></td>
                                 <td th:text="${e.position}"></td>
-                                <td th:text="${e.roomId}"></td>
+                                <td th:text="${roomNameList[eStat.index]}"></td>
                                 <td th:if="${e.examRoomId}==0">未分配考场</td>
                                 <td th:unless="${e.examRoomId}==0" th:text="${e.examRoomId}"></td>
                                 <td th:if="${e.examRoomId}==0">

@@ -120,11 +120,11 @@ public interface Manager {
     Integer insertEnter(ApplicationInformation applicationInformation);
 
     //更新报考信息
-    @Update("update ApplicationInformation set applyStatus=1 where userId=#{userId}")
+    @Update("update ApplicationInformation set applyStatus=1 where enterId=#{enterId}")
     Integer updateApply(int enterId);
 
     //更新缴费信息
-    @Update("update ApplicationInformation set payStatus=1 where userId=#{userId}")
+    @Update("update ApplicationInformation set payStatus=1 where enterId=#{enterId}")
     Integer updatePay(int enterId);
 
 

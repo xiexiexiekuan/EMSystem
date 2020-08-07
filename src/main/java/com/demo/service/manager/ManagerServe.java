@@ -101,6 +101,7 @@ public class ManagerServe {
         return managerDao.deleteExamRoom(examRoomId);
     }
 
+
     /**
      * 显示所有考务人员
      */
@@ -200,6 +201,7 @@ public class ManagerServe {
         List<UserInformation> studentList = managerDao.findStudentNotEnter(publishId,roomName);
         for (UserInformation student : studentList) {
             ApplicationInformation applicationInformation = new ApplicationInformation();
+            applicationInformation.setPublishId(publishId);
             applicationInformation.setUserId(student.getUserId());
             applicationInformation.setExamineeNumber("000");
             applicationInformation.setExamineePhoto(student.getPhoto());

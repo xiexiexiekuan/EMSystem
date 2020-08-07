@@ -57,6 +57,9 @@ public interface Mayor {
     @Select("select * from ExamTeacher")
     public List<ExamTeacher> findAllExamTeacher();
 
+    @Select("select roomName from RoomManage where roomId = #{roomId} ")
+    public String findRoomName(int roomId);
+
     @Update("update ExamTeacher set examRoomId=#{examRoomId} where teacherId=#{teacherId}")
     public Integer updateExamTeacher(int teacherId, int examRoomId);
 

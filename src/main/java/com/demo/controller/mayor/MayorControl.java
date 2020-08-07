@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -169,7 +170,14 @@ public class MayorControl {
      */
     @RequestMapping("/toExamTeacher")
     public String toExamTeacher(Map<String,Object> map) {
+        List<String> roomNameList = new ArrayList<>();
+
         List<ExamTeacher> examTeacher = mayorServe.findAllExamTeacher();
+        for(ExamTeacher e:examTeacher) {
+            String roomName = mayorServe.findExamName(e.getRoomId());
+            if (roomName!=null) roomNameList.add(roomName);
+        }
+        map.put("roomNameList",roomNameList);
         map.put("examTeacher",examTeacher);
         return "/Mayor/exam-teacher";
     }
