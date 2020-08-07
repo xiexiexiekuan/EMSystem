@@ -42,8 +42,11 @@
 <!--                                        <button type="submit">提交审核结果</button>-->
 <!--                                    </form>-->
 <!--                                </td>-->
-                                <td th:unless="${e.useStatus}==0">
+                                <td th:if="${e.useStatus}==0">
                                     <button >启用</button>
+                                </td>
+                                <td th:unless="${e.useStatus}==0">
+                                     已启用
                                 </td>
                             </tr>
                         </th:block>
