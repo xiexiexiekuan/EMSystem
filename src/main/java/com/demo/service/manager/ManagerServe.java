@@ -202,6 +202,7 @@ public class ManagerServe {
             ApplicationInformation applicationInformation = new ApplicationInformation();
             applicationInformation.setUserId(student.getUserId());
             applicationInformation.setExamineeNumber("000");
+            applicationInformation.setPublishId(publishId);
             applicationInformation.setExamineePhoto(student.getPhoto());
             applicationInformation.setCurSchool(roomName);
             applicationInformation.setStuType("0"); //应用型考生
