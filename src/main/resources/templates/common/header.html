@@ -7,16 +7,21 @@
     <title><th:block th:text="${title}"></th:block></title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    
     <!-- BOOTSTRAP STYLES-->
     <link href="/res/assets/css/bootstrap.css" rel="stylesheet" />
+    <!--Time Picker-->
+    <link href="/res/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
     <!-- FONTAWESOME STYLES-->
     <link href="/res/assets/css/font-awesome.css" rel="stylesheet" />
     <!--CUSTOM BASIC STYLES-->
     <link href="/res/assets/css/basic.css" rel="stylesheet" />
+    <!--CUSTOM MAIN STYLES-->
+    <link href="/res/assets/css/custom.css" rel="stylesheet" />
+    <!-- GOOGLE FONTS-->
+    <!--<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />-->
     <!-- ECharts SCRIPTS -->
     <script src="/res/js/echarts.js"></script>
-
     <script>
         function change(url){
             $('#page-inner').load(url)
@@ -30,19 +35,22 @@
     </script>
 </head>
 <body>
-<div id="nav" th:fragment="nav">
+<div id="nav" th:fragment="nav" style="background-color: #C6E746">
     <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/index">考试报名及考务管理系统</a>
+            <a class="navbar-brand" href="#">考试报名及考务管理系统</a>
         </div>
 
         <div class="header-right">
 
-            <button type="button" class="btn btn-danger" onclick="logout()">退出</button>
+            <a href="#" class="btn btn-info" title="New Message"><b>15 </b><i class="fa fa-envelope-o fa-2x"></i></a>
+            <a href="#" class="btn btn-primary" title="New Task"><b>9 </b><i class="fa fa-bars fa-2x"></i></a>
+            <small onclick="logout()"><a href="#" class="btn btn-danger" title="Logout"><i class="fa fa-exclamation-circle fa-2x"></i></a></small>
+
         </div>
     </nav>
     <!-- /. NAV TOP  -->
-    <nav class="navbar-default navbar-side" role="navigation">
+    <nav class="navbar-default navbar-side" role="navigation" style="background-color: #afd9ee">
         <div class="sidebar-collapse">
             <ul class="nav" id="main-menu">
                 <li>
@@ -63,7 +71,6 @@
                                 <span th:case="3">考生</span>
                              </th:block>
                             <br />
-                            <small onclick="logout()">注销</small>
                         </div>
                     </div>
 
@@ -205,6 +212,9 @@
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="/mayor/toReportViolate"><i class="fa fa-toggle-on"></i>上报违纪情况</a>
+                            </li>
+                            <li>
+                                <a href="/mayor/violateCode"><i class="fa fa-bell "></i>违纪编码库</a>
                             </li>
                             <li>
                                 <a href="/mayor/violateInfo"><i class="fa fa-bell "></i>违纪情况查询</a>

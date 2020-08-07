@@ -28,6 +28,9 @@ public interface Mayor {
     @Delete("delete from RoomManage where roomId=#{roomId}")
     public Integer deleteRoomManage(int roomId);
 
+    @Select("select * from ViolationsCode")
+    public List<ViolationsCode> findAllViolationsCode();
+
     @Select("select * from ViolationInfo")
     public List<ViolationInfo> findAllViolationInfo();
 

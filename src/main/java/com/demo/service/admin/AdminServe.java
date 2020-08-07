@@ -70,7 +70,7 @@ public class AdminServe {
     发布一场考试
      */
     public Integer publishExam(PublishExam exam){
-        exam.setUserId(UrlController.currentUser.getPrimaryKey());
+        exam.setUserId(UrlController.currentUser.getUserName());
         Date date = new Date();
         Timestamp timeStamp = new Timestamp(date.getTime());
         exam.setPublishTime(timeStamp);

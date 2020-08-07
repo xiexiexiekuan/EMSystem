@@ -7,6 +7,7 @@
 <div id="wrapper" class="row">
     <div th:replace="common/header::nav"></div>
     <div id="page-inner">
+        <div th:text="${msg}" style="color: red;"></div>
         <th:block th:if="${#lists.size(applicationInfo)>0}" th:switch="${applicationInfo[0].previewStatus}">
         <!--待审核-->
             <div class="row" th:case="-1">
