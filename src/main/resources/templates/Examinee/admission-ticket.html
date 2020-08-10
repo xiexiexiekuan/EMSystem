@@ -25,10 +25,10 @@
                             <th:block th:each="a:${admissionTicket}">
                                 <tr >
                                     <td th:text="${a.examineePhoto}">1</td> <!--其实是考试名称-->
-                                    <td>
+                                    <td th:if="${a.examineeNumber}=='000'">准考证号未生成</td>
+                                    <td th:unless="${a.examineeNumber}=='000'">
                                         <form action="/student/printTicket" method="get">
                                             <input type="hidden" class="form-control" name="enterId" th:value="${a.enterId}"/>
-
                                             <button type="submit">确认打印</button>
                                         </form>
                                     </td>

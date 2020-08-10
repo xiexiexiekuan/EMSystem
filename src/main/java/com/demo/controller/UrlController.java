@@ -75,7 +75,7 @@ public class UrlController extends BaseController {
      */
     @RequestMapping("validate")
     public String userValidate(UserInformation user, @RequestParam(required = false) String role, Map<String,Object> map){
-        System.out.println(user);
+        //System.out.println(user);
         UserInformation existUser=loginService.validate(user);
         if(existUser!=null) {
             currentUser = existUser;
@@ -99,6 +99,7 @@ public class UrlController extends BaseController {
         if(i==0){
             map.put("msg","用户名信息输入错误！");
         }
+        map.put("msg","用户名信息注册成功！");
         return "/common/login";
     }
 

@@ -9,23 +9,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- BOOTSTRAP STYLES-->
-    <link href="/res/assets/css/bootstrap.css" rel="stylesheet" />
+    <link href="/css/bootstrap.css" rel="stylesheet" />
     <!--Time Picker-->
-    <link href="/res/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <link href="/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
     <!-- FONTAWESOME STYLES-->
-    <link href="/res/assets/css/font-awesome.css" rel="stylesheet" />
+    <link href="/css/font-awesome.css" rel="stylesheet" />
     <!--CUSTOM BASIC STYLES-->
-    <link href="/res/assets/css/basic.css" rel="stylesheet" />
+    <link href="/css/basic.css" rel="stylesheet" />
     <!--CUSTOM MAIN STYLES-->
-    <link href="/res/assets/css/custom.css" rel="stylesheet" />
+    <link href="/css/custom.css" rel="stylesheet" />
     <!-- GOOGLE FONTS-->
     <style type="text/css">
-        li {background-color: #ebccd1;
-        }
+        li {background-color: #ebccd1;}
     </style>
     <!--<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />-->
     <!-- ECharts SCRIPTS -->
-    <script src="/res/js/echarts.js"></script>
+    <script src="/js/echarts.js"></script>
     <script>
         function change(url){
             $('#page-inner').load(url)
@@ -63,7 +62,7 @@
                         <img th:src="'/img/'+${session.user.photo}" class="img-thumbnail" />
                         </th:block>
                         <th:block th:unless="${session.user.photo!=null&&session.user.photo!=''}">
-                        <img src="/res/assets/img/user.png" class="img-thumbnail" />
+                        <img src="/img/portrait/user.png" class="img-thumbnail" />
                         </th:block>
                         <div class="inner-text" th:object="${session.user}" >
                             <span th:text="*{userName}"></span>
