@@ -2,6 +2,8 @@
 
 ## 1.简介
 
+  Education Management System（EMSystem）
+  
   本系统主要实现考试报名及考务管理系统的主要功能。系统的开发采用Java与SpringBoot编程环境,以MySQL为数据库，并以IntelliJ IDEA编辑器作为开发平台, 利用SpringBoot微服务框架为基础使用Mybatis作为ORM框架构建系统的数据接口以及实现RESTful风格的路径访问系统资源,同时采用了ThymeLeaf为模板引擎融入自适应UI框架Bootstrap美化用户界面。
 
   系统采用流行的MVC架构，以角色分类设计开发。
@@ -11,6 +13,7 @@
 ## 2.目录结构
 
   前端结构：公共模块包括登录注册，报错页面，页眉页脚，在common文件夹；其他4个角色得所有功能在各自文件夹中
+  
   后端结构：4个角色4个Controller控制器，另外Base和BaseError为全局配置，UrlController为登录注册控制器，UrlInfo为全局用户信息控制器
           Controller调用Service，然后调用Dao。
 ## 3.配置
@@ -42,8 +45,11 @@ a.安装MySQL（window上安装，MySQL密码设置为123456，默认用户为ro
 b.使用MySQL的workbench工具新建数据库erems，并将doc下的emsystem.sql脚本导入数据库：
 
 在Mysql得workbench左边数据库表列表得下方有2个菜单，Administration   Schemas
+
 选择Administration这个，点击 Data Import 
+
 有2个选项，选择下面得  import from self-contained file
+
 然后点击导入即可，本项目得sql文件包含创建数据库得内容
 
 
@@ -58,16 +64,28 @@ b.点击运行项目：打开com.demo目录下的DemoApplication右键运行main
 c.使用浏览器访问：`localhost:8088`，点击主页面的登录按钮，角色默认的用户名密码均为：admin，其余角色登录信息参见用户信息表。
 
 d.你需要注意：
+
   先测试下数据库能不能访问，在application.yml文件中修改数据库地址
+  
   还可以修改里面得绝对路径
   
   本系统4个角色得功能互相衔接，形成逻辑闭环，如：
+  
   考务院发布得考试才能被报名
+  
   学生报名应用型时必须在院校管理得白名单里面
+  
   院校集体给未报名得考生报名
+  
   所有报名信息皆需要市州人员审核后才能报考
+  
   报考后缴费
+  
   院校老师上报考场时本校必须是考点
+  
   市州上报违纪情况需要考务院审核处理
   
-  所有逻辑都处理了，读者如果你点击某个按钮显示找不到页面，可能是卡了，再试一次就好了，或者你提交得信息需要前置条件，我建议你去读一下Dao层的数据库语句，会对你运行本系统有帮助
+  
+  所有逻辑都处理了，读者如果你点击某个按钮显示找不到页面，可能是卡了，再试一次就好了，或者你提交得信息需要前置条件
+  
+  我建议你去读一下Dao层的数据库语句，会对你运行本系统有帮助
